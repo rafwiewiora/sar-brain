@@ -35,9 +35,11 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
      batchPicks.sort((a,b)=>score(b)-score(a));
      const n=batchPicks.shift();if(g.stock.has(n))continue;
      const before=record?quotes():{},price=g.price(n);
+     const alternative=record&&level.key==='RENIN'?batchPicks.find(id=>!g.stock.has(id)):null;
+     const shortlist=alternative?[n,alternative].map(id=>({id,estimate:base[id].estimate,model:base[id].model,price:g.price(id),score:score(id)})):null;
      if(!g.act('make',n))throw Error('Invalid policy move');
      const changes={};if(record)for(const [id,v] of Object.entries(quotes()))if(v<before[id])changes[id]=[before[id],v];
-     capture(batch,'make',[n],{amounts:{[n]:price},changes,decision:base[n]});
+     capture(batch,'make',[n],{amounts:{[n]:price},changes,decision:base[n],shortlist});
    }
  }
  const end=g.goal()?'Winner assayed.':'No eligible FEP candidate remains.';

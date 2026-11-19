@@ -62,11 +62,23 @@ async function main(){
    await page.goto(pathToFileURL(path.join(dist,target+'_intro.html')).href+'#slide-11');
    const storyCost=await page.evaluate(()=>run.total);if(storyCost!==expected)throw Error('Slide trajectory differs from movie');
    await Promise.all([page.waitForURL('**/strategy_movie.html#**'),page.locator('#movie').click()]);await ready();
+   if(target==='RENIN'){
+    const choice=await page.evaluate(()=>run().frames.findIndex(f=>f.action==='compare'));
+    if(choice<0)throw Error('Missing the RENIN shortlist');
+    for(const id of ['A','B']){
+     await page.evaluate(i=>step(i),choice);await ready();
+     const board=page.frameLocator('#game');
+     if(await board.locator('.choiceOption').count()!==2||await board.locator('.decisionResult').count())throw Error('Invalid shortlist reveal');
+     await board.getByRole('button',{name:'Choose '+id}).click();
+     await page.waitForFunction(i=>index===i+1,choice);await ready();
+     if(!(await board.locator('.decisionNote').innerText()).includes('Your pick'))throw Error('Missing replay comparison');
+    }
+   }
    const len=await page.evaluate(()=>run().frames.length), manifest=[];
    for(let i=0;i<len;i++){
     await page.evaluate(i=>step(i),i);await ready();
     const board=page.frameLocator('#game'),brain=page.frameLocator('#brainPane');
-    const sequence=await page.evaluate(()=>index?moments:[['settled',0]]);
+    const sequence=await page.evaluate(()=>index&&run().frames[index].action!=='compare'?moments:[['settled',0]]);
     const seconds=await page.evaluate(()=>index?duration():3);
     for(let j=0;j<sequence.length;j++){
      const [phase,start]=sequence[j];
@@ -80,13 +92,18 @@ async function main(){
      const cash=await board.locator('#stats b').first().textContent();
      if(cash!=='$'+expected.total||await brain.locator('#money').textContent()!==cash+' spent')throw Error('Ledger mismatch: '+target+'/'+i+'/'+phase);
      if(!after&&expected.action==='query'){
-      if(!(await board.locator('button.agentMove').innerText()).includes('all eligible · '+expected.count))throw Error('Bulk selection highlight');
-      const marked=await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
+      if(!(await board.locator('button.agentMove').innerText()).includes(target==='RENIN'?'eligible · $'+expected.count:'all eligible · '+expected.count))throw Error('Bulk selection highlight');
+      const marked=target==='RENIN'?(expected.count===1?await board.locator('.decisionArrow').count():await board.locator('[data-batch-target]').count()):await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
       if(marked!==expected.count)throw Error('Queried map coverage');
      }else if(!after&&expected.action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
      if(after&&expected.dm&&await brain.locator('#money').getAttribute('data-gain')!=='+$'+expected.dm)throw Error('Missing spend increase');
      if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
      if(phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
+     if(target==='RENIN'){
+      const cards=await board.locator('.decisionMol').count();
+      if(cards<1||cards>2||expected.action==='make'&&cards!==1)throw Error('Unexpected RENIN structures');
+      if(expected.action==='make'&&await board.locator('.decisionResult').count()!==Number(after))throw Error('Assay reveal timing');
+     }
      const name=target+i+'-'+phase+'.png';
      await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
      manifest.push("file '"+name+"'",'duration '+((sequence[j+1]?.[1]??1)-start)*seconds);

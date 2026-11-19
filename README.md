@@ -16,6 +16,8 @@ From a clone, run `python3 build.py` (Python 3.8 or later, standard library only
 
 Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a playable replay and a recorded film. The recording and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.80 with Hard error for RENIN and LoMap 0.60 with Medium error for ABL1 and S1P1. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
 
+Open `dist/RENIN_choice.html` to start at the final two-compound shortlist. Choose which compound you would make first, then compare with the recorded strategy. This editorial pause uses the prediction and inventory price captured before synthesis. It adds zero operations and zero FEP queries.
+
 ## What a move costs
 
 The current game charges $1 per missing synthesis operation and $1 per FEP query. The spend counter starts at $0 and has no cap. An assay is included when a compound is made. The initial inventory is supplied. The cash unit represents a game cost. RENIN’s recorded dates locate the historical measurements on the plot. Elapsed laboratory time is an open modeling question.

@@ -43,10 +43,11 @@ function project(key,level,run,base,ideal){
    for(const stage of level.routes[n]||[])if(group.has(stage))for(const a of upstream(stage))if(a!==group.get(stage))platformLinks.push([a,group.get(stage)]);
   }
   const madeIds=made.map(cid), picked=targets.map(cid);
-  const caption=raw.action==='open'?('Start with '+made.length+' measured compounds.'):raw.action==='query'?('Predict '+targets.length+' '+(targets.length===1?'candidate':'candidates')+' with FEP.'):('Make '+targets.map(n=>level.products[n].name).join(' + ')+' · +'+(raw.spent-prior.spent)+' synthesis steps');
+  const caption=raw.action==='compare'?'Which compound would you make first?':raw.action==='open'?('Start with '+made.length+' measured compounds.'):raw.action==='query'?('Predict '+targets.length+' '+(targets.length===1?'candidate':'candidates')+' with FEP.'):('Make '+targets.map(n=>level.products[n].name).join(' + ')+' · +'+(raw.spent-prior.spent)+' synthesis steps');
   const frame={routes,quotes,paidRoutes:{...paidRoutes},inventory:inv,links,platformLinks,paid:[],
    spent:raw.spent,queries:raw.queries,known:[...new Set([...madeIds,...pred.map(cid)])],made:madeIds,targets:picked,
    forecasts:Object.fromEntries(Object.entries(estimates).map(([n,v])=>[cid(n),v])),edges:Object.entries(parents).map(([n,p])=>[cid(p),cid(n)]),caption};
+  if(raw.action==='compare')frame.compareIds=picked.filter(id=>Number.isFinite(frame.forecasts[id]));
   states.push({inventory:[...new Set([...inv,...made])],spent:raw.spent,queries:raw.queries,forecasts:estimates,parents,history:[...history],quotes:Object.fromEntries(Object.entries(frame.quotes).map(([id,v])=>[node(id),v]))});
   (D.paths.movie??=[]).push(frame);previousMade=new Set(made);
  }
@@ -74,7 +75,7 @@ function project(key,level,run,base,ideal){
  D.startingReferences=opening.map(cid);
  D.movie={archived:false,target:key,endpoint:level.endpoint,ideal,policy:run.method,
   title:key==='RENIN'?'RENIN · Routes to the 1 nM compound':key+' · Routes to the best measured compound',
-  subtitle:key==='RENIN'?'15 measured references on 16 March 2006. CPD 270 was recorded on 23 October 2007.':level.patent+' · '+level.order.length+' compounds',
+  subtitle:key==='RENIN'?'15 starting assays · 16 March 2006':level.patent+' · '+level.order.length+' compounds',
   assumptions:[run.rule,run.setting||'Archived ideal predictions.'].join(' ')};
  delete D.openingInventory;
  return {D,states,cid,node};

@@ -10,7 +10,9 @@ $('bulkFep').onclick=null;
 $('bulkFep').onpointerenter=$('bulkFep').onpointerleave=$('bulkFep').onfocus=$('bulkFep').onblur=null;
 let activeMove;
 const drawBoard=render;
+if(level.key==='RENIN')installReninDecision();
 render=function(){
+ if(level.key==='RENIN'&&activeMove){renderReninDecision(activeMove);return;}
  drawBoard();
  if(!activeMove)return;
  const {archived,f,playAction,agentFocus}=activeMove;
@@ -53,7 +55,7 @@ window.addEventListener('message',e=>{
  }
  if(f.quotes){const base=g.price;g.price=n=>f.quotes[n]??base(n);}
  g.history.push(...f.history);
- activeMove={archived,f,playAction,targets,phase:e.data.phase,delta:e.data.delta,pair:e.data.pair,agentFocus:focus};pinned=focus;stage=null;message=info;render();
+ activeMove={archived,f,playAction,targets,index:e.data.index,inspected:e.data.inspected,decision:e.data.decision,phase:e.data.phase,delta:e.data.delta,pair:e.data.pair,agentFocus:focus};pinned=focus;stage=null;message=info;render();
  document.body.dataset.tick=e.data.tick;
  parent.postMessage({type:'painted',side:'board',tick:e.data.tick},'*');
 });

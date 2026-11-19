@@ -299,7 +299,7 @@ if(D.movie){
  for(const [id,delta] of [['prev',-1],['next',1],['play',0]])$(id).onclick=()=>parent.postMessage({type:'navigate',delta},'*');
  window.addEventListener('message',e=>{
   if(e.source!==parent||e.data?.type!=='brain-frame')return;
-  const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=[e.data.focus];
+  const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=f.compareIds||[e.data.focus];
   go(i);
   const {phase,delta}=e.data;document.body.dataset.phase=phase;
   for(const [id,amount,prefix] of [['money',delta.money,'+$'],['queries',delta.queries,'+'],['cost',delta.steps,'+']]){

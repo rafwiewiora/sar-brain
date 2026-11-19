@@ -15,6 +15,18 @@ body[data-phase="pop"] #stats b[data-gain]{display:inline-block;transform:scale(
 @media(prefers-reduced-motion:reduce){button.agentMove{transition:none!important}}
 #map .fepTarget circle.outline{fill:#13868b;stroke:#06565e;stroke-width:2}
 #map .fepTarget rect.outline{fill:#e4f6f4;stroke:#087f82;stroke-width:3}
+.reninReplay>header,.reninReplay .rail,.reninReplay #notice{display:none}
+.reninReplay main{max-width:1100px;margin:auto;padding:16px 24px}.reninReplay .heading{margin:0 0 18px}
+#reninDecision{text-align:center;border-top:1px solid #dbe3ef;padding:clamp(18px,3vh,38px) 10px;max-height:75vh;overflow:auto}
+#reninDecision h2{font:700 clamp(24px,2.8vw,36px)/1.15 system-ui;margin:0 0 26px;letter-spacing:-.025em}
+.decisionMols{display:flex;align-items:center;justify-content:center;gap:12px}.decisionMol{min-width:0;flex:0 1 425px}
+.decisionMol small{font-size:16px;font-weight:650;color:#516980}.decisionMol svg{width:100%;height:clamp(150px,26vh,240px);display:block;margin:6px 0}
+.decisionMol h3{font-size:24px;margin:0 0 5px}.decisionMol p,.decisionNote{font-size:17px;color:#42576d;margin:0}
+.decisionArrow{font-size:27px;color:#087f82}.decisionResult{display:block;color:#086c59;font-size:21px;margin-top:7px}
+.decisionButton{font-weight:700;padding:10px 20px;margin:25px auto 5px;font-size:18px;pointer-events:none}
+.decisionButton.complete{background:#edf6f4;color:#176052;border:1px solid #b7d6cc}
+.decisionNote{padding-top:12px}.decisionNote details{margin:auto;max-width:660px}.decisionNote summary{cursor:pointer;color:#405a78}.decisionNote details p{text-align:left}
+.choiceOption{border:1px solid #cbd7e4;border-radius:9px;padding:14px 12px 20px;flex:0 1 425px}.choiceOption button{margin-top:15px;background:#164caa;color:white;font-size:18px;padding:8px 20px}.choiceOption .decisionMol svg{height:clamp(120px,21vh,210px)}
 </style></head><body><header><strong>SAR Brain</strong><div><label><span class="sr">Campaign</span><select id="level"><option>S1P1</option><option>ABL1</option><option>RENIN</option></select></label><label class="difficulty">LoMap ≥ <select id="boardCut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label class="difficulty">Difficulty <select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><a id="strategyReplay" href="strategy_movie.html">Watch strategies</a><button id="guide">Game rules</button></div></header>
 <main><div class="heading"><div><h1>The medicinal chemistry board</h1><p id="goal"></p></div><div class="stats" aria-live="polite" id="stats"></div></div>
 <div class="board"><div class="bulkBar"><button id="bulkFep" type="button" data-action="query-all"></button></div><div class="atlas"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 630" role="group" aria-label="Interactive compound and synthesis map"></svg></div><aside class="focus"><div class="eyebrow" id="role"></div><h2 id="title"></h2><div class="structure" id="structure"></div><div class="detail" id="detail"></div><div class="actions" id="actions"></div></aside></div>
