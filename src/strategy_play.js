@@ -5,6 +5,17 @@ const moviePolicies=[
  ['hybridFree','FEP with SAR fallback','Rank by FEP when reachable and SAR elsewhere, plus novelty.'],
  ['hybrid','FEP with SAR fallback + cost','Use FEP when reachable and SAR elsewhere. Include novelty and remaining synthesis steps.']
 ];
+// Re-evaluate the display after each observation. Batch commitments are stored separately.
+function reninLiveRanks(g,ids,mode){
+ const activeColumn=mode==='sar'?0:mode==='aware'?1:2;
+ const entries=ids.map(id=>{
+  const sar=g.sar(id),price=g.price(id),penalty=.5*Math.log(Math.max(1,price));
+  const first=sar.p+sar.novelty,hybrid=(g.forecasts.get(id)?.p??sar.p)+sar.novelty;
+  return {id,price,sar:sar.p,scores:[first,first-penalty,hybrid-(mode==='hybridFree'?0:penalty)],ranks:[]};
+ });
+ for(let col=0;col<3;col++)entries.slice().sort((a,b)=>b.scores[col]-a.scores[col]).forEach((e,i)=>{e.ranks[col]=i+1;});
+ return {entries,activeColumn,fepCost:mode!=='hybridFree'};
+}
 function playStrategy(level,policy,cutoff,difficulty,record=true){
  const [mode,method,rule]=policy, g=campaign({...level,edges:level.edges.filter(e=>e[2]>=cutoff-1e-12)},s=>difficulty==='ideal'?0:gameSigma(s,difficulty));
  const batchSize=level.key==='RENIN'?2:4,frames=[];
@@ -12,7 +23,8 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
  const steps=()=>g.spent()-level.start;
  function capture(batch,action,targets,extra={}){
    if(!record)return;
-   frames.push({batch,action,targets,spent:steps(),queries:g.forecasts.size,
+   const liveRanks=level.key==='RENIN'?reninLiveRanks(g,pool(),mode):null;
+   frames.push({liveRanks,batch,action,targets,spent:steps(),queries:g.forecasts.size,
      made:g.made(),pred:Array.from(g.forecasts.keys()),forecasts:Object.fromEntries(Array.from(g.forecasts,([n,v])=>[n,v.p])),
      parents:Object.fromEntries(Array.from(g.forecasts,([n,v])=>[n,v.parent])),stock:Object.keys(level.stages).filter(n=>g.stock.has(n)),amounts:{},changes:{},...extra});
  }
@@ -30,19 +42,9 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
      return [n,{sar:sar.p,novelty:sar.novelty,estimate,utility:estimate+sar.novelty,model:wantsFep&&g.forecasts.has(n)?'FEP':'SAR'}];
    }));
    function score(n){const cost=mode==='aware'||mode==='hybrid'?g.price(n):1;return base[n].utility-.5*Math.log(Math.max(1,cost));}
-   let ranking=null;
-   if(record&&level.key==='RENIN'){
-    const ids=candidates.slice(), activeColumn=mode==='sar'?0:mode==='aware'?1:2;
-    const entries=ids.map(id=>{
-     const v=base[id],price=g.price(id),costPenalty=.5*Math.log(Math.max(1,price));
-     const sar=v.sar+v.novelty,fep=(g.forecasts.get(id)?.p??v.sar)+v.novelty;
-     return {id,scores:[sar,sar-costPenalty,fep-(mode==='hybridFree'?0:costPenalty)],ranks:[]};
-    });
-    for(let col=0;col<3;col++)entries.slice().sort((a,b)=>b.scores[col]-a.scores[col]).forEach((e,i)=>{e.ranks[col]=i+1;});
-    ranking={entries,activeColumn,fepCost:mode!=='hybridFree',batch};
-   }
    const batchPicks=candidates.sort((a,b)=>score(b)-score(a)).slice(0,batchSize);
-   if(ranking)ranking.shortlisted=batchPicks.slice();
+   const live=record?frames.at(-1).liveRanks:null;
+   const ranking=live?{...live,batch,shortlisted:batchPicks.slice()}:null;
    while(batchPicks.length&&!g.goal()){
      batchPicks.sort((a,b)=>score(b)-score(a));
      const n=batchPicks.shift();if(g.stock.has(n))continue;

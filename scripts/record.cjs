@@ -63,14 +63,31 @@ async function main(){
    const storyCost=await page.evaluate(()=>run.total);if(storyCost!==expected)throw Error('Slide trajectory differs from movie');
    await Promise.all([page.waitForURL('**/strategy_movie.html#**'),page.locator('#movie').click()]);await ready();
    const len=await page.evaluate(()=>run().frames.length), manifest=[];
+   if(target==='RENIN'){
+    const board=page.frameLocator('#game'),inspect=board.locator('#rankInspect');
+    const candidate=await inspect.locator('option',{hasText:'CPD 270'}).getAttribute('value');
+    await inspect.selectOption(candidate);
+    await page.evaluate(()=>step(1));await ready();
+    if(await inspect.inputValue()!==candidate||await board.locator('.infoBody h3').innerText()!=='CPD 270')throw Error('Pinned compound lost between actions');
+    await inspect.selectOption('');
+   }
    for(let i=0;i<len;i++){
     await page.evaluate(i=>step(i),i);await ready();
     const board=page.frameLocator('#game'),brain=page.frameLocator('#brainPane');
-    const sequence=await page.evaluate(()=>index?moments:[['settled',0]]);
+    const sequence=await page.evaluate(()=>{
+     if(!index)return [['settled',0]];
+     if(!run().frames[index].liveRanks)return moments;
+     const start=moments[2][1],end=moments[3][1];
+     const tween=Array.from({length:13},(_,i)=>{
+      const t=i/12;
+      return ['pop',start+(end-start)*i/13,t*t*(3-2*t)];
+     });
+     return [...moments.slice(0,2),...tween,moments[3]];
+    });
     const seconds=await page.evaluate(()=>index?duration():3);
     for(let j=0;j<sequence.length;j++){
-     const [phase,start]=sequence[j];
-     await page.evaluate(v=>setPhase(v),phase);await ready();
+     const [phase,start,progress]=sequence[j];
+     await page.evaluate(([p,t])=>setPhase(p,t),[phase,progress??null]);await ready();
      const after=phase==='pop'||phase==='settled';
      const expected=await page.evaluate(after=>{
       const current=run().frames[index],previous=run().frames[Math.max(0,index-1)],f=after?current:previous;
@@ -81,26 +98,23 @@ async function main(){
      if(cash!=='$'+expected.total||await brain.locator('#money').textContent()!==cash+' spent')throw Error('Ledger mismatch: '+target+'/'+i+'/'+phase);
      if(!after&&expected.action==='query'){
       if(!(await board.locator('button.agentMove').innerText()).includes(target==='RENIN'?'eligible · $'+expected.count:'all eligible · '+expected.count))throw Error('Bulk selection highlight');
-      const marked=target==='RENIN'?(expected.count===1?await board.locator('.decisionArrow').count():await board.locator('[data-batch-target]').count()):await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
+      const marked=target==='RENIN'?await board.locator('[data-batch-target]').count():await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
       if(marked!==expected.count)throw Error('Queried map coverage');
      }else if(!after&&expected.action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
      if(after&&expected.dm&&await brain.locator('#money').getAttribute('data-gain')!=='+$'+expected.dm)throw Error('Missing spend increase');
      if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
-     if(phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
+     if(target!=='RENIN'&&phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
      if(target==='RENIN'){
-      if(expected.action==='make'){
-       const ranks=await page.evaluate(()=>run().frames[index].ranking);
-       const rendered=await board.locator('.rankSeries').count();
-       if(rendered!==ranks.entries.length)throw Error('Incomplete rank plot');
-       const pick=await page.evaluate(()=>run().frames[index].targets[0]);
-       if(!ranks.shortlisted.includes(pick)||ranks.entries.find(e=>e.id===pick).ranks[ranks.activeColumn]>ranks.shortlisted.length)throw Error('Incorrect selected line');
-       if((await board.locator('.rankRange').first().innerText()).indexOf('±1σ')<0)throw Error('Missing modeled error for this FEP pick');
-      }
-      const cards=await board.locator('.decisionMol').count();
-      if(cards<1||cards>2||expected.action==='make'&&cards!==1)throw Error('Unexpected RENIN structures');
+      const complete=phase==='settled'||progress===1;
+      const snapshot=await page.evaluate(complete=>run().frames[Math.max(0,index-(complete?0:1))].liveRanks,complete);
+      const lines=await board.locator('.rankSeries').evaluateAll(items=>Object.fromEntries(items.map(el=>[el.dataset.rankId,el.dataset.ranks])));
+      if(Object.keys(lines).length!==snapshot.entries.length||snapshot.entries.some(e=>lines[e.id]!==e.ranks.join(',')))throw Error('Wrong rank transition at '+i+'/'+j);
+      const t=Number(await board.locator('#movingRanks').getAttribute('data-progress'));
+      if(Math.abs(t-(progress??Number(after)))>.001)throw Error('Incorrect animation progress');
+      if(await board.locator('.infoMol svg').count()!==1)throw Error('Missing compound structure');
       if(expected.action==='make'&&await board.locator('.decisionResult').count()!==Number(after))throw Error('Assay reveal timing');
      }
-     const name=target+i+'-'+phase+'.png';
+     const name=target+i+'-'+j+'-'+phase+'.png';
      await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
      manifest.push("file '"+name+"'",'duration '+((sequence[j+1]?.[1]??1)-start)*seconds);
     }

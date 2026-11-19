@@ -19,12 +19,13 @@ new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
 let phase='settled',phaseTimers=[],inspected=false;
 function duration(){
- if(run().frames[index].ranking)return 4.5;
+ if(run().frames[index].liveRanks)return index?4.3:3;
  return Math.max(1.05,projection.D.paths.movie[index].seconds??2.6);
 }
 const moments=[['aim',0],['press',.17],['pop',.39],['settled',.65]];
-function setPhase(value){
- phase=value;tick++;painted.clear();delete document.body.dataset.ready;sync();
+let rankProgress=null;
+function setPhase(value,progress=null){
+ rankProgress=progress;phase=value;tick++;painted.clear();delete document.body.dataset.ready;sync();
 }
 function sync(){
  if(!projection||ready.size<2)return;
@@ -35,7 +36,8 @@ function sync(){
  const focus=projection.node($('focus').value),beat=projection.D.paths.movie[index];
  const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
    {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
- const decision={ranking:f.ranking,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
+ const decision={ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
+   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:duration()*240,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
  if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
   const priorSet=new Set(old.made),now=new Set(f.made);
   const reachable=new Set();
