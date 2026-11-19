@@ -84,7 +84,7 @@ async function main(){
      });
      return [...moments.slice(0,2),...tween,moments[3]];
     });
-    const seconds=await page.evaluate(()=>index?duration():3);
+    const seconds=await page.evaluate(()=>index||narrated?duration():3);
     for(let j=0;j<sequence.length;j++){
      const [phase,start,progress]=sequence[j];
      await page.evaluate(([p,t])=>setPhase(p,t),[phase,progress??null]);await ready();
@@ -106,6 +106,10 @@ async function main(){
      if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
      if(target!=='RENIN'&&phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
      if(target==='RENIN'){
+      const story=await page.evaluate(after=>reninStory[index][after?'after':'before'],after);
+      if(await board.locator('.moveStory h3').textContent()!==story[0])throw Error('Wrong story beat at '+i+'/'+phase);
+      const framed=await page.evaluate(after=>Boolean(after&&reninStory[index].focus),after);
+      if(await board.locator('.storyEvidence').count()!==Number(framed))throw Error('Wrong evidence at '+i+'/'+phase);
       const complete=phase==='settled'||progress===1;
       const snapshot=await page.evaluate(complete=>run().frames[Math.max(0,index-(complete?0:1))].liveRanks,complete);
       const lines=await board.locator('.rankSeries').evaluateAll(items=>Object.fromEntries(items.map(el=>[el.dataset.rankId,el.dataset.ranks])));

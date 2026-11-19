@@ -77,7 +77,7 @@ function renderRankBoard(move){
  const automatic=opened?best:making||done||move.inspected||query&&targets.length===1?pick:leader;
  const id=watchCompound||automatic;
  const panel=$('reninDecision');
- panel.className='liveRanks';
+ panel.className=d.story?'liveRanks narrated':'liveRanks';
  const predictionCount=targets.length+' prediction'+(targets.length===1?'':'s');
  const title=making?(done?'Assayed ':'Make & assay ')+name(pick):query?(done?'Received '+predictionCount:'Run FEP on '+targets.length+' candidate'+(targets.length===1?'':'s')):'Opening inventory';
  const money=move.f.spent+move.f.queries;
@@ -113,7 +113,18 @@ function renderRankBoard(move){
  const batchList=query?'<details'+(listOpen?' open':'')+'><summary>'+targets.length+' FEP '+(targets.length===1?'target':'targets')+'</summary><div>'+targets.map(n=>'<span data-batch-target="'+esc(n)+'">'+esc(name(n))+'</span>').join(', ')+'</div></details>':'';
  panel.dataset.index=index;
  panel.innerHTML='<div class="rankTitle"><h2>'+esc(title)+'</h2>'+btn+'</div><figure class="rankFigure"><figcaption>'+subtitle+' · '+current.size+' candidates'+label+'</figcaption><svg id="movingRanks" viewBox="0 0 925 320" role="group" aria-label="Candidate ranks, select a line to inspect"></svg></figure>'+
- '<section class="rankInfo"><header><b>Compound details</b>'+selector+'</header><div class="infoBody"><div class="infoMol">'+level.drawings[id]+'</div><div><small>'+role+'</small><h3>'+esc(name(id))+'</h3><p>'+modelLine+range+'</p>'+result+'</div><div class="infoMovement"><b>'+rankText+'</b>'+selectedRanks+(price!==undefined?'<p>'+cost(price)+(held?' paid':' from stock')+'</p>':'')+(note&&id===pick?'<p>'+note+'</p>':'')+'</div></div>'+batchList+'</section>';
+ '<section class="rankInfo"><header><b>Compound details</b>'+selector+'</header><div class="infoBody"><div class="infoMol">'+level.drawings[id]+'</div><div><small>'+role+'</small><h3>'+esc(name(id))+'</h3><p>'+modelLine+range+'</p>'+result+'</div><div class="infoMovement"><b>'+rankText+'</b>'+selectedRanks+(price!==undefined?'<p class="price">'+cost(price)+(held?' paid':' from stock')+'</p>':'')+(note&&id===pick?'<p class="access">'+note+'</p>':'')+'</div></div>'+batchList+'</section>';
+ if(d.story){
+  const [heading,detail]=d.story.lines;
+  const caption=document.createElement('div');caption.className='moveStory';
+  caption.innerHTML='<h3>'+esc(heading)+'</h3><p>'+esc(detail)+'</p>';
+  panel.querySelector('.infoBody').after(caption);
+  if(id===pick&&d.story.focus){
+   const selector={assay:'.decisionResult',price:'.infoMovement .price',link:'.infoMovement .access',rank:'.infoMovement>b'}[d.story.focus];
+   const evidence=panel.querySelector(selector);
+   if(evidence)evidence.classList.add('storyEvidence',d.story.tone==='caution'?'caution':'positive');
+  }
+ }
  $('rankInspect').onchange=e=>{watchCompound=e.target.value;renderRankBoard({...move,decision:{...d,progress:done?1:0}});};
  const chart=$('movingRanks'),xs=[115,407,705],y=r=>48+(r-1)*247/Math.max(1,d.axisCount-1);
  function inspect(n){watchCompound=n;renderRankBoard({...move,decision:{...d,progress:done?1:0}});$('rankInspect').focus();}

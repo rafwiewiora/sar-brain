@@ -19,8 +19,21 @@ function fit(){
 new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit);
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
 let phase='settled',phaseTimers=[],inspected=false;
+// Narration belongs to the published RENIN replay and its paired SAR comparison.
+const reninStory = [
+ {action:'open',seconds:7,after:['Find a 1 nM renin inhibitor','Start with 15 assays. Each new synthesis step and each simulated FEP prediction costs $1.']},
+ {action:'query',count:5,seconds:7,before:['Which molecules look worth making?','The agent can predict five neighbors of its measured compounds. Other candidates keep their SAR estimates.'],after:['Five predictions change the shortlist','CPD 177 rises to first. The agent commits to two compounds in this batch.']},
+ {action:'make',name:'CPD 177',seconds:8,before:['Test the first prediction','CPD 177 ranks first with FEP. Preparing and assaying it takes nine synthesis steps.'],after:['The first prediction is too optimistic','FEP predicted 78 nM for CPD 177. The assay gives 513 nM.'],focus:'assay',tone:'caution'},
+ {action:'make',name:'CPD 121',seconds:7,before:['The first synthesis also made an intermediate','Reusing it cuts the price of CPD 121 from nine steps to two.'],after:['Two more steps buy a stronger compound','CPD 121 measures 115 nM. Its batch partner already paid for the shared chemistry.'],focus:'price'},
+ {action:'query',count:19,seconds:7,before:['New references extend FEP’s reach','The two assays make 19 more compounds eligible for prediction.'],after:['Choose the next pair','Using the new predictions and current synthesis prices, the agent selects CPD 223 and CPD 239.']},
+ {action:'make',name:'CPD 223',seconds:7,before:['Test the next prediction','CPD 223 takes two steps from the current stock.'],after:['CPD 223 sets a new best','Its measured potency is 6 nM. One more compound is already committed in this batch.'],focus:'assay'},
+ {action:'make',name:'CPD 239',seconds:8,before:['Make the second compound in the batch','CPD 239 also takes two synthesis steps. Its assay will make it available as an FEP reference.'],after:['A weaker compound opens the decisive link','At 9 nM, CPD 239 trails the 6 nM lead. It gives the agent its first eligible FEP link to CPD 270.'],focus:'link'},
+ {action:'query',count:1,seconds:8,before:['One new prediction is available','CPD 270 ranks eighth under the active strategy. The agent can now query it from CPD 239.'],after:['One prediction changes the decision','FEP predicts 1.01 nM. CPD 270 moves from eighth to first. Both SAR columns still rank it fourteenth.'],focus:'rank'},
+ {action:'make',name:'CPD 270',seconds:12,before:['Spend two steps to test CPD 270','The 1.01 nM value is a noisy prediction. The agent must make the compound and assay it.'],after:['The assay confirms 1 nM','This replay used 17 synthesis steps versus 21 for SAR + cost (19% fewer). With 25 FEP queries, it spent $42 versus $21.'],focus:'assay'}
+];
+let narrated=false;
 function duration(){
- if(run().frames[index].liveRanks)return index?4.3:3;
+ if(run().frames[index].liveRanks)return narrated?reninStory[index].seconds:index?4.3:3;
  return Math.max(1.05,projection.D.paths.movie[index].seconds??2.6);
 }
 const moments=[['aim',0],['press',.17],['pop',.39],['settled',.65]];
@@ -37,7 +50,9 @@ function sync(){
  const focus=projection.node($('focus').value),beat=projection.D.paths.movie[index];
  const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
    {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
- const decision={ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
+ const cue=narrated?reninStory[index]:null;
+ const story=cue?{lines:after?cue.after:cue.before,focus:after?cue.focus:undefined,tone:cue.tone}:null;
+ const decision={story,ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
    axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:duration()*240,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
  if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
   const priorSet=new Set(old.made),now=new Set(f.made);
@@ -93,6 +108,10 @@ function setup(){
  const summary=usesFep&&error!=='ideal'?data.draws[$('target').value][[i,cutoff,error]]:null;
  const level=summary?sampledLevel(board(),summary.seed):board();
  active=oracle?hindsightReplay(level,cutoff,$('route').value==='direct'):playStrategy(level,moviePolicies[i],cutoff,error);
+ narrated=level.key==='RENIN'&&!oracle&&i===3&&cutoff===.8&&error==='hard'&&active.frames.length===reninStory.length&&reninStory.every((cue,j)=>{
+  const frame=active.frames[j];
+  return frame.action===cue.action&&(!cue.name||level.products[frame.targets[0]].name===cue.name)&&(!cue.count||frame.targets.length===cue.count);
+ });
  const dollars=n=>n===null?'unreached':'$'+n;
  if(summary){
   $('sample').textContent='Median replay · '+dollars(summary.median)+' to hit · 10th–90th percentile '+dollars(summary.low)+'–'+dollars(summary.high)+' · '+summary.wins+'/'+summary.count+' reached the hit. ';
