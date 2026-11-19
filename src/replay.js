@@ -146,8 +146,9 @@ function renderBrain(){
  for(const c of [...all].sort((a,b)=>Number(spotlight.has(a.id))-Number(spotlight.has(b.id))||level(a)-level(b))){
   const l=level(c),px=cx(c),py=y(value(c)),r=fresh.has(c.id)?8.2:[3.7,4.2,5.3,8.2][l];
   if(spotlight.has(c.id))out+='<circle cx="'+px+'" cy="'+py+'" r="14" fill="#ccf2ee" stroke="#007b76" stroke-width="2" pointer-events="none"/>';
-  const title=display(c.id)+' · '+(c.date?dateLabel(c.date):'Depth '+c.depth)+(known.has(c.id)?' · '+num(10**(9-value(c)),2)+' nM':'');
-  out+='<g class="tap" role="button" tabindex="'+(l?0:-1)+'" data-cpd="'+c.id+'" aria-label="'+E(title)+'"><title>'+E(title)+'</title><circle cx="'+px+'" cy="'+py+'" r="'+(r+2)+'" fill="transparent"/><circle class="vis" cx="'+px+'" cy="'+py+'" r="'+r+'" fill="'+(l>=2?tint(c.pIC50):l===1?'white':'#dbe2e9')+'" stroke="'+(l===3?'#16263b':l===1?'#087f7e':'none')+'" stroke-width="2.3"/></g>';
+  const won=f.winningIds?.includes(c.id);
+  const title=(won?'★ Winner · ':'')+display(c.id)+' · '+(c.date?dateLabel(c.date):'Depth '+c.depth)+(known.has(c.id)?' · '+num(10**(9-value(c)),2)+' nM':'');
+  out+='<g class="tap" role="button" tabindex="'+(l?0:-1)+'" data-cpd="'+c.id+'" aria-label="'+E(title)+'"><title>'+E(title)+'</title><circle cx="'+px+'" cy="'+py+'" r="'+(r+2)+'" fill="transparent"/><circle class="vis" cx="'+px+'" cy="'+py+'" r="'+r+'" fill="'+(l>=2?tint(c.pIC50):l===1?'white':'#dbe2e9')+'" stroke="'+(l===3?'#16263b':l===1?'#087f7e':'none')+'" stroke-width="2.3"/>'+(won?text(px,py+6,'★','class="winnerStar" fill="#13794c" font-size="23" text-anchor="middle" stroke="white" stroke-width="2" paint-order="stroke" pointer-events="none"'):'')+'</g>';
  }
  const currentLabels=[...(spotlight.size?spotlight:fresh)].map(id=>D.compounds[id]).filter(Boolean);
  const labels=[];
@@ -263,7 +264,7 @@ function renderRetro(){
   const buttons=group.ids.filter(id=>id in f.quotes).map(id=>{
    const made=f.made.includes(id),cost=f.quotes[id],less=cost<start[id];
    const label=display(id)+' · '+(made?'already made':cost+' steps from current inventory');
-   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(id===watchSquare?' storySquare':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"><b>'+(made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
+   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(id===watchSquare?' storySquare':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"><b>'+(f.winningIds?.includes(id)?'★':made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
   }).join('');
   const drawing=D.molecules[group.goal]?'<div class="mol">'+mol(group.goal)+'</div>':'';
   return '<article class="platformCard '+(kept?'kept':'')+'"><h3>'+E(title)+'</h3><p class="muted">'+(kept?'Retained':'')+((kept&&costHint)?' · ':'')+E(costHint)+'</p><div class="platformContents">'+drawing+'<div class="squarelist">'+buttons+'</div></div></article>';

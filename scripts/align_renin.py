@@ -120,12 +120,34 @@ for reagent, pattern in [(acid, Chem.MolFromSmarts("O=Cc1c(Cl)n(-c2ccccc2)c2cccn
     assert product_atoms and reagent_atoms
     rdDepictor.GenerateDepictionMatching2DStructure(reagent, i5, list(zip(product_atoms, reagent_atoms)))
 
+# Trace the retained fragment on both sides. A second color identifies the joining bond.
+added = (.68, .91, .83)
+removed = (.99, .84, .77)
+formed = (.70, .55, .93)
+def draw_change(drawer, mol, colors, new_bond=None):
+    bond_colors = {bond.GetIdx(): colors[bond.GetBeginAtomIdx()] for bond in mol.GetBonds()
+                   if bond.GetBeginAtomIdx() in colors and colors.get(bond.GetEndAtomIdx()) == colors[bond.GetBeginAtomIdx()]}
+    if new_bond is not None:
+        bond_colors[new_bond] = formed
+    drawer.DrawMolecule(mol, highlightAtoms=list(colors), highlightBonds=list(bond_colors),
+                        highlightAtomColors=colors, highlightBondColors=bond_colors)
+
+def joining_bond(mol, fragment):
+    crossing = [b.GetIdx() for b in mol.GetBonds()
+                if (b.GetBeginAtomIdx() in fragment) != (b.GetEndAtomIdx() in fragment)]
+    assert len(crossing) == 1
+    return crossing[0]
+
 species = []
 for mol, center, available in [(acid,115,210),(amine,337,175),(i5,787,346)]:
     drawer = rdMolDraw2D.MolDraw2DSVG(width,height)
     drawer.drawOptions().clearBackground = False
     drawer.SetScale(width,height,lo,hi)
-    drawer.DrawMolecule(mol)
+    fragment = set(mol.GetSubstructMatch(amine)) if mol is not acid else set()
+    if mol is not acid:
+        assert len(fragment) == amine.GetNumAtoms()
+    bond = joining_bond(mol, fragment) if mol is i5 else None
+    draw_change(drawer, mol, dict.fromkeys(fragment, added), bond)
     drawer.FinishDrawing()
     points = [drawer.GetDrawCoords(i) for i in range(mol.GetNumAtoms())]
     x,y = min(p.x for p in points)-15,min(p.y for p in points)-15
@@ -143,3 +165,46 @@ for x,text in [(115,"Azaindole acid"),(337,"Boc-piperazine"),(787,"I5 · azaindo
     scheme.append(f'<text x="{x}" y="194" font-weight="650" font-size="19">{text}</text>')
 scheme.append('</g></svg>')
 (ROOT/"src"/"renin-i5-step.svg").write_text("".join(scheme))
+
+# The following slide compares the two endpoints of the recorded two-operation route.
+analog = next(molecules[key] for key,p in board["products"].items() if p["name"]=="CPD 121")
+comparison_mols = [i5]+[molecules[k] for k,p in board["products"].items() if p["name"] in ("CPD 121","CPD 239","CPD 270")]
+extent = [p for mol in comparison_mols for p in mol.GetConformer().GetPositions()]
+def comparison_svg(drawer):
+    first = drawer.GetDrawCoords(Point2D(min(p[0] for p in extent)-.65, max(p[1] for p in extent)+.6))
+    last = drawer.GetDrawCoords(Point2D(max(p[0] for p in extent)+.65, min(p[1] for p in extent)-.6))
+    box = f"{first.x:.2f} {first.y:.2f} {last.x-first.x:.2f} {last.y-first.y:.2f}"
+    svg = "<svg"+drawer.GetDrawingText().split("<svg",1)[1]
+    return svg.replace(f"viewBox='0 0 {width} {height}'", f"viewBox='{box}'")
+for label, mol, pattern, color in [
+    ("i5-before-reuse", i5, "CC(C)(C)OC(=O)", removed),
+    ("121-after-reuse", analog, "Cc1ccccc1[CH2]", added),
+]:
+    atoms = set(mol.GetSubstructMatch(Chem.MolFromSmarts(pattern)))
+    assert atoms
+    if mol is i5:
+        chlorine, = [a.GetIdx() for a in mol.GetAtoms() if a.GetAtomicNum()==17]
+        atoms.add(chlorine)
+    drawer = rdMolDraw2D.MolDraw2DSVG(width, height)
+    drawer.drawOptions().clearBackground = False
+    drawer.SetScale(width,height,lo,hi)
+    draw_change(drawer, mol, dict.fromkeys(atoms,color), joining_bond(mol,atoms) if mol is analog else None)
+    drawer.FinishDrawing()
+    (ROOT/"src"/("renin-"+label+".svg")).write_text(comparison_svg(drawer))
+
+# Compare the FEP pair in the same phenoxy-ring orientation. Only the
+# substituents that differ are highlighted; the shared methyl stays plain.
+for number, pattern, color in [
+    (239, "Oc1c([Cl:1])cccc1C", removed),
+    (270, "Oc1c([CH3:1])c([F:2])ccc1C", added),
+]:
+    compound = next(molecules[key] for key,p in board["products"].items() if p["name"]==f"CPD {number}")
+    query = Chem.MolFromSmarts(pattern)
+    match, = compound.GetSubstructMatches(query)
+    atoms = {match[a.GetIdx()] for a in query.GetAtoms() if a.GetAtomMapNum()}
+    drawer = rdMolDraw2D.MolDraw2DSVG(width,height)
+    drawer.drawOptions().clearBackground = False
+    drawer.SetScale(width,height,lo,hi)
+    draw_change(drawer, compound, dict.fromkeys(atoms,color))
+    drawer.FinishDrawing()
+    (ROOT/"src"/f"renin-fep-{number}.svg").write_text(comparison_svg(drawer))

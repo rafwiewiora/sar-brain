@@ -6,7 +6,7 @@ const moviePolicies=[
  ['hybrid','FEP with SAR fallback + cost','Use FEP when reachable and SAR elsewhere. Include novelty and remaining synthesis steps.']
 ];
 // Re-evaluate the display after each observation. Batch commitments are stored separately.
-function reninLiveRanks(g,ids,mode){
+function candidateRanks(g,ids,mode){
  const activeColumn=mode==='sar'?0:mode==='aware'?1:2;
  const entries=ids.map(id=>{
   const sar=g.sar(id),price=g.price(id),penalty=.5*Math.log(Math.max(1,price));
@@ -23,7 +23,7 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
  const steps=()=>g.spent()-level.start;
  function capture(batch,action,targets,extra={}){
    if(!record)return;
-   const liveRanks=level.key==='RENIN'?reninLiveRanks(g,pool(),mode):null;
+   const liveRanks=candidateRanks(g,pool(),mode);
    frames.push({liveRanks,batch,action,targets,spent:steps(),queries:g.forecasts.size,
      made:g.made(),pred:Array.from(g.forecasts.keys()),forecasts:Object.fromEntries(Array.from(g.forecasts,([n,v])=>[n,v.p])),
      parents:Object.fromEntries(Array.from(g.forecasts,([n,v])=>[n,v.parent])),stock:Object.keys(level.stages).filter(n=>g.stock.has(n)),amounts:{},changes:{},...extra});

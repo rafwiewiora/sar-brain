@@ -11,9 +11,18 @@ $('bulkFep').onpointerenter=$('bulkFep').onpointerleave=$('bulkFep').onfocus=$('
 document.body.classList.add('movieBoard');
 let activeMove;
 const drawBoard=render;
-if(level.key==='RENIN')installReninDecision();
+const nativeBoard=document.querySelector('.board');
+const rankPanel=document.createElement('section');
+rankPanel.id='reninDecision';
+rankPanel.hidden=true;
+nativeBoard.after(rankPanel);
 render=function(){
- if(level.key==='RENIN'&&activeMove){renderReninDecision(activeMove);return;}
+ const showingRanks=activeMove?.phase==='pop'&&!!activeMove.decision.afterRanks;
+ nativeBoard.hidden=showingRanks;
+ rankPanel.hidden=!showingRanks;
+ document.body.classList.toggle('reninReplay',showingRanks);
+ if(showingRanks){renderRankBoard(activeMove);return;}
+ cancelAnimationFrame(rankAnimation);
  drawBoard();
  if(!activeMove)return;
  const {archived,f,playAction,agentFocus}=activeMove;

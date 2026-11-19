@@ -32,6 +32,8 @@ def build():
     }
     renin_board = datasets["boards"]["RENIN"]
     renin_board["platformReaction"] = source("renin-i5-step.svg")
+    renin_board["reuseDrawings"] = [source("renin-i5-before-reuse.svg"), source("renin-121-after-reuse.svg")]
+    renin_board["fepPairDrawings"] = [source("renin-fep-239.svg"), source("renin-fep-270.svg")]
     OUT.mkdir(exist_ok=True)
     game = source("world.html").replace("__ENGINE__", source("engine.js"))
     world = source("world.js")

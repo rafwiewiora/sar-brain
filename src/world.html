@@ -63,6 +63,8 @@ body.movieBoard[data-phase="pop"] #stats b[data-gain]{display:block}
  .narrated .infoMol svg{height:120px}.rankInfo .moveStory h3{font-size:20px}
  .rankInfo .moveStory p{font-size:16px}
 }
+.movieBoard .board[hidden],.movieBoard #reninDecision[hidden]{display:none}
+.winCard{text-align:center}.winCard span{color:#158059;font-size:48px}.winCard h2{color:#146c4e}.winCard svg{display:block;margin:auto;width:min(100%,340px);height:155px}
 </style></head><body><header><strong>SAR Brain</strong><div><label><span class="sr">Campaign</span><select id="level"><option>S1P1</option><option>ABL1</option><option>RENIN</option></select></label><label class="difficulty">LoMap ≥ <select id="boardCut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label class="difficulty">Difficulty <select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><a id="strategyReplay" href="strategy_movie.html">Watch strategies</a><button id="guide">Game rules</button></div></header>
 <main><div class="heading"><div><h1>The medicinal chemistry board</h1><p id="goal"></p></div><div class="stats" aria-live="polite" id="stats"></div></div>
 <div class="board"><div class="bulkBar"><button id="bulkFep" type="button" data-action="query-all"></button></div><div class="atlas"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 630" role="group" aria-label="Interactive compound and synthesis map"></svg></div><aside class="focus"><div class="eyebrow" id="role"></div><h2 id="title"></h2><div class="structure" id="structure"></div><div class="detail" id="detail"></div><div class="actions" id="actions"></div></aside></div>

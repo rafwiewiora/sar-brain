@@ -94,7 +94,7 @@ function mainNode(n,measured){
  const val=measured?nm(level.products[n].p):'$'+g.price(n)+' to make';
  const forecast=g.forecasts.get(n);
  let hint=measured?(n===model.best?'best measured':'assayed'):n===model.sar[0]&&n===model.priced[0]?'SAR + price picks agree':n===model.sar[0]?'SAR pick':n===model.priced[0]?'price-aware pick':forecast?'FEP queried':g.sources(n).length?'FEP available':'untested';
- return node(n,'compound','<rect class="outline" x="'+(x-78)+'" y="'+(y-45)+'" width="156" height="86" rx="8" fill="'+(measured?'#ffffff':'#ffffff')+'" stroke="'+(on?col:measured?'#a7c7bb':'#c5b6d1')+'" stroke-width="'+(on?3:1.4)+'"/>'+drawing(n,x-70,y-41,140,75)+textAt(x,y+59,name(n)+' · '+val,15,col,650,'middle')+textAt(x,y+76,hint,12,grey,480,'middle'));
+ return node(n,'compound','<rect class="outline" x="'+(x-78)+'" y="'+(y-45)+'" width="156" height="86" rx="8" fill="'+(measured?'#ffffff':'#ffffff')+'" stroke="'+(on?col:measured?'#a7c7bb':'#c5b6d1')+'" stroke-width="'+(on?3:1.4)+'"/>'+drawing(n,x-70,y-41,140,75)+textAt(x,y+59,(measured&&level.products[n].p>=g.best-1e-8?'★ ':'')+name(n)+' · '+val,15,measured&&level.products[n].p>=g.best-1e-8?'#12774e':col,650,'middle')+textAt(x,y+76,hint,12,grey,480,'middle'));
 }
 function routeLane(){
  const target=pinned;
@@ -211,6 +211,9 @@ function action(type){
  if(type==='query')message=name(src)+' predicts '+name(n)+' at '+nm(g.forecasts.get(n).p)+'. Its assay is still hidden.';
  else{const discounts=Object.entries(g.savings()).sort((a,b)=>b[1]-a[1]);message=(type==='make'?name(n)+' assayed at '+nm(level.products[n].p):name(n)+' prepared')+'. Spent '+cost(e.cost)+'.';if(discounts.length){const [k,v]=discounts.find(([id])=>id===pinned)||discounts[0];message+=' '+name(k)+' now costs '+cost(g.price(k))+' (was '+(g.price(k)+v)+').';}if(g.goal()){stage=null;pinned=g.made().find(id=>level.products[id].p>=g.best-1e-8);message+=' Winner confirmed.';}}
  render();
+ if(type==='make'&&g.goal()){
+  openDialog('<div class="winCard"><span aria-hidden="true">★</span><h2>You won!</h2>'+level.drawings[pinned]+'<h3>'+esc(name(pinned))+' · '+nm(level.products[pinned].p)+'</h3><p>Best measured '+esc(level.endpoint)+' · $'+spentCash()+' spent</p></div>');
+ }
 }
 function openDialog(body){$('dialogBody').innerHTML=body;if(!$('dialog').open)$('dialog').showModal();}
 function restart(){openDialog('<h2>Restart '+level.key+'?</h2><p>This clears your moves on this map.</p>'+btn('confirm','Restart map'));}

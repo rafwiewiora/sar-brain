@@ -11,7 +11,7 @@ const firstQuery=frames.find(f=>f.action==='query'),ref=final.parents[winner],di
 const oracle=hindsightReplay(B,+preset.cut);
 const winRoute=B.routes[winner],discountIndex=frames.indexOf(discount);
 const stage=(discount?winRoute.filter(n=>B.stages[n]&&discount.stock.includes(n)&&!frames[discountIndex-1].stock.includes(n)):winRoute.filter(n=>B.stages[n])).at(-1);
-const mol=(id,note='')=>'<div class="mol">'+B.drawings[id]+'<b>'+esc(name(id))+'</b><small>'+esc(note)+'</small></div>';
+const mol=(id,note='',drawing=B.drawings[id])=>'<div class="mol">'+drawing+'<b>'+esc(name(id))+'</b><small>'+esc(note)+'</small></div>';
 const gallery=(items,arrows=false)=>'<div class="gallery">'+items.join(arrows?'<span class="arrow">→</span>':'')+'</div>';
 const ledger=items=>'<div class="ledger">'+items.map(([n,label])=>'<div><b>'+esc(n)+'</b>'+esc(label)+'</div>').join('')+'</div>';
 const bestStart=initial.made.slice().sort((a,b)=>p(b)-p(a));
@@ -39,9 +39,15 @@ const slides=[
   const next=makes[1].targets[0],change=discount.changes[next];
   const square='<div class="priceUpdate"><span>'+name(next)+'</span><div class="priceSquare"><b class="oldPrice">'+change[0]+'</b><b class="newPrice">'+change[1]+'</b></div><span>steps from stock</span></div>';
   slides[3]=['Prepare I5 on the route to '+name(firstId),'<div class="prepScheme">'+B.platformReaction+'</div>'+square,
-   'Amide coupling leaves the ring chloride available for diversification. <a href="https://patents.google.com/patent/US8580813B2/en#:~:text=Step5%3A%204-(2-Chloro" target="_blank" rel="noopener">Patent · Example 1, step 5 ↗</a>'];
-  slides[4]=['Reuse I5 to make '+name(next)+' in two steps',gallery([mol(stage,'Retained from '+name(firstId)),mol(next,'Two steps from stock')],true),
+   'Green follows Boc-piperazine into I5. Purple marks the new amide bond. <a href="https://patents.google.com/patent/US8580813B2/en#:~:text=Step5%3A%204-(2-Chloro" target="_blank" rel="noopener">Patent · Example 1, step 5 ↗</a>'];
+  slides[4]=['Reuse I5 to make '+name(next)+' in two steps',gallery([mol(stage,'Peach · chloride and Boc removed',B.reuseDrawings[0]),mol(next,'Green · 2-methylbenzyl added. Purple · new C–C bond.',B.reuseDrawings[1])],true),
    name(firstId)+' measured '+value(firstId)+' against a '+nm(first.decision.estimate)+' prediction. Its route still saved seven synthesis steps on '+name(next)+'.'];
+  if(name(ref)==='CPD 239'&&name(winner)==='CPD 270'){
+   const [left,right]=B.fepPairDrawings;
+   const pair=gallery([mol(ref,'Reference · '+value(ref)+' · Cl in peach',left),mol(winner,'Predicted · '+nm(final.forecasts[winner])+' · Me and F in green',right)],true);
+   slides[5][1]=gallery([mol(ref,'Measured reference · '+value(ref),left),mol(winner,'New FEP neighbor',right)],true);
+   slides[6][1]=pair;
+  }
  }
  // Several events can coincide in one move. Show the most specific matching slide.
  const slideForFrame=new Map([[initial,1],[firstQuery,2],[first,3],[discount,4],[refMake,5],[predictionFrame,6],[wMake,7]]);

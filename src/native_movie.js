@@ -17,6 +17,7 @@ function project(key,level,run,base,ideal){
  if(uncovered.length)D.panels.push({id:'other',goal:'other',title:'Other routes',ids:uncovered.map(cid)});
  if(!D.panels.some(p=>p.id===D.platform))D.platform=D.panels[0].id;
  const initialNetwork=(base.openingInventory||[]);
+ const bestPotency=Math.max(...level.order.map(id=>level.products[id].p));
  let previousMade=new Set(opening);
  for(const [i,raw] of run.frames.entries()){
   const made=raw.made.map(node),pred=raw.pred.map(node),targets=raw.targets.map(node);
@@ -44,7 +45,8 @@ function project(key,level,run,base,ideal){
   }
   const madeIds=made.map(cid), picked=targets.map(cid);
   const caption=raw.action==='open'?('Start with '+made.length+' measured compounds.'):raw.action==='query'?('Predict '+targets.length+' '+(targets.length===1?'candidate':'candidates')+' with FEP.'):('Make '+targets.map(n=>level.products[n].name).join(' + ')+' · +'+(raw.spent-prior.spent)+' synthesis steps');
-  const frame={routes,quotes,paidRoutes:{...paidRoutes},inventory:inv,links,platformLinks,paid:[],
+  const winningIds=raw.made.filter(id=>level.products[id].p>=bestPotency-1e-8).map(cid);
+  const frame={winningIds,routes,quotes,paidRoutes:{...paidRoutes},inventory:inv,links,platformLinks,paid:[],
    spent:raw.spent,queries:raw.queries,known:[...new Set([...madeIds,...pred.map(cid)])],made:madeIds,targets:picked,
    forecasts:Object.fromEntries(Object.entries(estimates).map(([n,v])=>[cid(n),v])),edges:Object.entries(parents).map(([n,p])=>[cid(p),cid(n)]),caption};
   states.push({inventory:[...new Set([...inv,...made])],spent:raw.spent,queries:raw.queries,forecasts:estimates,parents,history:[...history],quotes:Object.fromEntries(Object.entries(frame.quotes).map(([id,v])=>[node(id),v]))});

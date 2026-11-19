@@ -10,6 +10,9 @@ __CARD_CSS__
 #sheetKicker{color:#536a82;font-weight:650}#sheetTitle{font-size:clamp(23px,3vw,40px);line-height:1.1;margin:10px 0 16px;letter-spacing:-.03em}#sheetNote{margin:14px 0;color:#425971}#reveal{background:#245ae4;color:white;border:0}
 #sheetVisual .gallery,#sheetVisual .ledger{display:flex;align-items:center;justify-content:space-evenly;gap:12px;text-align:center}#sheetVisual .mol{flex:1;min-width:0;text-align:center}#sheetVisual .gallery svg{width:100%;height:clamp(90px,20vh,195px);display:block}#sheetVisual .mol small,#sheetVisual .ledger b{display:block;color:#526880}#sheetVisual .ledger{min-height:130px}#sheetVisual .ledger b{font-size:clamp(30px,4vw,57px);color:#6743ae}
 .slideSwitch{white-space:nowrap}.slideSwitch input{min-width:0}
+#stepSheet.victory article{max-width:600px;text-align:center;border:2px solid #18825c}
+#stepSheet.victory h1{color:#116d4b}#stepSheet.victory h1::before{content:'★';display:block;font-size:44px}
+#stepSheet.victory #sheetVisual svg{width:min(80%,340px);height:150px}
 </style><main><header><strong>SAR Brain</strong><label>Campaign <select id="target"></select></label><label>Strategy <select id="policy"></select></label><label id="routeLabel" hidden>Oracle route <select id="route"><option value="fep">Shortest FEP path</option><option value="direct">Direct synthesis</option></select></label><label id="cutLabel">LoMap ≥ <select id="cut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label id="errorLabel">Difficulty <select id="error"><option value="ideal">Ideal (0 error)</option><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><label class="slideSwitch"><input type="checkbox" checked id="withSlides"> Step slides</label><a id="storyLink">Story slides</a><a id="boardLink" href="medicinal_chemistry_world_map.html">Play the board</a></header>
 <figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Selected action</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>Recorded state</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><section id="stepSheet" aria-label="Replay slide" hidden><article><small id="sheetKicker"></small><h1 id="sheetTitle"></h1><div id="sheetVisual"></div><p id="sheetNote"></p><button id="reveal">Play this move →</button></article></section><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
 <script id="data" type="application/json">__DATA__</script><script>__SCENE__
@@ -25,7 +28,7 @@ function fit(){
 new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit);
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
 let phase='settled',inspected=false;
-let playing=true,segment='intro',remaining=0,deadline=0,deck=null;
+let playing=false,oneMove=false,segment='intro',remaining=0,deadline=0,deck=null;
 // Narration belongs to the published RENIN replay and its paired SAR comparison.
 const reninStory = [
  {action:'open',seconds:7,after:['Find a 1 nM renin inhibitor','Start with 15 assays. Each new synthesis step and each simulated FEP prediction costs $1.']},
@@ -40,10 +43,10 @@ const reninStory = [
 ];
 let narrated=false;
 function duration(){
- if(run().frames[index].liveRanks)return narrated?reninStory[index].seconds:index?4.3:3;
- return Math.max(1.05,projection.D.paths.movie[index].seconds??2.6);
+ if(liveLevel.key==='RENIN'&&run().frames[index].liveRanks)return narrated?reninStory[index].seconds:index?4.3:3;
+ return Math.max(run().frames[index].liveRanks?3.6:1.05,projection.D.paths.movie[index].seconds??2.6);
 }
-const moments=[['aim',0],['press',.17],['pop',.39],['settled',.65]];
+const moments=[['aim',0],['press',.17],['pop',.39],['settled',.85]];
 let rankProgress=null;
 function setPhase(value,progress=null){
  rankProgress=progress;phase=value;tick++;painted.clear();delete document.body.dataset.ready;sync();
@@ -60,7 +63,7 @@ function sync(){
  const cue=narrated?reninStory[index]:null;
  const story=cue&&$('withSlides').checked?{lines:after?cue.after:cue.before,focus:after?cue.focus:undefined,tone:cue.tone}:null;
  const decision={story,ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
-   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:duration()*240,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
+   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:duration()*210,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
  if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
   const priorSet=new Set(old.made),now=new Set(f.made);
   const reachable=new Set();
@@ -94,12 +97,13 @@ function options(el,items){el.replaceChildren(...items.map(([v,t])=>new Option(t
 function cancelClock(){clearTimeout(timer);timer=null;}
 function schedule(ms){
  cancelClock();remaining=ms;
- if(!playing||ready.size!==2)return;
+ if((!playing&&!oneMove)||ready.size!==2)return;
  deadline=performance.now()+remaining;
  timer=setTimeout(advanceClock,remaining);
 }
 function setPlaying(value){
- if(value===playing)return;
+ oneMove=false;
+ if(value===playing){if(!value)cancelClock();return;}
  if(!value&&timer!==null)remaining=Math.max(0,deadline-performance.now());
  playing=value;$('play').textContent=playing?'Pause':'Play';
  if(playing)schedule(remaining);else cancelClock();
@@ -127,12 +131,13 @@ function layoutSheet(){
  document.documentElement.style.setProperty('--sheet-bottom',Math.max(0,innerHeight-r.bottom)+'px');
 }
 function showCard(card,closing=false){
+ $('stepSheet').classList.toggle('victory',closing&&run().won);
  layoutSheet();$('sheetKicker').textContent=$('target').value+' · '+(closing?'Campaign result':'Move '+(index+1)+' of '+run().frames.length);
  $('sheetTitle').textContent=card[0];$('sheetVisual').innerHTML=card[1];$('sheetNote').innerHTML=card[2];
  $('reveal').textContent=closing?'Return to the campaign':'Play this move →';$('stepSheet').hidden=false;
 }
 function startAction(){
- $('stepSheet').hidden=true;segment='action';
+ $('stepSheet').hidden=true;segment='action';oneMove=!playing&&index>0;
  setPhase(index?'aim':'settled');schedule(duration()*1000*(index?moments[1][1]:1));
 }
 function finishReplay(){
@@ -143,11 +148,27 @@ function advanceClock(){
  if(segment==='intro'){startAction();return;}
  if(segment==='outro'){finishReplay();return;}
  const pos=moments.findIndex(([name])=>name===phase);
- if(pos<3){setPhase(moments[pos+1][0]);schedule(duration()*1000*((moments[pos+2]?.[1]??1)-moments[pos+1][1]));return;}
+ if(pos<3){
+  setPhase(moments[pos+1][0]);
+  if(phase==='settled'){
+   if(winningMove()){showVictory();return;}
+   oneMove=false;
+  }
+  schedule(duration()*1000*((moments[pos+2]?.[1]??1)-moments[pos+1][1]));return;
+ }
  if(index<run().frames.length-1){show(index+1);return;}
- if(deck&&$('withSlides').checked){
-  segment='outro';const card=deck.slides[8];showCard([card[0],card[1],narrated?reninStory.at(-1).after[1]:card[2]],true);schedule(10000);
- }else finishReplay();
+ if(winningMove()){showVictory();return;}
+ finishReplay();
+}
+function winningMove(){return run().won&&index===run().frames.length-1&&run().frames[index].action==='make';}
+function showVictory(){
+ setPlaying(false);segment='outro';
+ const f=run().frames[index],b=board(),id=f.made.reduce((best,n)=>b.products[n].p>b.products[best].p?n:best);
+ const potency=Number((10**(9-b.products[id].p)).toPrecision(3))+' nM';
+ const detail=b.products[id].name+' · '+potency+' measured';
+ const costs=f.spent+' synthesis steps · '+f.queries+' FEP queries · $'+(f.spent+f.queries)+' spent';
+ showCard(['Campaign won',b.drawings[id]+'<h2>'+detail+'</h2>',costs+(narrated?' · 19% fewer synthesis steps than SAR + cost (21 steps).':'')],true);
+ $('reveal').focus();
 }
 window.addEventListener('resize',layoutSheet);
 
@@ -158,7 +179,7 @@ function show(i,keep=false){
  const beat=projection.D.paths.movie[index];
  if(!keep&&beat.beat==='prediction')$('focus').value=projection.node(beat.candidate);
  if(keep){sync();return;}
- cancelClock();$('stepSheet').hidden=true;
+ cancelClock();oneMove=false;$('stepSheet').hidden=true;
  if($('withSlides').checked){
   segment='intro';setPhase(index?'aim':'settled');showCard(cardForStep());schedule(index===2&&deck?9000:6000);
  }else startAction();
@@ -167,7 +188,7 @@ function show(i,keep=false){
  $('rule').textContent=r.rule+(index===r.frames.length-1?'  '+(r.end||(Math.max(...f.made.map(n=>b.products[n].p))===Math.max(...Object.values(b.products).map(x=>x.p))?'Winner assayed.':'No eligible move remains.')):'');
 }
 function setup(){
- cancelClock();const i=+$('policy').value;
+ setPlaying(false);const i=+$('policy').value;
  const cutoff=+$('cut').value,error=$('error').value;
  const oracle=isOracle(),usesFep=i===2||i===3;
  const summary=usesFep&&error!=='ideal'?data.draws[$('target').value][[i,cutoff,error]]:null;
@@ -217,14 +238,14 @@ if(entryKey==='ranks'||entryKey==='choice'){
 $('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>show(index,true);
 function step(i){setPlaying(false);show(i);}
 function forward(){
- if(segment==='intro'){startAction();setPlaying(true);return;}
+ if(segment==='intro'){setPlaying(false);startAction();return;}
  if(segment==='outro'){finishReplay();return;}
- if(index<run().frames.length-1)step(index+1);else if(segment==='action'){setPhase('settled');advanceClock();}
+ if(index<run().frames.length-1)step(index+1);else if(segment==='action'){setPlaying(false);setPhase('settled');advanceClock();}
 }
 $('withSlides').onchange=()=>{if(!$('withSlides').checked&&segment==='intro')startAction();else if(segment==='outro')finishReplay();else if($('withSlides').checked)show(index);};
-$('reveal').onclick=()=>{if(segment==='outro')finishReplay();else{startAction();setPlaying(true);}};
+$('reveal').onclick=()=>{if(segment==='outro')finishReplay();else{setPlaying(false);startAction();}};
 $('prev').onclick=()=>step(index-1);$('next').onclick=forward;$('scrub').oninput=e=>step(+e.target.value);
-$('play').onclick=()=>{if(segment==='finished'){show(0);setPlaying(true);}else setPlaying(!playing);};
+$('play').onclick=()=>{if(segment==='outro'){finishReplay();return;}if(segment==='finished'){show(0);setPlaying(true);}else setPlaying(!playing);};
 $('play').textContent=playing?'Pause':'Play';
 document.addEventListener('keydown',e=>{if(['SELECT','INPUT'].includes(e.target.tagName))return;
  if(e.key==='ArrowRight'){e.preventDefault();forward();}else if(e.key==='ArrowLeft'){e.preventDefault();step(index-1);}
