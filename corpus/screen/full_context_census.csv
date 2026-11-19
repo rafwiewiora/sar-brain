@@ -1,0 +1,743 @@
+patent_id,patent_key,context_id,endpoint_id,target_name,organism,endpoint,unit,is_dag,invalid_structure_edge_rows,candidate_pool,eligible_measured_terminals,status
+33489,US9290451,8134,4,Cannabinoid receptor 2,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,218,eligible_size_and_graph
+33183,US9242970,7896,2,Orexin receptor type 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,210,eligible_size_and_graph
+33183,US9242970,7895,2,Orexin/Hypocretin receptor type 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,209,eligible_size_and_graph
+30332,US8846719,6055,1,Gamma-aminobutyric acid receptor subunit alpha-5,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,163,eligible_size_and_graph
+29715,US8765940,5835,1,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,100,eligible_size_and_graph
+34266,US9409866,9171,4,Cannabinoid receptor 2,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,98,eligible_size_and_graph
+27715,US8501936,5190,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,96,eligible_size_and_graph
+27715,US8501936,5189,2,Focal adhesion kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,92,eligible_size_and_graph
+33433,US9278981,8207,2,Tyrosine-protein kinase ABL1 [64-515],Human,IC50,nM,1,0,all_assayed_prepared_molecules,91,eligible_size_and_graph
+27715,US8501936,5191,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,89,eligible_size_and_graph
+32048,US9079866,6939,1,Arachidonate 5-lipoxygenase-activating protein,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,88,eligible_size_and_graph
+33584,US9303012,8415,4,Cannabinoid receptor 2,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,85,eligible_size_and_graph
+33433,US9278981,8205,2,Tyrosine-protein kinase ABL1 [64-515],Human,IC50,nM,1,0,all_assayed_prepared_molecules,79,eligible_size_and_graph
+32565,US9150519,7236,4,Sphingosine 1-phosphate receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,74,eligible_size_and_graph
+27687,US8501732,5208,2,Mitogen-activated protein kinase 8,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,73,eligible_size_and_graph
+32318,US9120749,7095,2,Maternal embryonic leucine zipper kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,73,eligible_size_and_graph
+31131,US8952169,6410,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,63,eligible_size_and_graph
+30878,US8921389,6273,2,Egl nine homolog 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,61,eligible_size_and_graph
+29765,US8772480,5879,1,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,59,eligible_size_and_graph
+34412,US9434690,9416,2,Coagulation factor XI,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,57,eligible_size_and_graph
+31705,US9034866,6707,1,Mitogen-activated protein kinase kinase kinase 14,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,54,eligible_size_and_graph
+28696,US8623889,5524,1,Tyrosine-protein kinase ABL1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,52,eligible_size_and_graph
+34180,US9394285,9067,4,5'-AMP-activated protein kinase catalytic subunit alpha-1/subunit beta-1/subunit gamma-1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,51,eligible_size_and_graph
+33161,US9238644,7861,2,Vascular endothelial growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,50,eligible_size_and_graph
+33337,US9266832,8033,4,Alpha-synuclein,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,50,eligible_size_and_graph
+33489,US9290451,8135,4,Cannabinoid receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,47,eligible_size_and_graph
+34412,US9434690,9418,2,Plasma kallikrein,Human,IC50,nM,1,0,all_assayed_prepared_molecules,47,eligible_size_and_graph
+31990,US9073881,6907,2,Eukaryotic translation initiation factor 4E,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,46,eligible_size_and_graph
+31131,US8952169,6412,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,45,eligible_size_and_graph
+32691,US9169259,7371,2,Tyrosine-protein kinase SYK [360-635],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,44,eligible_size_and_graph
+27915,US8524917,5221,2,Sphingosine 1-phosphate receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,40,eligible_size_and_graph
+34274,US9409892,9202,2,Prolyl hydroxylase EGLN2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,40,eligible_size_and_graph
+34274,US9409892,9204,2,Egl nine homolog 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,40,eligible_size_and_graph
+33230,US9249085,7924,4,Prostaglandin E2 receptor EP2 subtype,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,39,eligible_size_and_graph
+29260,US8703768,5719,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,38,eligible_size_and_graph
+32799,US9181266,7483,2,Poly [ADP-ribose] polymerase tankyrase-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,37,eligible_size_and_graph
+28926,US8653263,5640,1,Orexin receptor type 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,36,eligible_size_and_graph
+28926,US8653263,5641,1,Orexin/Hypocretin receptor type 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,36,eligible_size_and_graph
+29920,US8796280,5952,1,Prostaglandin D2 receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,36,eligible_size_and_graph
+32799,US9181266,7482,2,Poly [ADP-ribose] polymerase tankyrase-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,36,eligible_size_and_graph
+31565,US9012443,6602,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,34,eligible_size_and_graph
+34412,US9434690,9415,2,Coagulation factor XI,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,31,eligible_size_and_graph
+34412,US9434690,9417,2,Plasma kallikrein,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,31,eligible_size_and_graph
+34168,US9394290,9070,2,"Cytochrome P450 11B1, mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,30,eligible_size_and_graph
+34267,US9409895,9207,2,Autotaxin,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,29,eligible_size_and_graph
+29862,US8785638,5906,2,Gag-Pol polyprotein,Human immunodeficiency virus type 1 group M subtype B (isolate BRU/LAI),IC50,nM,1,0,all_assayed_prepared_molecules,28,eligible_size_and_graph
+31563,US9012461,6646,2,Focal adhesion kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,28,eligible_size_and_graph
+31563,US9012461,6648,2,Focal adhesion kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,28,eligible_size_and_graph
+30279,US8841455,6042,2,Macrophage colony-stimulating factor 1 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,26,eligible_size_and_graph
+32815,US9187429,7550,4,"Cytochrome P450 11B1, mitochondrial",Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,26,eligible_size_and_graph
+31563,US9012461,6647,3,Focal adhesion kinase 1,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,25,eligible_size_and_graph
+32815,US9187429,7551,4,"Cytochrome P450 11B2, mitochondrial",Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,25,eligible_size_and_graph
+34130,US9388176,8991,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,24,eligible_size_and_graph
+34400,US9428502,9374,2,Fatty acid synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,24,eligible_size_and_graph
+29765,US8772480,5880,2,Serine/threonine-protein kinase mTOR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,23,eligible_size_and_graph
+30632,US8889870,6208,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,23,eligible_size_and_graph
+32565,US9150519,7235,1,Sphingosine 1-phosphate receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,23,eligible_size_and_graph
+32794,US9181272,7487,2,Cytochrome P450 family 11 subfamily B member 2,Chlorocebus sabaeus,IC50,nM,1,0,all_assayed_prepared_molecules,23,eligible_size_and_graph
+33161,US9238644,7863,2,Vascular endothelial growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,22,eligible_size_and_graph
+28418,US8592426,5401,1,Kininogen-1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+28418,US8592426,5402,2,Kininogen-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+28782,US8637532,5619,2,Aurora kinase A,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+33021,US9216981,7710,2,Serine/threonine-protein kinase B-raf,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+33021,US9216981,7711,4,Serine/threonine-protein kinase B-raf,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+33861,US9346815,8730,1,Tyrosine-protein kinase JAK1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+33861,US9346815,8731,1,Tyrosine-protein kinase JAK2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,21,eligible_size_and_graph
+28447,US8592431,5407,2,Acetyl-coenzyme A transporter 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,20,eligible_size_and_graph
+31700,US9034907,6717,1,Glutaminyl-peptide cyclotransferase,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,20,eligible_size_and_graph
+31700,US9034907,6717,2,Glutaminyl-peptide cyclotransferase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,20,eligible_size_and_graph
+34168,US9394290,9071,2,"Cytochrome P450 11B2, mitochondrial",Human,IC50,nM,1,0,all_assayed_prepared_molecules,20,eligible_size_and_graph
+28782,US8637532,5618,2,Ribosomal protein S6 kinase beta-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,19,insufficient_measured_prepared_compounds
+33161,US9238644,7865,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,19,insufficient_measured_prepared_compounds
+34427,US9434725,9509,1,Serine/threonine-protein kinase pim-1,Human,Ki,nM,1,0,all_assayed_prepared_molecules,19,insufficient_measured_prepared_compounds
+34427,US9434725,9511,1,Serine/threonine-protein kinase pim-2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,19,insufficient_measured_prepared_compounds
+34427,US9434725,9513,1,Serine/threonine-protein kinase pim-3,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,19,insufficient_measured_prepared_compounds
+33805,US9340555,8616,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,18,insufficient_measured_prepared_compounds
+34233,US9403801,9154,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,18,insufficient_measured_prepared_compounds
+30519,US8871790,6126,2,Fatty acid synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,17,insufficient_measured_prepared_compounds
+31153,US8957064,6421,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,17,insufficient_measured_prepared_compounds
+33645,US9315489,8454,2,Tyrosine-protein kinase ABL1 [64-515],Human,IC50,nM,1,0,all_assayed_prepared_molecules,17,insufficient_measured_prepared_compounds
+28646,US8618286,5503,2,"Nitric oxide synthase, brain",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+28646,US8618286,5504,2,"Nitric oxide synthase, endothelial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+29575,US8748624,5783,1,Glucagon receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+30278,US8841312,6048,2,Cyclin-dependent kinase 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+31153,US8957064,6422,2,RAC-beta serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+31295,US8975417,6492,2,Bromodomain-containing protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,16,insufficient_measured_prepared_compounds
+30979,US8937092,6330,1,Transient receptor potential cation channel subfamily V member 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,15,insufficient_measured_prepared_compounds
+31483,US9000044,6614,2,Prostaglandin D2 receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,15,insufficient_measured_prepared_compounds
+33098,US9227970,7816,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,15,insufficient_measured_prepared_compounds
+33548,US9296757,8331,2,Glutathione S-transferase A1/Isoform 2 of MAP kinase-interacting serine/threonine-protein kinase 1 (MNK1a) [T344D],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,15,insufficient_measured_prepared_compounds
+28646,US8618286,5505,2,"Nitric oxide synthase, inducible",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,14,insufficient_measured_prepared_compounds
+31188,US8962648,6460,2,Lymphokine-activated killer T-cell-originated protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,14,insufficient_measured_prepared_compounds
+31295,US8975417,6494,2,Bromodomain-containing protein 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,14,insufficient_measured_prepared_compounds
+30231,US8835472,6027,2,Acetyl-CoA carboxylase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+30600,US8889668,6163,1,Sphingosine 1-phosphate receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+31295,US8975417,6493,2,Bromodomain-containing protein 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+32523,US9145380,7208,2,Prostaglandin E synthase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+32919,US9199981,7594,2,Mast/stem cell growth factor receptor Kit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+33764,US9334290,8644,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+33775,US9339501,8646,2,"Steroid 17-alpha-hydroxylase/17,20 lyase",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+33847,US9346798,8711,2,Sodium channel protein type 9 subunit alpha,Human,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+34130,US9388176,8993,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+34134,US9388189,8999,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit delta isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+34193,US9394297,9097,2,Serine/threonine-protein kinase pim-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+34193,US9394297,9099,2,Serine/threonine-protein kinase pim-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,13,insufficient_measured_prepared_compounds
+29076,US8674100,5643,2,Macrophage colony-stimulating factor 1 receptor,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+29657,US8759532,5833,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+31141,US8957073,6425,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+31565,US9012443,6600,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+31563,US9012461,6649,2,Focal adhesion kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+31661,US9029399,6693,2,"Steroid 17-alpha-hydroxylase/17,20 lyase",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+32210,US9102669,7032,2,Acyl-CoA desaturase 1,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+32565,US9150519,7237,4,Sphingosine 1-phosphate receptor 3,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+33485,US9290459,8152,2,Neutrophil elastase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+33645,US9315489,8456,2,Tyrosine-protein kinase ABL1 [64-515],Human,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+33686,US9321748,8513,2,"Leucine-rich repeat serine/threonine-protein kinase 2 [970-2527,G2019S]",Human,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+33686,US9321748,8515,2,Leucine-rich repeat serine/threonine-protein kinase 2 [970-2527],Human,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+33760,US9334278,8576,2,Tyrosine-protein kinase SYK [360-635],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+34173,US9394289,9069,2,Macrophage colony-stimulating factor 1 receptor,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+34233,US9403801,9156,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,12,insufficient_measured_prepared_compounds
+28248,US8569511,5327,2,3-phosphoinositide-dependent protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+28248,US8569511,5328,2,3-phosphoinositide-dependent protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+28406,US8592415,5397,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+28610,US8614234,5499,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+28782,US8637532,5620,2,Aurora kinase B,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+29387,US8722709,5748,2,Mineralocorticoid receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+30402,US8853215,6098,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+31260,US8969583,6385,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+31143,US8957074,6428,2,Cyclin-dependent kinase 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+31823,US9051270,6790,2,Sodium channel protein type 10 subunit alpha,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+32135,US9090562,6964,2,Histone-lysine N-methyltransferase EZH2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+32613,US9156822,7289,1,D(2) dopamine receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+32613,US9156822,7291,4,D(2) dopamine receptor,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33063,US9221797,7738,2,Macrophage colony-stimulating factor 1 receptor [555-568],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33345,US9266869,8063,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33805,US9340555,8615,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33764,US9334290,8645,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33804,US9340537,8671,2,Tyrosine-protein kinase ABL1 [64-515],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+33873,US9353081,8762,4,"Cytochrome P450 11B1, mitochondrial",Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,11,insufficient_measured_prepared_compounds
+29202,US8691993,5688,2,Prostaglandin D2 receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+30095,US8815840,5993,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+30246,US8835470,6028,2,Sphingosine 1-phosphate receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+30367,US8853193,6106,2,MAP kinase-interacting serine/threonine-protein kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+30415,US8859534,6110,1,5-hydroxytryptamine receptor 1A,Cricetulus griseus,Ki,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+30415,US8859534,6111,1,5-hydroxytryptamine receptor 1B,Cricetulus griseus,Ki,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+31295,US8975417,6495,2,CREB-binding protein,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+32613,US9156822,7290,4,D(2) dopamine receptor,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+33345,US9266869,8065,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+33345,US9266869,8066,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+33991,US9365576,8890,2,Cellular tumor antigen p53 [18-26]/E3 ubiquitin-protein ligase Mdm2 [2-188],Human,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+34427,US9434725,9515,2,Serine/threonine-protein kinase pim-1,Mouse,IC50,nM,1,0,all_assayed_prepared_molecules,10,insufficient_measured_prepared_compounds
+27447,US8470841,5118,2,Acetyl-CoA carboxylase 2 [151-2458],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+28584,US8609852,5473,1,Metabotropic glutamate receptor 5,Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+31131,US8952169,6411,2,Sodium channel protein type 5 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+31483,US9000044,6613,2,Prostaglandin D2 receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+32121,US9090564,6966,2,Serine/threonine-protein kinase mTOR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+32136,US9090628,6979,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit delta isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+32442,US9133168,7168,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+29741,US8772323,7169,4,Glucose-dependent insulinotropic receptor,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+32586,US9150577,7251,2,Ribosomal protein S6 kinase alpha-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+32799,US9181266,7484,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33001,US9212182,8299,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33709,US9321756,8523,2,Serine/threonine-protein kinase pim-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33709,US9321756,8525,2,Serine/threonine-protein kinase pim-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33805,US9340555,8617,2,Vascular endothelial growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33874,US9353066,8757,2,Tyrosine-protein kinase SYK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+33953,US9365511,8859,2,Histamine H3 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+34531,US9447106,9569,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,9,insufficient_measured_prepared_compounds
+27446,US8470843,5122,2,Hormone-sensitive lipase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+27548,US8481536,5140,2,Proto-oncogene tyrosine-protein kinase Src,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+27638,US8497265,5179,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+29026,US8673905,5649,2,Receptor-type tyrosine-protein kinase FLT3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+29759,US8772510,5872,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+30278,US8841312,6049,2,Cyclin-dependent kinase 6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+30320,US8846698,6084,2,High affinity nerve growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+30489,US8865911,6124,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+30632,US8889870,6209,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+31935,US9066954,6855,1,Hepatocyte growth factor receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33345,US9266869,8064,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33344,US9266883,8081,2,Fibroblast growth factor receptor 4 [388-802],Human,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33206,US9247759,8145,2,Taste receptor type 2 member 8,Human,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33541,US9296747,8272,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33805,US9340555,8620,2,Vascular endothelial growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33804,US9340537,8669,2,Tyrosine-protein kinase ABL1 [64-515],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33801,US9340549,8678,2,Poly [ADP-ribose] polymerase tankyrase-1 [1091-1325],Human,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+33847,US9346798,8709,2,Sodium channel protein type 9 subunit alpha,Human,IC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+34266,US9409866,9172,4,Cannabinoid receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,8,insufficient_measured_prepared_compounds
+27948,US8530648,5240,1,Orexin/Hypocretin receptor type 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+27948,US8530648,5241,1,Orexin receptor type 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+27948,US8530648,5242,3,Orexin/Hypocretin receptor type 1,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+27948,US8530648,5243,3,Orexin receptor type 2,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+28378,US8586620,5379,2,"Nitric oxide synthase, brain",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+28378,US8586620,5380,2,"Nitric oxide synthase, endothelial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+31096,US8952008,6369,1,Gamma-aminobutyric acid receptor subunit alpha-2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+31505,US9006269,6641,2,Fatty-acid amide hydrolase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+32135,US9090562,6965,2,Histone-lysine N-methyltransferase EZH2 [Y641F],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+33154,US9238653,7020,2,"Dihydroorotate dehydrogenase (quinone), mitochondrial",Plasmodium falciparum (isolate 3D7),IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+32654,US9163021,7338,2,High affinity nerve growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+32799,US9181266,7486,2,Poly [ADP-ribose] polymerase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+33382,US9273042,8113,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+33873,US9353081,8761,4,"Cytochrome P450 11B2, mitochondrial",Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+34141,US9393245,8817,2,Tumor necrosis factor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,7,insufficient_measured_prepared_compounds
+28406,US8592415,5398,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+29606,US8754233,5800,2,Integrin-linked protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31260,US8969583,6387,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31395,US8993565,6564,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31404,US8993586,6568,2,Acetyl-CoA carboxylase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31404,US8993586,6569,2,Acetyl-CoA carboxylase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31491,US9006232,6629,2,Glycogen synthase kinase-3 beta,Bos taurus,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31950,US9067914,6870,2,High affinity nerve growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31950,US9067914,6871,2,BDNF/NT-3 growth factors receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+31950,US9067914,6873,2,Macrophage colony-stimulating factor 1 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32200,US9102591,7027,2,P2X purinoceptor 7,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32323,US9120761,7099,2,Focal adhesion kinase 1,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32386,US9126931,7132,2,ALK tyrosine kinase receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32373,US9126973,7138,2,Hematopoietic prostaglandin D synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32500,US9139593,7205,2,Bifunctional epoxide hydrolase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+32638,US9163012,7330,2,11-beta-hydroxysteroid dehydrogenase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33198,US9242998,7913,2,Genome polyprotein,Hepatitis C virus genotype 1a (isolate H77),IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33198,US9242998,7914,2,Genome polyprotein,Hepatitis C virus genotype 1b (isolate Japanese),IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33257,US9255096,7958,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33257,US9255096,7959,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33257,US9255096,7960,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33290,US9260425,7992,1,Serine/threonine-protein kinase pim-1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33418,US9278960,8188,2,Guanine nucleotide-binding protein subunit alpha-15 [Y147C]/Metabotropic glutamate receptor 2,Human,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33547,US9296741,8398,1,Bromodomain-containing protein 4 [57-168],Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33547,US9296741,8400,1,Bromodomain-containing protein 4 [352-457],Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+33672,US9320734,8497,3,RAC-alpha serine/threonine-protein kinase [1-123],Human,Kd,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+34140,US9393232,9046,2,Bromodomain-containing protein 4 [1-477],Human,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+34235,US9403810,9105,2,E3 ubiquitin-protein ligase SMURF1 [420-757],Human,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+34182,US9394311,9147,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+34267,US9409895,9206,2,Ectonucleotide pyrophosphatase/phosphodiesterase family member 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,6,insufficient_measured_prepared_compounds
+27646,US8497270,5174,2,Gag-Pol polyprotein,Human immunodeficiency virus type 1 group M subtype B (isolate BRU/LAI),IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+27713,US8501750,5197,2,Type-1 angiotensin II receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+29258,US8703767,5720,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+29423,US8729078,5755,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+29881,US8791130,5935,1,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+30129,US8822500,6011,2,Serine/threonine-protein kinase receptor R3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+30129,US8822500,6014,2,High affinity nerve growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+31278,US8975265,6477,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+31278,US8975265,6478,2,RAC-beta serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+31395,US8993565,6563,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+31868,US9056865,6828,2,Smoothened homolog,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+32532,US9145392,7210,2,Ribosomal protein S6 kinase beta-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+32532,US9145392,7211,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+32615,US9156845,7275,2,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+32615,US9156845,7276,2,Leucine-rich repeat serine/threonine-protein kinase 2 [G2019S],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33129,US9233946,7836,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 4",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33133,US9233968,7839,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33244,US9249163,8009,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33132,US9233965,8010,2,Casein kinase I isoform epsilon,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33498,US9290485,8160,2,Plasma kallikrein,Human,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33523,US9296693,8266,2,Bifunctional epoxide hydrolase 2,Human,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33541,US9296747,8273,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33573,US9302989,8292,2,Nicotinamide phosphoribosyltransferase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33584,US9303012,8416,4,Cannabinoid receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33705,US9321790,8557,2,"Phosphatidylinositol 3-kinase regulatory subunit alpha/4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33783,US9340511,8583,2,Egl nine homolog 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33731,US9328099,8589,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33731,US9328099,8590,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+33847,US9346798,8713,2,Sodium channel protein type 5 subunit alpha,Human,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+34279,US9409915,9213,2,Transient receptor potential M8 protein,Canis lupus familiaris,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+34346,US9422290,9289,2,Bromodomain-containing protein 4 [44-168],Human,IC50,nM,1,0,all_assayed_prepared_molecules,5,insufficient_measured_prepared_compounds
+27529,US8481564,5138,2,Macrophage colony-stimulating factor 1,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+27570,US8486953,5152,2,MAP kinase-interacting serine/threonine-protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+27570,US8486953,5153,2,MAP kinase-interacting serine/threonine-protein kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+27546,US8481733,5159,2,Activated CDC42 kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+28300,US8575391,5351,2,Dual specificity mitogen-activated protein kinase kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+28909,US8653111,5639,2,Prolyl hydroxylase EGLN2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+29215,US8697696,5696,1,Gamma-aminobutyric acid receptor subunit alpha-5,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+29261,US8703761,5722,2,Diacylglycerol O-acyltransferase 1 [89-488],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+29791,US8778951,5901,2,Cyclin-T1/Cyclin-dependent kinase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+30619,US8889724,6181,2,Solute carrier family 22 member 12,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+30909,US8927536,6289,2,11-beta-hydroxysteroid dehydrogenase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+30932,US8933079,6303,2,Melanin-concentrating hormone receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+31282,US8975282,6485,3,Vascular endothelial growth factor receptor 2,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+31282,US8975282,6486,3,Hepatocyte growth factor receptor,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+31341,US8987248,6519,2,Proteinase-activated receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32015,US9073926,6928,2,Ribosomal protein S6 kinase alpha-3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32018,US9073940,6932,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha/beta/delta/gamma isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32637,US9163003,7312,2,Poly [ADP-ribose] polymerase tankyrase-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32637,US9163003,7313,2,Poly [ADP-ribose] polymerase tankyrase-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32642,US9163013,7332,2,Glycogen synthase kinase-3 beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32653,US9163042,7340,2,Sodium channel protein type 10 subunit alpha,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32841,US9187480,7572,1,Cannabinoid receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32841,US9187480,7573,1,Cannabinoid receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+32847,US9187487,7578,2,Tyrosine-protein kinase JAK3 [781-1124],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33129,US9233946,7833,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 3",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33244,US9249163,8008,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33523,US9296693,8268,2,Bifunctional epoxide hydrolase 2,Mouse,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33557,US9296736,8279,2,Cellular tumor antigen p53 [1-83]/E3 ubiquitin-protein ligase Mdm2 [1-188],Human,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33542,US9296748,8284,2,Bromodomain-containing protein 4 [44-168],Human,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33568,US9302996,8414,2,Diacylglycerol O-acyltransferase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+33975,US9365562,8878,1,"Isoform PDE10A2 of cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A (PDE10A2)",Human,Ki,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+34246,US9403833,9113,2,E3 ubiquitin-protein ligase SMURF1 [420-757],Human,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+34191,US9394309,9144,2,Angiopoietin-1 receptor [776-1124],Human,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+34315,US9416132,9277,2,Serine/threonine-protein kinase pim-1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+34435,US9434727,9562,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+34435,US9434727,9564,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,4,insufficient_measured_prepared_compounds
+27962,US8536165,5258,2,"Dihydroorotate dehydrogenase (quinone), mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+28467,US8598184,5445,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+28668,US8623863,5534,1,Orexin/Hypocretin receptor type 1,Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+28668,US8623863,5535,1,Orexin receptor type 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29205,US8691986,5686,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29205,US8691986,5687,2,"cGMP-dependent 3',5'-cyclic phosphodiesterase",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29269,US8703771,5716,2,Tyrosine-protein kinase ABL1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29269,US8703771,5717,2,Mast/stem cell growth factor receptor Kit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29269,US8703771,5718,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29258,US8703767,5721,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29552,US8748451,5811,2,Histone deacetylase 6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29655,US8759537,5832,2,Prostaglandin E synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29959,US8802673,5972,1,Trace amine-associated receptor 1,Mus musculus,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+29959,US8802673,5973,1,Trace amine-associated receptor 7b,Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+30079,US8815918,5985,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+31245,US8969394,6382,1,Prostaglandin E2 receptor EP4 subtype,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+31424,US8993756,6575,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+31481,US9000184,6622,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+31481,US9000184,6624,2,Amyloid-beta precursor protein,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+31992,US9073882,6908,2,ATP-sensitive inward rectifier potassium channel 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32021,US9073922,6924,2,Cyclin-dependent kinase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32013,US9073931,6930,1,Oxysterols receptor LXR-beta,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32204,US9102637,7030,2,TRAF2 and NCK-interacting protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32323,US9120761,7100,2,"Vascular endothelial growth factor receptor 3 [818-948,1003-1077]",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32323,US9120761,7102,3,Focal adhesion kinase 1,Mus musculus,Kd,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32415,US9133105,7156,2,Histone deacetylase 4/Myocyte-specific enhancer factor 2D,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+30479,US8865745,7172,2,"cAMP-specific 3',5'-cyclic phosphodiesterase 4B",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32640,US9163008,7319,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+32726,US9174993,7417,2,Serine/threonine-protein kinase Sgk1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33002,US9216182,7700,1,Histamine H3 receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33002,US9216182,7701,1,Histamine H3 receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33133,US9233968,7841,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33133,US9233968,7842,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33133,US9233968,7843,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33200,US9242996,7910,2,Mitogen-activated protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33257,US9255096,7961,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33485,US9290459,8151,4,Neutrophil elastase,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33485,US9290459,8153,2,Neutrophil elastase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33541,US9296747,8274,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33573,US9302989,8294,2,Nicotinamide phosphoribosyltransferase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33507,US9290476,8388,3,Isoform 2 of Nuclear receptor ROR-gamma (RORgT),Human,Kd,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33643,US9315491,8458,2,Serine/threonine-protein kinase mTOR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33649,US9315498,8461,4,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Human,EC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33672,US9320734,8497,1,RAC-alpha serine/threonine-protein kinase [1-123],Human,Ki,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33788,US9340507,8655,2,Neutrophil elastase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33824,US9346782,8705,3,Nuclear receptor ROR-gamma [258-518],Artificial Sequence,Kd,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33824,US9346782,8706,2,"Nuclear receptor ROR-gamma [258-518,Y502F]",Artificial Sequence,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33991,US9365576,8886,2,Cellular tumor antigen p53 [18-26]/E3 ubiquitin-protein ligase Mdm2 [2-188],Human,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+33991,US9365576,8888,2,Cellular tumor antigen p53 [18-26]/Protein Mdm4 [2-185],Human,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34162,US9394281,8895,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34162,US9394281,8897,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34246,US9403833,9114,2,E3 ubiquitin-protein ligase SMURF1 [420-757],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34296,US9415055,9269,2,P2X purinoceptor 7,Human,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34378,US9428456,9348,4,Atypical chemokine receptor 3,Human,EC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34515,US9447092,9478,2,Aurora kinase A,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34515,US9447092,9489,2,Cytochrome P450 2C9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34515,US9447092,9491,2,Cytochrome P450 2D6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+34431,US9434697,9554,2,Fibroblast growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,3,insufficient_measured_prepared_compounds
+27548,US8481536,5142,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+27979,US8536175,5259,2,Fibroblast growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+27990,US8541407,5273,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28071,US8546389,5276,2,Genome polyprotein,Hepatitis C virus genotype 1b (isolate BK),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28071,US8546389,5277,2,Genome polyprotein,Hepatitis C virus genotype 3a (isolate NZL1),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28111,US8552037,5299,2,Melatonin receptor type 1A,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28111,US8552037,5300,2,Melatonin receptor type 1B,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28351,US8586571,5376,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28447,US8592431,5406,2,Acetyl-coenzyme A transporter 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28511,US8604016,5471,2,"Glutaminase kidney isoform, mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+28769,US8637507,5560,2,Diacylglycerol O-acyltransferase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29036,US8673906,5648,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit beta isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29125,US8685958,5679,2,Melanin-concentrating hormone receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29405,US8722895,5736,2,Egl nine homolog 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29405,US8722895,5737,2,Prolyl hydroxylase EGLN3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29495,US8741923,5780,1,Sphingosine 1-phosphate receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29557,US8748458,5821,2,Histone deacetylase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29557,US8748458,5822,2,Histone deacetylase 6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29664,US8765727,5883,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29664,US8765727,5884,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29664,US8765727,5885,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29664,US8765727,5886,2,Non-receptor tyrosine-protein kinase TYK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29811,US8779142,5899,2,Heat shock protein HSP 90-alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29836,US8785467,5915,1,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29942,US8796310,5937,2,Tyrosine-protein kinase SYK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29929,US8796295,5947,2,Metabotropic glutamate receptor 5,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+29929,US8796295,5948,2,Metabotropic glutamate receptor 5,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30080,US8815901,5986,2,Fibroblast growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30110,US8822458,6003,2,Coagulation factor X,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30119,US8822447,6005,2,Ketohexokinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30129,US8822500,6017,2,Proto-oncogene tyrosine-protein kinase ROS,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30129,US8822500,6018,2,Proto-oncogene tyrosine-protein kinase receptor Ret,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30294,US8846656,6083,2,C5a anaphylatoxin chemotactic receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30390,US8853258,6086,2,UDP-3-O-acyl-N-acetylglucosamine deacetylase,Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30374,US8853207,6093,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30374,US8853207,6094,2,Mast/stem cell growth factor receptor Kit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30377,US8853203,6104,2,Metabotropic glutamate receptor 5,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30489,US8865911,6125,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30518,US8871934,6127,2,"[Pyruvate dehydrogenase (acetyl-transferring)] kinase isozyme 2, mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30642,US8894989,6210,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30656,US8895544,6212,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30656,US8895544,6213,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+30911,US8927577,6295,1,Pro-glucagon,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31218,US8969335,6366,2,Inhibitor of nuclear factor kappa-B kinase subunit epsilon,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31218,US8969335,6367,2,Serine/threonine-protein kinase TBK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31260,US8969583,6386,2,Vascular endothelial growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31162,US8957093,6434,2,Peroxisome proliferator-activated receptor gamma,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31179,US8962630,6451,2,Cyclin-dependent kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31273,US8975260,6475,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31357,US8987286,6531,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31523,US9006454,6644,2,"Dihydroorotate dehydrogenase (quinone), mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31561,US9012651,6653,2,Transient receptor potential cation channel subfamily V member 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31583,US9018234,6659,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31642,US9029360,6679,2,Metabotropic glutamate receptor 5,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31828,US9051265,6788,2,Peroxisome proliferator-activated receptor gamma,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31895,US9062004,6832,2,Cannabinoid receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31947,US9067922,6879,2,Solute carrier family 22 member 12,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31961,US9067937,6884,2,Maternal embryonic leucine zipper kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+31993,US9073821,6896,2,UDP-3-O-acyl-N-acetylglucosamine deacetylase,Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32013,US9073931,6929,1,Oxysterols receptor LXR-alpha,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32177,US9096596,7008,1,P2X purinoceptor 7,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32177,US9096596,7010,2,P2X purinoceptor 7,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32177,US9096596,7011,2,P2X purinoceptor 7,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32195,US9102622,7029,1,Fatty-acid amide hydrolase 1 [30-579],Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32195,US9102622,7029,2,Fatty-acid amide hydrolase 1 [30-579],Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32323,US9120761,7101,2,Isoform 2 of Vascular endothelial growth factor receptor 3 (Short) 98-1298],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32373,US9126973,7139,2,Hematopoietic prostaglandin D synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32429,US9133162,7165,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32429,US9133162,7167,2,Tyrosine-protein kinase receptor UFO,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32434,US9133171,7173,2,Cyclin-dependent kinase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32434,US9133171,7174,2,Cyclin-dependent kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32434,US9133171,7175,2,Cyclin-dependent kinase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32449,US9133183,7182,2,Macrophage colony-stimulating factor 1 receptor [538-972],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32527,US9145402,7212,1,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32618,US9156829,7267,2,Orexin/Hypocretin receptor type 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32637,US9163003,7316,2,Poly [ADP-ribose] polymerase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32674,US9169224,7363,2,Fatty-acid amide hydrolase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32674,US9169224,7364,2,Fatty-acid amide hydrolase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32757,US9181181,7457,4,Peroxisome proliferator-activated receptor gamma [205-505],Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32983,US9212139,7670,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+32989,US9212186,7691,1,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33027,US9216968,7706,2,Prostaglandin E synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33023,US9216988,7719,2,Nuclear receptor ROR-gamma,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33062,US9221828,7743,2,Serine/threonine-protein kinase Sgk1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33129,US9233946,7835,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 4",Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33161,US9238644,7862,2,Vascular endothelial growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33200,US9242996,7912,2,Mitogen-activated protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33292,US9260440,8014,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33319,US9265773,8057,2,Genome polyprotein,Hepatitis C virus genotype 1a (isolate H77),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33319,US9265773,8058,2,Genome polyprotein,Hepatitis C virus genotype 1b (isolate Japanese),IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33371,US9273029,8106,2,Serine/threonine-protein kinase TBK1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33483,US9290456,8138,2,D-amino-acid oxidase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33206,US9247759,8147,2,Taste receptor type 2 member 14,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33528,US9296703,8269,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33583,US9303033,8337,2,Casein kinase II subunit beta,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33579,US9303035,8438,2,Cystic fibrosis transmembrane conductance regulator,Chinese hamster,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33672,US9320734,8498,2,RAC-alpha serine/threonine-protein kinase [1-123],Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33686,US9321748,8512,2,"Leucine-rich repeat serine/threonine-protein kinase 2 [970-2527,G2019S]",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33689,US9321760,8527,2,Ribosomal protein S6 kinase beta-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33734,US9328111,8539,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33791,US9340506,8601,4,Hexokinase-4,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33835,US9346803,8715,2,Aldo-keto reductase family 1 member C3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33835,US9346803,8717,2,Aldo-keto reductase family 1 member C2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+33933,US9359371,8821,2,"cGMP-specific 3',5'-cyclic phosphodiesterase [537-875]",Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34162,US9394281,8898,2,Aurora kinase B,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34162,US9394281,8899,2,Receptor-type tyrosine-protein kinase FLT3 [K633Q],Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34116,US9388165,9029,2,"RAF proto-oncogene serine/threonine-protein kinase [Y340D,Y341D]",Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34174,US9394303,9079,1,Induced myeloid leukemia cell differentiation protein Mcl-1 homolog,Mus musculus,Ki,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34174,US9394303,9079,2,Induced myeloid leukemia cell differentiation protein Mcl-1 homolog,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34227,US9403804,9088,2,Macrophage colony-stimulating factor 1 receptor,Mus musculus,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34193,US9394297,9093,2,Serine/threonine-protein kinase pim-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34193,US9394297,9098,2,Serine/threonine-protein kinase pim-1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34193,US9394297,9100,2,Serine/threonine-protein kinase pim-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34242,US9403831,9112,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34233,US9403801,9153,2,Tyrosine-protein kinase JAK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34233,US9403801,9157,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34233,US9403801,9159,2,Non-receptor tyrosine-protein kinase TYK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34231,US9403808,9163,4,Cannabinoid receptor 2,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34243,US9403843,9167,2,Calpain-1 catalytic subunit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34272,US9409907,9208,2,Dual specificity protein kinase TTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34384,US9428503,9382,2,Serine-protein kinase ATM,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34525,US9447114,9431,2,Short transient receptor potential channel 5,Human,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34515,US9447092,9490,2,Cytochrome P450 2C19,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34435,US9434727,9561,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+34435,US9434727,9563,2,Retinol-binding protein 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,2,insufficient_measured_prepared_compounds
+27548,US8481536,5141,2,Tyrosine-protein kinase Yes,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27771,US8507683,5211,2,RNA-directed RNA polymerase,Hepacivirus hominis,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27773,US8507533,5214,1,Pro-glucagon,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27743,US8507510,5216,2,Cyclin-dependent kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27743,US8507510,5217,2,Cyclin-dependent kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27743,US8507510,5218,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+27990,US8541407,5274,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28043,US8546392,5282,2,17-beta-hydroxysteroid dehydrogenase type 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28087,US8551963,5313,3,Receptor-type tyrosine-protein kinase FLT3,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28261,US8575145,5335,2,Serine/threonine-protein kinase pim-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28261,US8575145,5336,2,Serine/threonine-protein kinase pim-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28261,US8575145,5337,2,Serine/threonine-protein kinase pim-3,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28310,US8580778,5358,2,Transmembrane prolyl 4-hydroxylase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28283,US8575197,5365,2,P2X purinoceptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28378,US8586620,5377,2,5-hydroxytryptamine 1D receptor,Bos taurus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28378,US8586620,5381,2,"Nitric oxide synthase, inducible",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28434,US8592457,5388,1,Orexin receptor type 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28511,US8604016,5472,2,"Glutaminase kidney isoform, mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28574,US8609708,5485,2,Cytochrome P450 2A6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28574,US8609708,5486,2,Cytochrome P450 3A4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28555,US8609647,5493,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28610,US8614234,5500,2,Vascular endothelial growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28641,US8618158,5506,2,E3 ubiquitin-protein ligase Mdm2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28661,US8618107,5519,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28677,US8623885,5525,2,Receptor-type tyrosine-protein kinase FLT3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28677,US8623885,5526,2,Cyclin-dependent kinase 4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28623,US8618103,5530,1,Tyrosine-protein kinase JAK3,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28623,US8618103,5530,2,Tyrosine-protein kinase JAK3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28623,US8618103,5532,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28785,US8637501,5559,1,Melanin-concentrating hormone receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28765,US8637500,5601,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28794,US8637558,5629,2,15-hydroxyprostaglandin dehydrogenase [NAD(+)],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29013,US8669361,5651,1,Serine/threonine-protein kinase pim-1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29013,US8669361,5652,1,Serine/threonine-protein kinase pim-2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29013,US8669361,5653,1,Serine/threonine-protein kinase pim-3,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29092,US8680120,5658,2,Prostaglandin E2 receptor EP1 subtype,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29087,US8680116,5664,1,"cGMP-dependent 3',5'-cyclic phosphodiesterase",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29139,US8685992,5666,2,Histone deacetylase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29139,US8685992,5667,2,Histone deacetylase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29139,US8685992,5668,2,Histone deacetylase 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29247,US8697716,5693,2,Mast/stem cell growth factor receptor Kit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29318,US8710232,5727,2,Carboxypeptidase B,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29340,US8716296,5731,2,Cyclin-dependent kinase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29404,US8722896,5734,1,Prokineticin receptor 2,Cricetulus griseus,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29383,US8722692,5753,2,Tyrosine-protein kinase SYK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29552,US8748451,5810,2,Histone deacetylase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29557,US8748458,5823,2,Histone deacetylase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29557,US8748458,5829,2,Histone deacetylase 9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29659,US8759366,5834,2,Tyrosine-protein kinase SYK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29635,US8759386,5836,1,Prostaglandin D2 receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29748,US8772481,5878,2,Mitogen-activated protein kinase 14,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29745,US8772316,5881,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29664,US8765727,5887,2,ALK tyrosine kinase receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29726,US8772288,5896,2,Mitogen-activated protein kinase 14,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29790,US8778970,5907,1,Sodium-dependent serotonin transporter,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29790,US8778970,5908,1,5-hydroxytryptamine receptor 1A,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29790,US8778970,5909,2,Cytochrome P450 2D6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29904,US8791272,5920,1,Prostaglandin D2 receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29873,US8791100,5927,2,Sphingosine 1-phosphate receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29928,US8796296,5946,1,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29930,US8796293,5949,2,Rho-associated protein kinase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+29961,US8802674,5965,1,Leucine-rich repeat serine/threonine-protein kinase 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30076,US8815891,5987,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30155,US8822510,5997,2,Sphingosine 1-phosphate receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30129,US8822500,6019,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30269,US8841450,6033,1,Serine/threonine-protein kinase ATR,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30333,US8846746,6051,2,Sodium/glucose cotransporter 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30330,US8846711,6057,2,Enoyl-[acyl-carrier-protein] reductase [NADPH] FabI,Staphylococcus aureus (strain MRSA252),IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30302,US8846689,6068,2,Focal adhesion kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30298,US8846673,6069,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30311,US8846658,6082,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30377,US8853203,6105,2,Metabotropic glutamate receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30464,US8865714,6117,2,Hematopoietic prostaglandin D synthase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+28599,US8614220,6161,2,Serine/threonine-protein kinase PLK1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30770,US8912173,6236,2,Tyrosine-protein kinase SYK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30776,US8912181,6237,2,Heat shock protein HSP 90-alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+30786,US8912219,6240,2,Nuclear receptor ROR-gamma,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31001,US8940744,6353,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31143,US8957074,6426,2,Cyclin-dependent kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31179,US8962630,6450,2,Cyclin-dependent kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31189,US8962637,6453,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31189,US8962637,6455,2,Proto-oncogene tyrosine-protein kinase Src,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31201,US8962651,6461,2,Genome polyprotein,Hepatitis C virus genotype 1b (isolate Con1),IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31294,US8975415,6489,1,Beta-secretase 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31294,US8975415,6489,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31353,US8987273,6529,2,RAC-alpha serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31353,US8987273,6530,2,RAC-beta serine/threonine-protein kinase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31365,US8987319,6542,2,Androgen receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31424,US8993756,6576,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31459,US8999998,6590,1,Tyrosine-protein kinase JAK1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31459,US8999998,6591,1,Tyrosine-protein kinase JAK2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31459,US8999998,6592,1,Tyrosine-protein kinase JAK3,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31459,US8999998,6594,1,Non-receptor tyrosine-protein kinase TYK2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31565,US9012443,6601,2,Sodium channel protein type 5 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31481,US9000184,6623,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31501,US9006242,6631,2,Cytochrome P450 2C8,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31501,US9006242,6632,2,Cytochrome P450 2C9,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31501,US9006242,6633,2,Cytochrome P450 2C19,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31501,US9006242,6634,2,Cytochrome P450 2D6,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31494,US9006244,6635,1,Oxysterols receptor LXR-alpha,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31494,US9006244,6636,1,Oxysterols receptor LXR-beta,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31580,US9018211,6654,2,ATP-sensitive inward rectifier potassium channel 1,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31617,US9023849,6670,2,"cGMP-specific 3',5'-cyclic phosphodiesterase",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31636,US9023865,6672,2,Mitogen-activated protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31649,US9029356,6676,2,ALK tyrosine kinase receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31649,US9029356,6677,2,Insulin-like growth factor 1 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31649,US9029356,6678,2,Aurora kinase B,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31661,US9029399,6694,2,"Steroid 17-alpha-hydroxylase/17,20 lyase",Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31689,US9034874,6708,1,Histamine H3 receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31689,US9034874,6709,1,Histamine H3 receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31752,US9040693,6743,2,Gonadotropin-releasing hormone receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32246,US9108903,6783,2,Sodium channel protein type 10 subunit alpha,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31853,US9051311,6810,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31853,US9051311,6812,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31921,US9062048,6836,2,C-C chemokine receptor-like 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31926,US9062078,6852,1,Orexin/Hypocretin receptor type 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31926,US9062078,6853,1,Orexin receptor type 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31926,US9062078,6854,1,Orexin/Hypocretin receptor type 1,Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31951,US9067917,6874,1,Arachidonate 5-lipoxygenase-activating protein,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31966,US9067949,6895,1,5-hydroxytryptamine receptor 6,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+31987,US9073876,6906,1,Arachidonate 5-lipoxygenase-activating protein,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32022,US9073906,6915,2,11-beta-hydroxysteroid dehydrogenase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32055,US9079902,6944,2,Sodium channel protein type 9 subunit alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32177,US9096596,7009,1,P2X purinoceptor 7,Rattus norvegicus,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32288,US9115102,7059,2,Disintegrin and metalloproteinase domain-containing protein 17,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32325,US9120780,7109,2,Heat shock protein HSP 90-alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32363,US9126952,7136,2,DNA-dependent protein kinase catalytic subunit,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32383,US9127001,7148,2,Potassium channel subfamily K member 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32410,US9132129,7151,2,PC4 and SFRS1-interacting protein,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32410,US9132129,7152,2,PC4 and SFRS1-interacting protein,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32429,US9133162,7166,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32449,US9133183,7183,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32449,US9133183,7184,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32456,US9133187,7185,2,Mitogen-activated protein kinase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32482,US9139546,7198,1,Cannabinoid receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32618,US9156829,7268,2,Orexin receptor type 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32610,US9156831,7271,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32610,US9156831,7273,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit beta isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32613,US9156822,7292,4,D(2) dopamine receptor,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32637,US9163003,7314,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32640,US9163008,7320,1,Sodium channel protein type 9 subunit alpha,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32674,US9169224,7362,2,Fatty-acid amide hydrolase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32676,US9169240,7367,2,Endothelial lipase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32683,US9169246,7376,2,Methionine aminopeptidase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32748,US9180120,7443,2,Vasopressin V1a receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32748,US9180120,7444,2,Vasopressin V2 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32772,US9181182,7459,4,Sphingosine 1-phosphate receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32795,US9181279,7489,2,Prostaglandin E2 receptor EP4 subtype,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32830,US9187466,7562,2,Vasopressin V1a receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32830,US9187466,7563,2,Vasopressin V2 receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+32841,US9187480,7571,1,Cannabinoid receptor 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33032,US9216972,7707,2,Sphingosine 1-phosphate receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33032,US9216972,7708,4,Sphingosine 1-phosphate receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33020,US9216984,7713,2,Tyrosine-protein kinase JAK2 [828-1132],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33048,US9221802,7740,4,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Human,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33076,US9226923,7779,2,ALK tyrosine kinase receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33076,US9226923,7780,2,Hepatocyte growth factor receptor,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33076,US9226923,7782,2,Tyrosine-protein kinase receptor,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33076,US9226923,7783,2,ALK tyrosine kinase receptor [L1196M],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33076,US9226923,7784,2,Tyrosine-protein kinase receptor,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33091,US9227959,7795,1,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Human,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33108,US9227973,7817,2,Calcitonin gene-related peptide type 1 receptor,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33129,US9233946,7831,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 3",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33129,US9233946,7832,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 3",Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33129,US9233946,7834,2,"6-phosphofructo-2-kinase/fructose-2,6-bisphosphatase 3",Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33161,US9238644,7864,2,Vascular endothelial growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33161,US9238644,7866,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33187,US9242973,7903,1,Beta-secretase 1,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33187,US9242973,7903,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33187,US9242973,7905,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33199,US9243002,7915,2,Genome polyprotein,Hepatitis C virus genotype 1a (isolate H77),IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33199,US9243002,7916,2,Genome polyprotein,Hepatitis C virus genotype 1b (isolate Japanese),IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33238,US9249151,7935,2,E3 ubiquitin-protein ligase XIAP [241-356],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33238,US9249151,7936,2,Baculoviral IAP repeat-containing protein 3 [256-363],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33263,US9255107,7978,2,Tyrosine-protein kinase ABL1 [T315I],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33278,US9260413,7990,2,Catechol O-methyltransferase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33292,US9260440,8015,2,Poly [ADP-ribose] polymerase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33311,US9265734,8022,2,Histone deacetylase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33311,US9265734,8023,2,Histone deacetylase 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33311,US9265734,8024,2,Histone deacetylase 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33125,US9233921,8056,2,Uracil-DNA glycosylase,Vaccinia virus (strain Copenhagen),IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33348,US9266835,8059,4,Cannabinoid receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33341,US9266881,8075,1,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33350,US9266895,8076,2,Tyrosine-protein kinase BTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33371,US9273029,8108,2,Inhibitor of nuclear factor kappa-B kinase subunit epsilon,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33394,US9273052,8114,2,Poly [ADP-ribose] polymerase 1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33486,US9290454,8136,1,Prostaglandin D2 receptor 2,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33206,US9247759,8146,2,Taste receptor type 2 member 8,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33403,US9278093,8173,2,"Cytochrome P450 11B2, mitochondrial",Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33403,US9278093,8174,2,"Cytochrome P450 11B1, mitochondrial",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33426,US9278968,8199,4,Guanylate cyclase soluble subunit alpha-1/beta-1,Human,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33433,US9278981,8209,2,Tyrosine-protein kinase ABL1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33458,US9284315,8238,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33458,US9284315,8240,2,Serine/threonine-protein kinase mTOR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33001,US9212182,8300,2,Sodium channel protein type 9 subunit alpha,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33571,US9303023,8435,2,Orexin receptor type 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33644,US9315493,8460,4,Peroxisome proliferator-activated receptor gamma [182-505]/Regulatory protein GAL4 [1-147],Plasmodium sp. LIN3p,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33672,US9320734,8499,2,RAC-alpha serine/threonine-protein kinase [1-123],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33684,US9321738,8506,2,Lysophosphatidic acid receptor 1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33684,US9321738,8508,2,Lysophosphatidic acid receptor 3,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33686,US9321748,8514,2,Leucine-rich repeat serine/threonine-protein kinase 2 [970-2527],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33692,US9321766,8518,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33692,US9321766,8520,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33709,US9321756,8526,2,Serine/threonine-protein kinase pim-3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33723,US9328070,8538,1,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Human,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33745,US9328118,8542,2,Cathepsin S,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33775,US9339501,8648,2,"Steroid 17-alpha-hydroxylase/17,20 lyase",Rat,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33801,US9340549,8680,2,Poly [ADP-ribose] polymerase tankyrase-2 [946-1162],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33812,US9345700,8703,2,Induced myeloid leukemia cell differentiation protein Mcl-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33835,US9346803,8719,2,Aldo-keto reductase family 1 member C4,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33857,US9346827,8721,2,Beta-secretase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33832,US9346794,8727,2,Neutrophil elastase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33902,US9359301,8771,1,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33902,US9359301,8771,4,Isoform 1 of Metabotropic glutamate receptor 5 (5a),Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33933,US9359371,8823,2,"cGMP-specific 3',5'-cyclic phosphodiesterase [537-875]",Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33944,US9364482,8851,2,Genome polyprotein [1027-1711],HCV,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33944,US9364482,8853,2,Genome polyprotein [1027-1711],HCV,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33975,US9365562,8879,1,"Isoform PDE10A2 of cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A (PDE10A2)",Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+33991,US9365576,8891,2,Cellular tumor antigen p53 [18-26]/E3 ubiquitin-protein ligase Mdm2 [2-188],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34162,US9394281,8896,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34112,US9388140,8978,2,Dual specificity protein kinase TTK,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34116,US9388165,9030,2,Serine/threonine-protein kinase B-raf,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34116,US9388165,9031,2,Serine/threonine-protein kinase B-raf [V600E],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34116,US9388165,9034,2,Platelet-derived growth factor receptor alpha,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34116,US9388165,9035,2,Platelet-derived growth factor receptor beta,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34116,US9388165,9036,2,Vascular endothelial growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34170,US9394291,9073,2,Mineralocorticoid receptor [729-984],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34170,US9394291,9075,2,Mineralocorticoid receptor [729-984],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34174,US9394303,9080,1,Apoptosis regulator Bcl-2,Mouse,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34174,US9394303,9081,1,Bcl-2-like protein 1,Mouse,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34193,US9394297,9094,2,Serine/threonine-protein kinase pim-1,Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34193,US9394297,9095,2,Serine/threonine-protein kinase pim-2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34217,US9403768,9101,2,E3 ubiquitin-protein ligase XIAP [124-240],Artificial Sequence,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34254,US9408850,9118,2,Mast/stem cell growth factor receptor Kit [544-976],Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34218,US9403767,9149,1,Nociceptin receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34218,US9403767,9151,1,Mu-type opioid receptor,Homo sapiens,Ki,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34233,US9403801,9155,2,Tyrosine-protein kinase JAK2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34233,US9403801,9161,2,Aurora kinase A,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34233,US9403801,9162,2,Receptor-type tyrosine-protein kinase FLT3 [K633Q],Human,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34231,US9403808,9164,4,Cannabinoid receptor 1,Homo sapiens,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34373,US9428465,9262,2,Acid ceramidase,Rattus norvegicus,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34373,US9428465,9264,2,Acid ceramidase,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34315,US9416132,9276,2,Serine/threonine-protein kinase pim-1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34374,US9428469,9353,4,Genome polyprotein [192-746],Hepatitis C virus genotype 1b (isolate Con1),EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34387,US9428505,9376,4,Parathyroid hormone [32-65],Human,EC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34384,US9428503,9384,2,Serine/threonine-protein kinase ATR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34384,US9428503,9385,2,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34384,US9428503,9386,2,Serine/threonine-protein kinase mTOR,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9479,3,Aurora kinase A,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9480,3,Aurora kinase B,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9481,3,Receptor-type tyrosine-protein kinase FLT3,Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9482,3,Receptor-type tyrosine-protein kinase FLT3 [D835H],Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9483,3,Receptor-type tyrosine-protein kinase FLT3 [D835Y],Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9484,3,Receptor-type tyrosine-protein kinase FLT3 [K663Q],Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9485,3,Receptor-type tyrosine-protein kinase FLT3 [N841I],Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34515,US9447092,9486,3,Receptor-type tyrosine-protein kinase FLT3 [R834Q],Homo sapiens,Kd,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34431,US9434697,9555,2,Fibroblast growth factor receptor 2,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34431,US9434697,9556,2,Fibroblast growth factor receptor 3,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+34431,US9434697,9559,2,Fibroblast growth factor receptor 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds
+25097,US8168651,16667,2,Poly [ADP-ribose] polymerase 1,Homo sapiens,IC50,nM,1,0,all_assayed_prepared_molecules,1,insufficient_measured_prepared_compounds

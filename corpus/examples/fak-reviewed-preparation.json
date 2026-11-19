@@ -1,0 +1,88 @@
+{
+  "patent": "US8501936",
+  "title": "Preparation of the bromochloro core",
+  "molecules": {
+    "AVXURJPOCDRRFD-UHFFFAOYSA-N": "NO",
+    "BDTDECDAHYOJRO-UHFFFAOYSA-N": "CCOC(=O)N=C=S",
+    "RBCARPJOEUEZLS-UHFFFAOYSA-N": "Nc1ncccc1Br",
+    "SUFKKFLJJMKVJJ-UHFFFAOYSA-N": "Nc1nc2c(Br)cccn2n1",
+    "KIEUKZNLWJFVON-UHFFFAOYSA-N": "CCOC(=O)NC(=S)Nc1ncccc1Br",
+    "WYMZXLOITHKGTF-UHFFFAOYSA-N": "Clc1nc2c(Br)cccn2n1",
+    "VEXZGXHMUGYJMC-UHFFFAOYSA-N": "Cl"
+  },
+  "reactions": [
+    {
+      "cost": 1,
+      "label": "Carboethoxythiourea formation",
+      "conditions": "Ethoxycarbonyl isothiocyanate in dioxane, room temperature; isolated thiourea.",
+      "reagents": [],
+      "source_records": [
+        {
+          "patent": "US8501936",
+          "url": "https://patents.google.com/patent/US8501936B2/en",
+          "example": "2a",
+          "reviewed": true
+        }
+      ],
+      "id": "r_review_US8501936_Ex2a",
+      "inputs": [
+        "RBCARPJOEUEZLS-UHFFFAOYSA-N",
+        "BDTDECDAHYOJRO-UHFFFAOYSA-N"
+      ],
+      "outputs": [
+        "KIEUKZNLWJFVON-UHFFFAOYSA-N"
+      ]
+    },
+    {
+      "cost": 1,
+      "label": "Hydroxylamine-mediated triazolopyridine ring formation",
+      "conditions": "Hydroxylamine hydrochloride and DIPEA in methanol/ethanol, then60C; isolated product.",
+      "reagents": [
+        "hydroxylamine hydrochloride",
+        "DIPEA"
+      ],
+      "source_records": [
+        {
+          "patent": "US8501936",
+          "url": "https://patents.google.com/patent/US8501936B2/en",
+          "example": "2b",
+          "reviewed": true
+        }
+      ],
+      "id": "r_review_US8501936_Ex2b",
+      "inputs": [
+        "KIEUKZNLWJFVON-UHFFFAOYSA-N",
+        "AVXURJPOCDRRFD-UHFFFAOYSA-N"
+      ],
+      "outputs": [
+        "SUFKKFLJJMKVJJ-UHFFFAOYSA-N"
+      ]
+    },
+    {
+      "cost": 1,
+      "label": "Deaminative chlorination",
+      "conditions": "Sodium nitrite, copper(II)chloride, hydrochloric acid;5C thenroomtemperature; isolated chloride.",
+      "reagents": [
+        "NaNO2",
+        "CuCl2\u00b72H2O",
+        "HCl"
+      ],
+      "source_records": [
+        {
+          "patent": "US8501936",
+          "url": "https://patents.google.com/patent/US8501936B2/en",
+          "example": "68a",
+          "reviewed": true
+        }
+      ],
+      "id": "r_review_US8501936_Ex68a",
+      "inputs": [
+        "SUFKKFLJJMKVJJ-UHFFFAOYSA-N",
+        "VEXZGXHMUGYJMC-UHFFFAOYSA-N"
+      ],
+      "outputs": [
+        "WYMZXLOITHKGTF-UHFFFAOYSA-N"
+      ]
+    }
+  ]
+}

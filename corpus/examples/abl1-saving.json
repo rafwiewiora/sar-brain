@@ -1,0 +1,36 @@
+{
+  "patent": "US9278981",
+  "context": 8205,
+  "first": "m_307317",
+  "next": "m_307318",
+  "first_steps": 3,
+  "next_from_start": 3,
+  "next_after_first": 1,
+  "steps_saved": 2,
+  "first_route": [
+    "r_704e73963941baa4",
+    "r_e806efab6ec59aa8",
+    "r_c7af56d237f988af"
+  ],
+  "standalone_next_route": [
+    "r_704e73963941baa4",
+    "r_e806efab6ec59aa8",
+    "r_2ee56eb954ee9b61"
+  ],
+  "remaining_route": [
+    "r_2ee56eb954ee9b61"
+  ],
+  "reused_molecules": {
+    "m_264522": {
+      "database_molecule_id": 264522,
+      "heavy_atoms": 28,
+      "id": "m_264522",
+      "inchikey": "JWLOEROSGALCSD-NSHDSACASA-N",
+      "is_stock": false,
+      "rings": 3,
+      "smiles": "O=C(Nc1ccc(OC(F)(F)Cl)cc1)c1cnc(N2CC[C@H](CO)C2)c(Br)c1",
+      "stock_purchasability_verified": false,
+      "stock_reason": null
+    }
+  }
+}

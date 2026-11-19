@@ -1,0 +1,99 @@
+{
+  "ABL1": {
+    "context": "US9278981_c8205_e2",
+    "files": [
+      "fep/ABL1/additional_maps_060.jsonl.gz",
+      "fep/ABL1/additional_maps_085.jsonl.gz",
+      "fep/ABL1/certified_screen.json.gz",
+      "fep/ABL1/config.json.gz",
+      "fep/ABL1/network.json.gz",
+      "fep/ABL1/network_060.json.gz",
+      "fep/ABL1/network_085.json.gz",
+      "fep/ABL1/pair_maps.jsonl.gz",
+      "fep/ABL1/retry_maps_060.jsonl.gz"
+    ]
+  },
+  "CB2": {
+    "context": "US9409866_c9171_e4",
+    "files": [
+      "fep/CB2/certified_screen.json.gz",
+      "fep/CB2/config.json.gz",
+      "fep/CB2/network.json.gz",
+      "fep/CB2/pair_maps.jsonl.gz"
+    ]
+  },
+  "CYP11B1": {
+    "context": "US9394290_c9070_e2",
+    "files": [
+      "fep/CYP11B1/certified_screen.json.gz",
+      "fep/CYP11B1/config.json.gz",
+      "fep/CYP11B1/network.json.gz",
+      "fep/CYP11B1/pair_maps.jsonl.gz"
+    ]
+  },
+  "FAK": {
+    "context": "US8501936_c5189_e2",
+    "files": [
+      "fep/FAK/certified_screen.json.gz",
+      "fep/FAK/config.json.gz",
+      "fep/FAK/network.json.gz",
+      "fep/FAK/pair_maps.jsonl.gz"
+    ]
+  },
+  "GABRA5": {
+    "context": "US8846719_c6055_e1",
+    "files": [
+      "fep/GABRA5/certified_screen.json.gz",
+      "fep/GABRA5/config.json.gz",
+      "fep/GABRA5/network.json.gz",
+      "fep/GABRA5/pair_maps.jsonl.gz"
+    ]
+  },
+  "JAK2": {
+    "context": "US8501936_c5190_e2",
+    "files": [
+      "fep/JAK2/certified_screen.json.gz",
+      "fep/JAK2/config.json.gz",
+      "fep/JAK2/network.json.gz",
+      "fep/JAK2/pair_maps.jsonl.gz"
+    ]
+  },
+  "K6": {
+    "context": "US9238644_c7861_e2",
+    "files": [
+      "fep/K6/certified_screen.json.gz",
+      "fep/K6/config.json.gz",
+      "fep/K6/network.json.gz",
+      "fep/K6/pair_maps.jsonl.gz"
+    ]
+  },
+  "OX1": {
+    "context": "US9242970_c7895_e2",
+    "files": [
+      "fep/OX1/certified_screen.json.gz",
+      "fep/OX1/config.json.gz",
+      "fep/OX1/network.json.gz",
+      "fep/OX1/pair_maps.jsonl.gz"
+    ]
+  },
+  "PI3K": {
+    "context": "US8765940_c5835_e1",
+    "files": [
+      "fep/PI3K/certified_screen.json.gz",
+      "fep/PI3K/config.json.gz",
+      "fep/PI3K/network.json.gz",
+      "fep/PI3K/pair_maps.jsonl.gz"
+    ]
+  },
+  "S1P1": {
+    "context": "US9150519_c7236_e4",
+    "files": [
+      "fep/S1P1/additional_maps_060.jsonl.gz",
+      "fep/S1P1/certified_screen.json.gz",
+      "fep/S1P1/config.json.gz",
+      "fep/S1P1/network.json.gz",
+      "fep/S1P1/network_060.json.gz",
+      "fep/S1P1/pair_maps.jsonl.gz"
+    ]
+  }
+}

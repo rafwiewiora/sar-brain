@@ -4,6 +4,8 @@ Play a medicinal chemistry campaign using structures, assay measurements and syn
 
 [Read the introduction to the medicinal chemistry environment](docs/preprint.md)
 
+[Browse the 47-patent collection and reproduce an intermediate saving](corpus/README.md)
+
 ## Run locally
 
 From a clone, run `python3 build.py` (Python 3.8 or later, standard library only). Open **dist/medicinal_chemistry_world_map.html** to play, or **dist/strategy_movie.html** to watch the game and the SAR Brain advance together. Both pages work offline.

@@ -1,0 +1,40 @@
+{
+  "version": "gateway-opportunity-1.0",
+  "unit": "Intermediate plus its reachable measured region, within one patent, target, assay metadata context and endpoint.",
+  "screen": {
+    "min_cohort": 20,
+    "min_descendants": 5,
+    "min_outside": 5,
+    "min_recorded_entry_operations": 3,
+    "min_measured_branch_sets": 2,
+    "topology_uses_activity": false,
+    "sar_screen": "Within-cohort strongest decile with cutoff ties; five-neighbor Morgan/Tanimoto predictions withholding entire region; describe enrichment, residuals and chemical diversity, no multiple-testing claims.",
+    "ranking": "Pareto screen over entry cost, postentry cost drop, strong compounds, enrichment and region-withheld residual; activities explicitly used to nominate retrospective demos."
+  },
+  "primary": {
+    "policy": "Paid platform preparation followed by inventory-aware exploration",
+    "controls": [
+      "SAR only",
+      "Fixed standalone prices with physical inventory reuse",
+      "Ordinary inventory-aware exploration"
+    ],
+    "batch": 4,
+    "lambda_": 0.5,
+    "seeds": "64 paired starts 1000\u20131063; disjoint from pilot0\u201315.",
+    "budget_range": "10% to50% of original canonical reaction-union pool cost, fixed before policy outcomes.",
+    "score": "Minimum of the three mean paired AUC differences, in percentage points. Equivalent to investment AUC minus the strongest mean baseline AUC.",
+    "confidence_interval": "4000 paired resamples using the same seed indices across all three contrasts, then minimum of bootstrap mean contrasts.",
+    "starts": "Primary structural outside-region starts confirmed not to contain the intermediate; unrestricted starts reported separately.",
+    "entry": "Actual remaining minimum preparation price after three paid seeds; full nominal source entry price also reported.",
+    "additional_control": "Pay for the same intermediate then use SAR-only rankings; distinguishes preparation from exploiting the newly cheap region."
+  },
+  "scope_refinement": "Initial screen used measured terminal products. A source audit exposed an assayed internal molecule, so broaden to all measured prepared molecules and retain terminal-only runs as sensitivity. Original inputs/results stay immutable.",
+  "limits": [
+    "Source-frontier stocks are not verified purchased building blocks.",
+    "Finalists receive source checks and separately versioned known-preparation/collapsed-operation corrections.",
+    "Recorded absence of a bypass does not prove chemical necessity.",
+    "No quantity, yield, failed-reaction, assay or procurement prices.",
+    "Retrospective opportunity selection is not an independently validated prospective acquisition algorithm.",
+    "Multiple compounds/contexts from the same patent are not independent observations."
+  ]
+}

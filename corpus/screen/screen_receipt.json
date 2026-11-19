@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "graphs": 47,
+  "eligible_contexts": 70,
+  "candidates": 56,
+  "counts": {
+    "cohorts": 70,
+    "exact_complete": 99
+  },
+  "elapsed_seconds": 1.1,
+  "notes": [
+    "Stage1 permits two-layer convergent preparations; final entry gate is exact operation cost>=3.",
+    "Exact minimum entry cost is priced over all route-specific input/output signatures; no upstream-union-as-cost substitution.",
+    "Structural descendants may have bypasses; unavoidable support uses full AND-reactant closure with the candidate molecule blocked.",
+    "Savings are individual descendant quotes after retaining all products from the paid entry plan, not a joint batch optimum.",
+    "No potency or historical order enters topology selection."
+  ]
+}

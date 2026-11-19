@@ -1,0 +1,1517 @@
+{
+  "US8501732_c5208_e2": {
+    "patent": "US8501732",
+    "context_id": 5208,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Mitogen-activated protein kinase 8",
+    "eligible": 73,
+    "terminal_eligible": 71,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US8501732_c5208_e2.archive.json.gz",
+        "original_sha256": "6090a87f439ec44d7dc5c987e274dd53b3007954ff1ef0da7b648c272a294d2c",
+        "sha256": "5989ac64aa1bf502d9043ed1f13e4fa953cf0d7a4db69377f17db10b0737cce5"
+      }
+    },
+    "screen_network": "networks/US8501732_c5208_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 73,
+    "observations": "observations/US8501732_c5208_e2.json.gz"
+  },
+  "US8501936_c5189_e2": {
+    "patent": "US8501936",
+    "context_id": 5189,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Focal adhesion kinase 1",
+    "eligible": 92,
+    "terminal_eligible": 73,
+    "added_prepared_internal": 19,
+    "versions": {
+      "archive": {
+        "file": "networks/US8501936_c5189_e2.archive.json.gz",
+        "original_sha256": "aab5f71b812c2df977c5284aa3e666eafa58c41755696da4c2de2963b896ac20",
+        "sha256": "60cccb218012cccc1563a35f8d2a25546d498d2834a769e0d079aaab32e004a3"
+      },
+      "reviewed": {
+        "file": "networks/US8501936_c5189_e2.reviewed.json.gz",
+        "original_sha256": "8dacaaee9f41930415991a60957b7674fd07f57a04c8f691b72d9fd51c2b4a1d",
+        "sha256": "d2d6d48a128ab165beea7be7d062a9fbb69133f17d34bd1a14f52ee596448105"
+      },
+      "head_reviewed": {
+        "file": "networks/US8501936_c5189_e2.head_reviewed.json.gz",
+        "original_sha256": "826a117efe70397e5e294a2924f3061abbc45db2e3fe3fb1965402e5095491ce",
+        "sha256": "63ba0a461303553745d14106fc2d71b5fcc4724d9ac3fa6dd9745750324d404c"
+      }
+    },
+    "screen_network": "networks/US8501936_c5189_e2.head_reviewed.json.gz",
+    "screen_revision": "head_reviewed",
+    "screen_eligible": 92,
+    "observations": "observations/US8501936_c5189_e2.json.gz"
+  },
+  "US8501936_c5190_e2": {
+    "patent": "US8501936",
+    "context_id": 5190,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Tyrosine-protein kinase JAK2",
+    "eligible": 96,
+    "terminal_eligible": 77,
+    "added_prepared_internal": 19,
+    "versions": {
+      "archive": {
+        "file": "networks/US8501936_c5190_e2.archive.json.gz",
+        "original_sha256": "f281d92375f29d53ea346f2561b2be6067ae82b34a5bc905a5a637e034f754fe",
+        "sha256": "3513505205ad67fc28643fed3aeb9f76999404466da6b5818f3606a6280b6d49"
+      },
+      "reviewed": {
+        "file": "networks/US8501936_c5190_e2.reviewed.json.gz",
+        "original_sha256": "1c30c4b2e03c7b885fe87b165bf45b7f9d26d692c00f4054e983141f1514ec6d",
+        "sha256": "e714ca077f812146d4017654bd1f40481289403cb63d1a37e1e9567ae82413bd"
+      },
+      "head_reviewed": {
+        "file": "networks/US8501936_c5190_e2.head_reviewed.json.gz",
+        "original_sha256": "fcf01f2e2d89af2cd2fcfe11e435410159fb9228da4e78e6f42318c766489b9d",
+        "sha256": "43ecb390563e6eb83efaaff4396b00da2ca2e55813bf0801461600f8ee0983b1"
+      }
+    },
+    "screen_network": "networks/US8501936_c5190_e2.reviewed.json.gz",
+    "screen_revision": "reviewed",
+    "screen_eligible": 96,
+    "observations": "observations/US8501936_c5190_e2.json.gz"
+  },
+  "US8501936_c5191_e2": {
+    "patent": "US8501936",
+    "context_id": 5191,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Tyrosine-protein kinase JAK3",
+    "eligible": 89,
+    "terminal_eligible": 70,
+    "added_prepared_internal": 19,
+    "versions": {
+      "archive": {
+        "file": "networks/US8501936_c5191_e2.archive.json.gz",
+        "original_sha256": "d72e07a0fdacf33bc62a8fe9416525363c8f99df2c9e01ebf9dee32213367e64",
+        "sha256": "754f5db5961689d60a5a9ee8e251b607759094952d772f77d554862eac1be832"
+      },
+      "reviewed": {
+        "file": "networks/US8501936_c5191_e2.reviewed.json.gz",
+        "original_sha256": "6c476fa255eeebd36a8c60d78cb2eababf3d0c77b048cb369552308a3d034383",
+        "sha256": "b445b266b4aef9083d32013b441c2c1e181fc2c0315c79599ab45b3d0f0c4a23"
+      },
+      "head_reviewed": {
+        "file": "networks/US8501936_c5191_e2.head_reviewed.json.gz",
+        "original_sha256": "8b7bb4fed43dbc9f3c1cc5ab03d1cbfdff2ae9eba62ed233ea7e51ba63868f63",
+        "sha256": "9c20da958ece3712c54cb97bd77393caefd982ba3269950aad7f88a35d61d8ca"
+      }
+    },
+    "screen_network": "networks/US8501936_c5191_e2.reviewed.json.gz",
+    "screen_revision": "reviewed",
+    "screen_eligible": 89,
+    "observations": "observations/US8501936_c5191_e2.json.gz"
+  },
+  "US8524917_c5221_e2": {
+    "patent": "US8524917",
+    "context_id": 5221,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Sphingosine 1-phosphate receptor 3",
+    "eligible": 40,
+    "terminal_eligible": 29,
+    "added_prepared_internal": 11,
+    "versions": {
+      "archive": {
+        "file": "networks/US8524917_c5221_e2.archive.json.gz",
+        "original_sha256": "2f9eb6543897381b081bdf4791f5baa08a8d1d6e57ea73f504ecfd77e1afac2e",
+        "sha256": "7cf827ee74b9c9324d2a4f22fed8369c4eec702a5fbcd65b4bf45b341a94b133"
+      }
+    },
+    "screen_network": "networks/US8524917_c5221_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 40,
+    "observations": "observations/US8524917_c5221_e2.json.gz"
+  },
+  "US8592426_c5401_e1": {
+    "patent": "US8592426",
+    "context_id": 5401,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Kininogen-1",
+    "eligible": 21,
+    "terminal_eligible": 16,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US8592426_c5401_e1.archive.json.gz",
+        "original_sha256": "c73f48f011e8e091636a59b0fffd126c0b240d3091f73fef9f10f782bc176337",
+        "sha256": "304b4a7fdb1a6c6a204f5626d6d063bfdeaa9696f4213daf88269d463427079e"
+      }
+    },
+    "screen_network": "networks/US8592426_c5401_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US8592426_c5401_e1.json.gz"
+  },
+  "US8592426_c5402_e2": {
+    "patent": "US8592426",
+    "context_id": 5402,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Kininogen-1",
+    "eligible": 21,
+    "terminal_eligible": 16,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US8592426_c5402_e2.archive.json.gz",
+        "original_sha256": "c8488522b9f94e60bd5b3441c0248efbd5fb55522a0541d2cce32dc6877f45dc",
+        "sha256": "c58650f7edacdd78693a9f36171148556db3e4c860cef7108875b4b18600f116"
+      }
+    },
+    "screen_network": "networks/US8592426_c5402_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US8592426_c5402_e2.json.gz"
+  },
+  "US8592431_c5407_e2": {
+    "patent": "US8592431",
+    "context_id": 5407,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Acetyl-coenzyme A transporter 1",
+    "eligible": 20,
+    "terminal_eligible": 19,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US8592431_c5407_e2.archive.json.gz",
+        "original_sha256": "56c998ca1ef1fd1b8f6d289e37cad4e60551401df126ba7e1e07fd7d85863ce0",
+        "sha256": "bf12e036fb53ba0fc98bd77953c8fbe865e2b58f42d131e6d1dee95563f9e23f"
+      }
+    },
+    "screen_network": "networks/US8592431_c5407_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 20,
+    "observations": "observations/US8592431_c5407_e2.json.gz"
+  },
+  "US8623889_c5524_e1": {
+    "patent": "US8623889",
+    "context_id": 5524,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Tyrosine-protein kinase ABL1",
+    "eligible": 52,
+    "terminal_eligible": 43,
+    "added_prepared_internal": 9,
+    "versions": {
+      "archive": {
+        "file": "networks/US8623889_c5524_e1.archive.json.gz",
+        "original_sha256": "cb5f3e28f7c5dbc0695f41ede4b44e642cdb152e020b4430887387bf74891771",
+        "sha256": "432584fa24375a091de163e7f792d2d1007ddcfb0557f1f0f0e4c451d89c132d"
+      }
+    },
+    "screen_network": "networks/US8623889_c5524_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 52,
+    "observations": "observations/US8623889_c5524_e1.json.gz"
+  },
+  "US8637532_c5619_e2": {
+    "patent": "US8637532",
+    "context_id": 5619,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Aurora kinase A",
+    "eligible": 21,
+    "terminal_eligible": 15,
+    "added_prepared_internal": 6,
+    "versions": {
+      "archive": {
+        "file": "networks/US8637532_c5619_e2.archive.json.gz",
+        "original_sha256": "0a7ff37cbac6b53a50baf865dfff2437578b104d53763952ff3f60bb4c256254",
+        "sha256": "1246f3fced6fb4da8290f526ffea0b61eeedf08d138d572b20ce45a0f756d9b9"
+      }
+    },
+    "screen_network": "networks/US8637532_c5619_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US8637532_c5619_e2.json.gz"
+  },
+  "US8653263_c5640_e1": {
+    "patent": "US8653263",
+    "context_id": 5640,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Orexin receptor type 2",
+    "eligible": 36,
+    "terminal_eligible": 36,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8653263_c5640_e1.archive.json.gz",
+        "original_sha256": "38e53f4f660cc62ef5afe9ea2de6f7529d999bf73f4ea0fd4a4515571911c030",
+        "sha256": "e185eb6d9ed007eefd0df7b57d25551a6aa832109b533e7835cb10fd03e04627"
+      }
+    },
+    "screen_network": "networks/US8653263_c5640_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 36,
+    "observations": "observations/US8653263_c5640_e1.json.gz"
+  },
+  "US8653263_c5641_e1": {
+    "patent": "US8653263",
+    "context_id": 5641,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Orexin/Hypocretin receptor type 1",
+    "eligible": 36,
+    "terminal_eligible": 36,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8653263_c5641_e1.archive.json.gz",
+        "original_sha256": "624dcf7d8524f2db94968a11527788520bc0f7f25e9c274e5ec43e64d23e0683",
+        "sha256": "bfc1dacf49828d6079c675cca9b2293dff691d7f3e54b69c49d917b29c4402dc"
+      }
+    },
+    "screen_network": "networks/US8653263_c5641_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 36,
+    "observations": "observations/US8653263_c5641_e1.json.gz"
+  },
+  "US8703768_c5719_e2": {
+    "patent": "US8703768",
+    "context_id": 5719,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",
+    "eligible": 38,
+    "terminal_eligible": 37,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US8703768_c5719_e2.archive.json.gz",
+        "original_sha256": "6e618e26532f1d833c472bc0dc540f775b51126e4637ad19acad972e19fba1c7",
+        "sha256": "9a66543802dfe0d3c48e5e734e8473ef2dbfb4d77bf098ef103ae692a15889dc"
+      }
+    },
+    "screen_network": "networks/US8703768_c5719_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 38,
+    "observations": "observations/US8703768_c5719_e2.json.gz"
+  },
+  "US8765940_c5835_e1": {
+    "patent": "US8765940",
+    "context_id": 5835,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",
+    "eligible": 100,
+    "terminal_eligible": 94,
+    "added_prepared_internal": 6,
+    "versions": {
+      "archive": {
+        "file": "networks/US8765940_c5835_e1.archive.json.gz",
+        "original_sha256": "cdd7ca88309f85895ded471a37a2192f8d60506a44802c0dcb0440a9d1f287fa",
+        "sha256": "3ba681d369eb9865bc233f5d8f27fb5cc1d4ad5d20b81a73a496d706afb54020"
+      },
+      "reviewed": {
+        "file": "networks/US8765940_c5835_e1.reviewed.json.gz",
+        "original_sha256": "f861901a1babca30e7d285e84c3b923f69d554f6b88c2913b79dd0ff04d1f5d7",
+        "sha256": "db7686013cb36ac607ed87a7b2656326dfd3a7c5faffea93680ca703e4345a05"
+      }
+    },
+    "screen_network": "networks/US8765940_c5835_e1.reviewed.json.gz",
+    "screen_revision": "reviewed",
+    "screen_eligible": 100,
+    "observations": "observations/US8765940_c5835_e1.json.gz"
+  },
+  "US8772480_c5879_e1": {
+    "patent": "US8772480",
+    "context_id": 5879,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",
+    "eligible": 59,
+    "terminal_eligible": 59,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8772480_c5879_e1.archive.json.gz",
+        "original_sha256": "6697968820ea8dfe8959ec3a9526e8afb8dfd67ef97ec7464e7972f18a07a875",
+        "sha256": "641a756331e07cb0af4241e6f1640d58059a3029aaaee4d669e4958e393a3760"
+      }
+    },
+    "screen_network": "networks/US8772480_c5879_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 59,
+    "observations": "observations/US8772480_c5879_e1.json.gz"
+  },
+  "US8772480_c5880_e2": {
+    "patent": "US8772480",
+    "context_id": 5880,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Serine/threonine-protein kinase mTOR",
+    "eligible": 23,
+    "terminal_eligible": 23,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8772480_c5880_e2.archive.json.gz",
+        "original_sha256": "557dd5ed6e06dabbf6f70bf7927fa8956dc5896de33f2a8b8cdc384e4a7fa19a",
+        "sha256": "4f47e1d5308a6379a1d08de06fda3d22712ef56f810a3cfcd354b2bd512505d2"
+      }
+    },
+    "screen_network": "networks/US8772480_c5880_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 23,
+    "observations": "observations/US8772480_c5880_e2.json.gz"
+  },
+  "US8785638_c5906_e2": {
+    "patent": "US8785638",
+    "context_id": 5906,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Gag-Pol polyprotein",
+    "eligible": 28,
+    "terminal_eligible": 28,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8785638_c5906_e2.archive.json.gz",
+        "original_sha256": "1fd31e9dde9ebc6461a86527912177593dc9ed7ec491ee0216de5a573ec2aee4",
+        "sha256": "b63f0be0df59edb41bea6d6bfec5af1ee984420728462b8888558b70158215e5"
+      }
+    },
+    "screen_network": "networks/US8785638_c5906_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 28,
+    "observations": "observations/US8785638_c5906_e2.json.gz"
+  },
+  "US8796280_c5952_e1": {
+    "patent": "US8796280",
+    "context_id": 5952,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Prostaglandin D2 receptor 2",
+    "eligible": 36,
+    "terminal_eligible": 36,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8796280_c5952_e1.archive.json.gz",
+        "original_sha256": "e0cdde14f859d77ab34621249ca0e8f11e4f2a91332f31a379a23e5b2a9e2791",
+        "sha256": "ed240909c0d8998d5bb8f00ecc7242a411481538e58107d6a5d58eb5358626a1"
+      }
+    },
+    "screen_network": "networks/US8796280_c5952_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 36,
+    "observations": "observations/US8796280_c5952_e1.json.gz"
+  },
+  "US8841455_c6042_e2": {
+    "patent": "US8841455",
+    "context_id": 6042,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Macrophage colony-stimulating factor 1 receptor",
+    "eligible": 26,
+    "terminal_eligible": 20,
+    "added_prepared_internal": 6,
+    "versions": {
+      "archive": {
+        "file": "networks/US8841455_c6042_e2.archive.json.gz",
+        "original_sha256": "92c855544d8cdf4b9c2e228df600e3f64441e8b984fa3270800573e8b639203b",
+        "sha256": "89b9895503a33e1e52bb241f59afc6100b5dfdefb400aa3a7db03363df94dd99"
+      }
+    },
+    "screen_network": "networks/US8841455_c6042_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 26,
+    "observations": "observations/US8841455_c6042_e2.json.gz"
+  },
+  "US8846719_c6055_e1": {
+    "patent": "US8846719",
+    "context_id": 6055,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Gamma-aminobutyric acid receptor subunit alpha-5",
+    "eligible": 163,
+    "terminal_eligible": 150,
+    "added_prepared_internal": 13,
+    "versions": {
+      "archive": {
+        "file": "networks/US8846719_c6055_e1.archive.json.gz",
+        "original_sha256": "b24da2b946f33fe97f5db47aa09cf49e88c4a25eb080793503c9a063195ea8ba",
+        "sha256": "40499a7e81b032402d0f614544f2d07ddba77d60a5f45b952de99c2035ec7feb"
+      }
+    },
+    "screen_network": "networks/US8846719_c6055_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 163,
+    "observations": "observations/US8846719_c6055_e1.json.gz"
+  },
+  "US8889870_c6208_e2": {
+    "patent": "US8889870",
+    "context_id": 6208,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Vascular endothelial growth factor receptor 2",
+    "eligible": 23,
+    "terminal_eligible": 21,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US8889870_c6208_e2.archive.json.gz",
+        "original_sha256": "3c478abb430980e08e4b7a3c9182b9ca1f41ecf57b7badc7c1970387979ead03",
+        "sha256": "c663c3859bd1e61c02fc433f83020fdbc5f5c0ccf7004595946e0749ce0b15be"
+      }
+    },
+    "screen_network": "networks/US8889870_c6208_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 23,
+    "observations": "observations/US8889870_c6208_e2.json.gz"
+  },
+  "US8921389_c6273_e2": {
+    "patent": "US8921389",
+    "context_id": 6273,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Egl nine homolog 1",
+    "eligible": 61,
+    "terminal_eligible": 61,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US8921389_c6273_e2.archive.json.gz",
+        "original_sha256": "77807d250b635d314c46cecfd945ebaae1c51862ba8ed1ee2e4b2c8e3e179047",
+        "sha256": "b0d8747bb530f43143e4d06cce73027122a7e0628a673e02beff81de69895728"
+      }
+    },
+    "screen_network": "networks/US8921389_c6273_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 61,
+    "observations": "observations/US8921389_c6273_e2.json.gz"
+  },
+  "US8952169_c6410_e2": {
+    "patent": "US8952169",
+    "context_id": 6410,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Sodium channel protein type 9 subunit alpha",
+    "eligible": 63,
+    "terminal_eligible": 60,
+    "added_prepared_internal": 3,
+    "versions": {
+      "archive": {
+        "file": "networks/US8952169_c6410_e2.archive.json.gz",
+        "original_sha256": "7e3e027c40a132527644612266f2745d2d532f61eba7cc23eb8f3979f4dfa4e6",
+        "sha256": "e000f8521a136ec3a70877487c0d74d0d2d63575638f9883357b946def263886"
+      }
+    },
+    "screen_network": "networks/US8952169_c6410_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 63,
+    "observations": "observations/US8952169_c6410_e2.json.gz"
+  },
+  "US8952169_c6412_e2": {
+    "patent": "US8952169",
+    "context_id": 6412,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Sodium channel protein type 9 subunit alpha",
+    "eligible": 45,
+    "terminal_eligible": 42,
+    "added_prepared_internal": 3,
+    "versions": {
+      "archive": {
+        "file": "networks/US8952169_c6412_e2.archive.json.gz",
+        "original_sha256": "2ee1463c7e51ff7d07bdb193816f7e800cb01ad96f49c1bd684454b89556af0f",
+        "sha256": "1303b113baa7afa7d1e1316783b89d0c0a317e493be2794535debc29aec310a5"
+      }
+    },
+    "screen_network": "networks/US8952169_c6412_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 45,
+    "observations": "observations/US8952169_c6412_e2.json.gz"
+  },
+  "US9012443_c6602_e2": {
+    "patent": "US9012443",
+    "context_id": 6602,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Sodium channel protein type 9 subunit alpha",
+    "eligible": 34,
+    "terminal_eligible": 27,
+    "added_prepared_internal": 7,
+    "versions": {
+      "archive": {
+        "file": "networks/US9012443_c6602_e2.archive.json.gz",
+        "original_sha256": "08558204b8ad9a5cff21f66fd761e661db35e954a581b1c248cd4bb534f88890",
+        "sha256": "5b07236aa02a020e02f361d0bc10e2be83d72d9b36a8e47ccc8d5ec2fb69dd1c"
+      }
+    },
+    "screen_network": "networks/US9012443_c6602_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 34,
+    "observations": "observations/US9012443_c6602_e2.json.gz"
+  },
+  "US9012461_c6646_e2": {
+    "patent": "US9012461",
+    "context_id": 6646,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Focal adhesion kinase 1",
+    "eligible": 28,
+    "terminal_eligible": 18,
+    "added_prepared_internal": 10,
+    "versions": {
+      "archive": {
+        "file": "networks/US9012461_c6646_e2.archive.json.gz",
+        "original_sha256": "d90778f4d1542836d3e9426c58f9d08c82fa1076d87e04d94cc62a17a2477f2a",
+        "sha256": "afd3b58204dc40205faf9277ba2416428fd1e1e9adce6859b87b41f75e2a4d98"
+      }
+    },
+    "screen_network": "networks/US9012461_c6646_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 28,
+    "observations": "observations/US9012461_c6646_e2.json.gz"
+  },
+  "US9012461_c6647_e3": {
+    "patent": "US9012461",
+    "context_id": 6647,
+    "endpoint_id": 3,
+    "endpoint": "Kd",
+    "target_name": "Focal adhesion kinase 1",
+    "eligible": 25,
+    "terminal_eligible": 16,
+    "added_prepared_internal": 9,
+    "versions": {
+      "archive": {
+        "file": "networks/US9012461_c6647_e3.archive.json.gz",
+        "original_sha256": "7ae3dfcef047b5940f8c3b32f17e757358dd38e372034d5b9aeec24d7ad6a558",
+        "sha256": "df7a3fa2a619d1ff984261d28378e25a827a8490272136bd111538c4bf904406"
+      }
+    },
+    "screen_network": "networks/US9012461_c6647_e3.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 25,
+    "observations": "observations/US9012461_c6647_e3.json.gz"
+  },
+  "US9012461_c6648_e2": {
+    "patent": "US9012461",
+    "context_id": 6648,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Focal adhesion kinase 1",
+    "eligible": 28,
+    "terminal_eligible": 18,
+    "added_prepared_internal": 10,
+    "versions": {
+      "archive": {
+        "file": "networks/US9012461_c6648_e2.archive.json.gz",
+        "original_sha256": "23c3f604bb68eb2a6235052f970af11836815e6aa314346998259a5c939964ba",
+        "sha256": "aa21c00a4601fcd9223d8cdccc9e30450c15f0e3908c4732ea1682a2ffe4c4a1"
+      }
+    },
+    "screen_network": "networks/US9012461_c6648_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 28,
+    "observations": "observations/US9012461_c6648_e2.json.gz"
+  },
+  "US9034866_c6707_e1": {
+    "patent": "US9034866",
+    "context_id": 6707,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Mitogen-activated protein kinase kinase kinase 14",
+    "eligible": 54,
+    "terminal_eligible": 53,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9034866_c6707_e1.archive.json.gz",
+        "original_sha256": "dea7f8d81d1b3809bf21282798b7ad4c7bb12c3e733a7107c4ab72529f4ca1f4",
+        "sha256": "e1303b77e74467ec5a641afcd66ab7f8c7761d90a6f46e2683f18a24d3fd0dbc"
+      }
+    },
+    "screen_network": "networks/US9034866_c6707_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 54,
+    "observations": "observations/US9034866_c6707_e1.json.gz"
+  },
+  "US9034907_c6717_e1": {
+    "patent": "US9034907",
+    "context_id": 6717,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Glutaminyl-peptide cyclotransferase",
+    "eligible": 20,
+    "terminal_eligible": 20,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9034907_c6717_e1.archive.json.gz",
+        "original_sha256": "2f2963381b2a595846416bc0ee9affa76a9f3439dae046b777869e8b16d87f7b",
+        "sha256": "d130f7f8ae41f5ddfb18895df9eb7a307053017fcb376ed82672af8e37e72785"
+      }
+    },
+    "screen_network": "networks/US9034907_c6717_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 20,
+    "observations": "observations/US9034907_c6717_e1.json.gz"
+  },
+  "US9034907_c6717_e2": {
+    "patent": "US9034907",
+    "context_id": 6717,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Glutaminyl-peptide cyclotransferase",
+    "eligible": 20,
+    "terminal_eligible": 20,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9034907_c6717_e2.archive.json.gz",
+        "original_sha256": "c339c775c8ff5063cce0ca43231af33f8681609a295213274dbfad7c67403297",
+        "sha256": "3e9b4ef89e0f96ce85e6a53e19935298daae3960ac42c435850dc3fe342aef25"
+      }
+    },
+    "screen_network": "networks/US9034907_c6717_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 20,
+    "observations": "observations/US9034907_c6717_e2.json.gz"
+  },
+  "US9073881_c6907_e2": {
+    "patent": "US9073881",
+    "context_id": 6907,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Eukaryotic translation initiation factor 4E",
+    "eligible": 46,
+    "terminal_eligible": 46,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9073881_c6907_e2.archive.json.gz",
+        "original_sha256": "40d14eee55253fc18c025ebdd6a4fd321243f08975668dde5be7ef29596e4e4f",
+        "sha256": "d47393eccea3c92c00acd2cdc23f5c57b514d80d6b542063166f22b31ccec66d"
+      }
+    },
+    "screen_network": "networks/US9073881_c6907_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 46,
+    "observations": "observations/US9073881_c6907_e2.json.gz"
+  },
+  "US9079866_c6939_e1": {
+    "patent": "US9079866",
+    "context_id": 6939,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Arachidonate 5-lipoxygenase-activating protein",
+    "eligible": 88,
+    "terminal_eligible": 85,
+    "added_prepared_internal": 3,
+    "versions": {
+      "archive": {
+        "file": "networks/US9079866_c6939_e1.archive.json.gz",
+        "original_sha256": "e1be3649438b91a35167b92855251286ea47a8372191f8135294ac677eba3bcc",
+        "sha256": "6a96693d2f4442ad63b8b87fbe4d9af1c9e52bf9597edd36b4041bc47726cb32"
+      }
+    },
+    "screen_network": "networks/US9079866_c6939_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 88,
+    "observations": "observations/US9079866_c6939_e1.json.gz"
+  },
+  "US9120749_c7095_e2": {
+    "patent": "US9120749",
+    "context_id": 7095,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Maternal embryonic leucine zipper kinase",
+    "eligible": 73,
+    "terminal_eligible": 72,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9120749_c7095_e2.archive.json.gz",
+        "original_sha256": "adcfce3d273c4ceeef85b76c7e973ad8ac5688f1184477b7b8fda9030f958df3",
+        "sha256": "027c5c6617cef168855110df2e3e6714f0d8f271a306ce4f41562b84ba4c821a"
+      }
+    },
+    "screen_network": "networks/US9120749_c7095_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 73,
+    "observations": "observations/US9120749_c7095_e2.json.gz"
+  },
+  "US9150519_c7235_e1": {
+    "patent": "US9150519",
+    "context_id": 7235,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Sphingosine 1-phosphate receptor 1",
+    "eligible": 23,
+    "terminal_eligible": 23,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9150519_c7235_e1.archive.json.gz",
+        "original_sha256": "b79f3cb9c5bf1690fee9f0c1328e5df5bf80d398379753e4bf60a794932880da",
+        "sha256": "ab8a1f79da97f9b3171a85128363f6ccd09e3b2ec97636c2a39cbc491df0d7dd"
+      }
+    },
+    "screen_network": "networks/US9150519_c7235_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 23,
+    "observations": "observations/US9150519_c7235_e1.json.gz"
+  },
+  "US9150519_c7236_e4": {
+    "patent": "US9150519",
+    "context_id": 7236,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Sphingosine 1-phosphate receptor 1",
+    "eligible": 74,
+    "terminal_eligible": 70,
+    "added_prepared_internal": 4,
+    "versions": {
+      "archive": {
+        "file": "networks/US9150519_c7236_e4.archive.json.gz",
+        "original_sha256": "f80c7a499cccafa6d5959770e032fb1228b9623771cfa34d0619767a51e94e35",
+        "sha256": "dedd8e365d9b3abb7448d89bd0e2d5a02efb1e202e27b63c9bcfcf2141e74671"
+      }
+    },
+    "screen_network": "networks/US9150519_c7236_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 74,
+    "observations": "observations/US9150519_c7236_e4.json.gz"
+  },
+  "US9169259_c7371_e2": {
+    "patent": "US9169259",
+    "context_id": 7371,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Tyrosine-protein kinase SYK [360-635]",
+    "eligible": 44,
+    "terminal_eligible": 34,
+    "added_prepared_internal": 10,
+    "versions": {
+      "archive": {
+        "file": "networks/US9169259_c7371_e2.archive.json.gz",
+        "original_sha256": "26a5294d9d117c6eb2e596a571d9298a070cb937ece1686e965a62f00829a30f",
+        "sha256": "c01976cb3875ee70b55a13bf408e3d9fcb2cdbfbc04cc9029e9e0344398495cb"
+      }
+    },
+    "screen_network": "networks/US9169259_c7371_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 44,
+    "observations": "observations/US9169259_c7371_e2.json.gz"
+  },
+  "US9181266_c7482_e2": {
+    "patent": "US9181266",
+    "context_id": 7482,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Poly [ADP-ribose] polymerase tankyrase-1",
+    "eligible": 36,
+    "terminal_eligible": 36,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9181266_c7482_e2.archive.json.gz",
+        "original_sha256": "c748c9ba7a5e3f2a8a18e709322b89ad45eec23ccaea53b27828c4cdead48b3f",
+        "sha256": "616cd70811a0aa1d744aab85e6bea2147627cc5c5d896eb1c1be44bd38c8c88b"
+      }
+    },
+    "screen_network": "networks/US9181266_c7482_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 36,
+    "observations": "observations/US9181266_c7482_e2.json.gz"
+  },
+  "US9181266_c7483_e2": {
+    "patent": "US9181266",
+    "context_id": 7483,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Poly [ADP-ribose] polymerase tankyrase-2",
+    "eligible": 37,
+    "terminal_eligible": 37,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9181266_c7483_e2.archive.json.gz",
+        "original_sha256": "cff647f8f42077b7b846ec8509d9c6df0bbe2432562fb24fd555d45c58934736",
+        "sha256": "dcd5bdf2f7e85ea7fc25e1545db7766b2d5eb667a38d77af4f85d3d3a35bcc90"
+      }
+    },
+    "screen_network": "networks/US9181266_c7483_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 37,
+    "observations": "observations/US9181266_c7483_e2.json.gz"
+  },
+  "US9181272_c7487_e2": {
+    "patent": "US9181272",
+    "context_id": 7487,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Cytochrome P450 family 11 subfamily B member 2",
+    "eligible": 23,
+    "terminal_eligible": 18,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US9181272_c7487_e2.archive.json.gz",
+        "original_sha256": "be3cdb63c9880da4d0eb0fe055eed34ca0ed4de432aabf11a6c96ee1496840f6",
+        "sha256": "13a5d35911d6eb9db3ba835b3183e1b13bcf961502a9886620a926b793704cd0"
+      }
+    },
+    "screen_network": "networks/US9181272_c7487_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 23,
+    "observations": "observations/US9181272_c7487_e2.json.gz"
+  },
+  "US9187429_c7550_e4": {
+    "patent": "US9187429",
+    "context_id": 7550,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cytochrome P450 11B1, mitochondrial",
+    "eligible": 26,
+    "terminal_eligible": 21,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US9187429_c7550_e4.archive.json.gz",
+        "original_sha256": "5439ec141023dc65f0fd93786e92c4acad0ac2bc363c3cb446f80719181e5231",
+        "sha256": "a109a7d9cc8abd10a1c78935bbfcaa81c7224da474143adf4bedfa07c1281cb2"
+      }
+    },
+    "screen_network": "networks/US9187429_c7550_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 26,
+    "observations": "observations/US9187429_c7550_e4.json.gz"
+  },
+  "US9187429_c7551_e4": {
+    "patent": "US9187429",
+    "context_id": 7551,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cytochrome P450 11B2, mitochondrial",
+    "eligible": 25,
+    "terminal_eligible": 20,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US9187429_c7551_e4.archive.json.gz",
+        "original_sha256": "3989208f8168280b93a33b495d05c5b180f79b2bd4faacd1040a686e0af8fcbf",
+        "sha256": "9ca6f06dc52827e11a1fd1b948cf3e337350894eebd5b37269d2bcc77cd775a9"
+      }
+    },
+    "screen_network": "networks/US9187429_c7551_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 25,
+    "observations": "observations/US9187429_c7551_e4.json.gz"
+  },
+  "US9216981_c7710_e2": {
+    "patent": "US9216981",
+    "context_id": 7710,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Serine/threonine-protein kinase B-raf",
+    "eligible": 21,
+    "terminal_eligible": 21,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9216981_c7710_e2.archive.json.gz",
+        "original_sha256": "068127e0eb7cea9d3badcd06c37f5ad35f7ff3d55bb9fb177372be2f7ae54658",
+        "sha256": "8a557eda0d3d028ea53b7fec3544292c1086b746f3f69cb46137708463a42581"
+      }
+    },
+    "screen_network": "networks/US9216981_c7710_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US9216981_c7710_e2.json.gz"
+  },
+  "US9216981_c7711_e4": {
+    "patent": "US9216981",
+    "context_id": 7711,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Serine/threonine-protein kinase B-raf",
+    "eligible": 21,
+    "terminal_eligible": 21,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9216981_c7711_e4.archive.json.gz",
+        "original_sha256": "8c9b8682dbadf67cdea15e26abc874f0c535cb80c0bfd7834845160b4f75ff78",
+        "sha256": "6a5e78d593367eed0495c56d4bc14a47f161faccb79bbcbbb4d3401e413f7061"
+      }
+    },
+    "screen_network": "networks/US9216981_c7711_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US9216981_c7711_e4.json.gz"
+  },
+  "US9238644_c7861_e2": {
+    "patent": "US9238644",
+    "context_id": 7861,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Vascular endothelial growth factor receptor 3",
+    "eligible": 50,
+    "terminal_eligible": 40,
+    "added_prepared_internal": 10,
+    "versions": {
+      "archive": {
+        "file": "networks/US9238644_c7861_e2.archive.json.gz",
+        "original_sha256": "1f8acc91b6d23a57b70c7ac23be9808bfeb5a98947281cbdbd7a5e22d47a7403",
+        "sha256": "fdf669fe6cbbf1361fe4b3f19bb73f7aefea90f1c8b6b38a4783f69b49b5f2e2"
+      }
+    },
+    "screen_network": "networks/US9238644_c7861_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 50,
+    "observations": "observations/US9238644_c7861_e2.json.gz"
+  },
+  "US9238644_c7863_e2": {
+    "patent": "US9238644",
+    "context_id": 7863,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Vascular endothelial growth factor receptor 3",
+    "eligible": 22,
+    "terminal_eligible": 17,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US9238644_c7863_e2.archive.json.gz",
+        "original_sha256": "1cdffce1211a1afd714ff90616fba22fe8422fcaefd0230c412fe35a789572ac",
+        "sha256": "4bf89ac2655a8878d0ad60c747c71d5812604a91856fd579d395c50d1af47bc5"
+      }
+    },
+    "screen_network": "networks/US9238644_c7863_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 22,
+    "observations": "observations/US9238644_c7863_e2.json.gz"
+  },
+  "US9242970_c7895_e2": {
+    "patent": "US9242970",
+    "context_id": 7895,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Orexin/Hypocretin receptor type 1",
+    "eligible": 209,
+    "terminal_eligible": 207,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9242970_c7895_e2.archive.json.gz",
+        "original_sha256": "4fc178786fed0c5c2e63aca862e3c055381bef48a3d282423d36ee00c82dacdb",
+        "sha256": "bb963bec5c76dd9f235a3d49914c8dc3145a5c1f3bae73c38d7f1e28b70db3b0"
+      },
+      "reviewed": {
+        "file": "networks/US9242970_c7895_e2.reviewed.json.gz",
+        "original_sha256": "8bf2167d473f194294be93e8840c44c2d7862e784e8009432a78e7ff044532c7",
+        "sha256": "6d3a4cc370c8464c789c862e2fead361cc367e26dd9aac3077fbbdaecdcfbd0a"
+      }
+    },
+    "screen_network": "networks/US9242970_c7895_e2.reviewed.json.gz",
+    "screen_revision": "reviewed",
+    "screen_eligible": 209,
+    "observations": "observations/US9242970_c7895_e2.json.gz"
+  },
+  "US9242970_c7896_e2": {
+    "patent": "US9242970",
+    "context_id": 7896,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Orexin receptor type 2",
+    "eligible": 210,
+    "terminal_eligible": 208,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9242970_c7896_e2.archive.json.gz",
+        "original_sha256": "44ef24b3716e4cfe356d1dc0ce98bbaa0ac692891f1932c0e3b985c2cc4cd48e",
+        "sha256": "4789e06b49bef5ddd9a0764f44df5095f682b4be49ef7c51e4c2c35b25586e07"
+      },
+      "reviewed": {
+        "file": "networks/US9242970_c7896_e2.reviewed.json.gz",
+        "original_sha256": "6142907efdb38e15ae338d86b0142a8a135f9c9f473a7da59c9ef493b68e4664",
+        "sha256": "06de75ec98c498dae24776e6beee11f672fadc0e3966d2cff0e64c09f43b16a1"
+      }
+    },
+    "screen_network": "networks/US9242970_c7896_e2.reviewed.json.gz",
+    "screen_revision": "reviewed",
+    "screen_eligible": 210,
+    "observations": "observations/US9242970_c7896_e2.json.gz"
+  },
+  "US9249085_c7924_e4": {
+    "patent": "US9249085",
+    "context_id": 7924,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Prostaglandin E2 receptor EP2 subtype",
+    "eligible": 39,
+    "terminal_eligible": 37,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9249085_c7924_e4.archive.json.gz",
+        "original_sha256": "24eb25ccf850f5c51425cb190cdb9c904723432e190babc5ae819bdb5046933b",
+        "sha256": "e145dcd292d3632996cbbefd398c3d76bfeb0913c0e6fb0bfb90731d0e6209b5"
+      }
+    },
+    "screen_network": "networks/US9249085_c7924_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 39,
+    "observations": "observations/US9249085_c7924_e4.json.gz"
+  },
+  "US9266832_c8033_e4": {
+    "patent": "US9266832",
+    "context_id": 8033,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Alpha-synuclein",
+    "eligible": 50,
+    "terminal_eligible": 50,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9266832_c8033_e4.archive.json.gz",
+        "original_sha256": "1a0f07840ff36e378db23cea94f40d9525d622a8ce8b772de5040efa0a1551f5",
+        "sha256": "3030e5a1685db150a0521c51e4dc95e685b0d5f30e307d6f89de7fd9a8088e79"
+      }
+    },
+    "screen_network": "networks/US9266832_c8033_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 50,
+    "observations": "observations/US9266832_c8033_e4.json.gz"
+  },
+  "US9278981_c8205_e2": {
+    "patent": "US9278981",
+    "context_id": 8205,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Tyrosine-protein kinase ABL1 [64-515]",
+    "eligible": 79,
+    "terminal_eligible": 78,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9278981_c8205_e2.archive.json.gz",
+        "original_sha256": "e48d13369f9728da2ee884dbe9a71574928926ed38270ba5aa2235838c7a69c2",
+        "sha256": "605ac26d7a2dc56a228a8918852b2b5bc3dd22aec3f680d1d70d1ab55032c068"
+      }
+    },
+    "screen_network": "networks/US9278981_c8205_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 79,
+    "observations": "observations/US9278981_c8205_e2.json.gz"
+  },
+  "US9278981_c8207_e2": {
+    "patent": "US9278981",
+    "context_id": 8207,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Tyrosine-protein kinase ABL1 [64-515]",
+    "eligible": 91,
+    "terminal_eligible": 90,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9278981_c8207_e2.archive.json.gz",
+        "original_sha256": "fe63e72166a14f71cb574579ef21df7f3cf3828f3f0fde176c0ffa330cbf2c22",
+        "sha256": "3a1f53aef5c1f8e0cc70824e4e023add7c669b8b8dbdd2379e5c2b27161fad84"
+      }
+    },
+    "screen_network": "networks/US9278981_c8207_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 91,
+    "observations": "observations/US9278981_c8207_e2.json.gz"
+  },
+  "US9290451_c8134_e4": {
+    "patent": "US9290451",
+    "context_id": 8134,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cannabinoid receptor 2",
+    "eligible": 218,
+    "terminal_eligible": 208,
+    "added_prepared_internal": 10,
+    "versions": {
+      "archive": {
+        "file": "networks/US9290451_c8134_e4.archive.json.gz",
+        "original_sha256": "e966d23d68ebff841c2f69a112183b01b92f659434d3e5f3aaf6345997f51f42",
+        "sha256": "e70bd260bc448923861e718b9c83d61e7139876272d9bc068a7afdacaef8087d"
+      }
+    },
+    "screen_network": "networks/US9290451_c8134_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 218,
+    "observations": "observations/US9290451_c8134_e4.json.gz"
+  },
+  "US9290451_c8135_e4": {
+    "patent": "US9290451",
+    "context_id": 8135,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cannabinoid receptor 1",
+    "eligible": 47,
+    "terminal_eligible": 42,
+    "added_prepared_internal": 5,
+    "versions": {
+      "archive": {
+        "file": "networks/US9290451_c8135_e4.archive.json.gz",
+        "original_sha256": "0d117b8f35672e0135722fd97c6ab28d6f8ba7e5bba13bfd67530a6e1fa9f363",
+        "sha256": "f3cc50d775814b387b263364d1e485319c12973d6e9ce7bb25aed6806aaee79f"
+      }
+    },
+    "screen_network": "networks/US9290451_c8135_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 47,
+    "observations": "observations/US9290451_c8135_e4.json.gz"
+  },
+  "US9303012_c8415_e4": {
+    "patent": "US9303012",
+    "context_id": 8415,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cannabinoid receptor 2",
+    "eligible": 85,
+    "terminal_eligible": 84,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9303012_c8415_e4.archive.json.gz",
+        "original_sha256": "0d087df450562deb25583d5469ae3f1f61f476e85fe26ed06c92d735c9ceaddf",
+        "sha256": "6d754603b480d10a9c954328c5baf6da96812c7bde17120c7f7ee086497077a5"
+      }
+    },
+    "screen_network": "networks/US9303012_c8415_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 85,
+    "observations": "observations/US9303012_c8415_e4.json.gz"
+  },
+  "US9346815_c8730_e1": {
+    "patent": "US9346815",
+    "context_id": 8730,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Tyrosine-protein kinase JAK1",
+    "eligible": 21,
+    "terminal_eligible": 19,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9346815_c8730_e1.archive.json.gz",
+        "original_sha256": "9f8359ce82446f8f699ba34f029a90945ec07003eb2bb48a938bcb06740125f1",
+        "sha256": "91871fdf33e3b37a3960b394b6cc6defa19dcd36e5c50afe235dbc8795811e81"
+      }
+    },
+    "screen_network": "networks/US9346815_c8730_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US9346815_c8730_e1.json.gz"
+  },
+  "US9346815_c8731_e1": {
+    "patent": "US9346815",
+    "context_id": 8731,
+    "endpoint_id": 1,
+    "endpoint": "Ki",
+    "target_name": "Tyrosine-protein kinase JAK2",
+    "eligible": 21,
+    "terminal_eligible": 19,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9346815_c8731_e1.archive.json.gz",
+        "original_sha256": "0a627be6cb2a15242410ee369a83c456eb9fc2d098f03e87aaf2c921c872b868",
+        "sha256": "1532d6795f5fe3195c47fb8520b329cdbf2ae22d65418ad2b229ea7190b3bf5b"
+      }
+    },
+    "screen_network": "networks/US9346815_c8731_e1.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 21,
+    "observations": "observations/US9346815_c8731_e1.json.gz"
+  },
+  "US9388176_c8991_e2": {
+    "patent": "US9388176",
+    "context_id": 8991,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Vascular endothelial growth factor receptor 2",
+    "eligible": 24,
+    "terminal_eligible": 21,
+    "added_prepared_internal": 3,
+    "versions": {
+      "archive": {
+        "file": "networks/US9388176_c8991_e2.archive.json.gz",
+        "original_sha256": "8bd8154a1a0f51526e21cd71874d14cd3d7cbb2cb4e3245f90396f50c3a165a7",
+        "sha256": "be4f66b5551344a999508cb1f03e813b09d3e01d1aa169c93798f09dfe341434"
+      }
+    },
+    "screen_network": "networks/US9388176_c8991_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 24,
+    "observations": "observations/US9388176_c8991_e2.json.gz"
+  },
+  "US9394285_c9067_e4": {
+    "patent": "US9394285",
+    "context_id": 9067,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "5'-AMP-activated protein kinase catalytic subunit alpha-1/subunit beta-1/subunit gamma-1",
+    "eligible": 51,
+    "terminal_eligible": 50,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9394285_c9067_e4.archive.json.gz",
+        "original_sha256": "21468381d68fbe2dcf85ee02af75678e1d3c5fffee57ff79bae89a1ca102091c",
+        "sha256": "3b76b6ade9fde8291c8e0f0efbe5b6020bd077b10087d70a8ebcdf1ca4004e2c"
+      }
+    },
+    "screen_network": "networks/US9394285_c9067_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 51,
+    "observations": "observations/US9394285_c9067_e4.json.gz"
+  },
+  "US9394290_c9070_e2": {
+    "patent": "US9394290",
+    "context_id": 9070,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Cytochrome P450 11B1, mitochondrial",
+    "eligible": 30,
+    "terminal_eligible": 28,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9394290_c9070_e2.archive.json.gz",
+        "original_sha256": "c0e609613c65e38e0dd6bd820d4c090d41bb4d10674a785ff7051d0a358d4925",
+        "sha256": "7ba98ba84b8d6c8e0d45b06481a3462462954b1f576f90f1fee6d7cd611fca63"
+      }
+    },
+    "screen_network": "networks/US9394290_c9070_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 30,
+    "observations": "observations/US9394290_c9070_e2.json.gz"
+  },
+  "US9394290_c9071_e2": {
+    "patent": "US9394290",
+    "context_id": 9071,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Cytochrome P450 11B2, mitochondrial",
+    "eligible": 20,
+    "terminal_eligible": 19,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9394290_c9071_e2.archive.json.gz",
+        "original_sha256": "2e4646181b981da534f53070b5405559f888cd933990326e1018204121de8ddd",
+        "sha256": "c5925f2022831a85a6def7fbb64ec4c05ca1b774a2ad76168b2ba4dbfbfbfffc"
+      }
+    },
+    "screen_network": "networks/US9394290_c9071_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 20,
+    "observations": "observations/US9394290_c9071_e2.json.gz"
+  },
+  "US9409866_c9171_e4": {
+    "patent": "US9409866",
+    "context_id": 9171,
+    "endpoint_id": 4,
+    "endpoint": "EC50",
+    "target_name": "Cannabinoid receptor 2",
+    "eligible": 98,
+    "terminal_eligible": 94,
+    "added_prepared_internal": 4,
+    "versions": {
+      "archive": {
+        "file": "networks/US9409866_c9171_e4.archive.json.gz",
+        "original_sha256": "60de8830dd7ffe996dc3576320fc700f62f505f80d756cd323e4b0cc1ab895b6",
+        "sha256": "039942ce4d8d785d68539b2a78a3170f2f3838c4c46c0dd0e2dd74c34f97863e"
+      }
+    },
+    "screen_network": "networks/US9409866_c9171_e4.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 98,
+    "observations": "observations/US9409866_c9171_e4.json.gz"
+  },
+  "US9409892_c9202_e2": {
+    "patent": "US9409892",
+    "context_id": 9202,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Prolyl hydroxylase EGLN2",
+    "eligible": 40,
+    "terminal_eligible": 38,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9409892_c9202_e2.archive.json.gz",
+        "original_sha256": "8ddb110390025098aa0156ccfbbb9ceb26e5a2504b288178ddd06f393830500e",
+        "sha256": "c9e56003ec8ed2df489ffa8c203c4338f070b1248592a63fe33d483d16082df2"
+      }
+    },
+    "screen_network": "networks/US9409892_c9202_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 40,
+    "observations": "observations/US9409892_c9202_e2.json.gz"
+  },
+  "US9409892_c9204_e2": {
+    "patent": "US9409892",
+    "context_id": 9204,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Egl nine homolog 1",
+    "eligible": 40,
+    "terminal_eligible": 38,
+    "added_prepared_internal": 2,
+    "versions": {
+      "archive": {
+        "file": "networks/US9409892_c9204_e2.archive.json.gz",
+        "original_sha256": "98c86a7512845502b4ed2ce553c3e9e6295fd47c4252f6fcb52fe1c66c574254",
+        "sha256": "bf72dfa0024c0982b444ff16ea107d39220002ac0365bcd4dfe7c9b14db2eb44"
+      }
+    },
+    "screen_network": "networks/US9409892_c9204_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 40,
+    "observations": "observations/US9409892_c9204_e2.json.gz"
+  },
+  "US9409895_c9207_e2": {
+    "patent": "US9409895",
+    "context_id": 9207,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Autotaxin",
+    "eligible": 29,
+    "terminal_eligible": 29,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9409895_c9207_e2.archive.json.gz",
+        "original_sha256": "29ac3645361dd34ea346b77a3a449d88f0957cfe2940d25f2c4e9f1f88d2c71b",
+        "sha256": "5adb294c69538c1e2bc8e06e252d409023512278b34d70f0b10069424ce3f7c1"
+      }
+    },
+    "screen_network": "networks/US9409895_c9207_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 29,
+    "observations": "observations/US9409895_c9207_e2.json.gz"
+  },
+  "US9428502_c9374_e2": {
+    "patent": "US9428502",
+    "context_id": 9374,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Fatty acid synthase",
+    "eligible": 24,
+    "terminal_eligible": 23,
+    "added_prepared_internal": 1,
+    "versions": {
+      "archive": {
+        "file": "networks/US9428502_c9374_e2.archive.json.gz",
+        "original_sha256": "8c5d7cbb12fdc84446615b4dbd2e6dfe8977258b74691048151d959ed240fab8",
+        "sha256": "97d61a4371230cc8ad6f5f59e2e90e4cb1bc2dcdfd0a99514016a53b0e3afaa8"
+      }
+    },
+    "screen_network": "networks/US9428502_c9374_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 24,
+    "observations": "observations/US9428502_c9374_e2.json.gz"
+  },
+  "US9434690_c9415_e2": {
+    "patent": "US9434690",
+    "context_id": 9415,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Coagulation factor XI",
+    "eligible": 31,
+    "terminal_eligible": 31,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9434690_c9415_e2.archive.json.gz",
+        "original_sha256": "0a358e427d57bbbc5cd0b8371ed733a06b45c525798391c185bb53916e71e02e",
+        "sha256": "0a5782532cefe6f03cdbba29d1d986cafd8673d32fca228c0f81f562b268b826"
+      }
+    },
+    "screen_network": "networks/US9434690_c9415_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 31,
+    "observations": "observations/US9434690_c9415_e2.json.gz"
+  },
+  "US9434690_c9416_e2": {
+    "patent": "US9434690",
+    "context_id": 9416,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Coagulation factor XI",
+    "eligible": 57,
+    "terminal_eligible": 57,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9434690_c9416_e2.archive.json.gz",
+        "original_sha256": "bb0fb6f19df02295fcc81a2baa064abea4efe0ae47ccc796627c54dda87a7d82",
+        "sha256": "15843839342139b4dd1fa56753a407d74740a0a6a47649de44c57b75031ce30b"
+      }
+    },
+    "screen_network": "networks/US9434690_c9416_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 57,
+    "observations": "observations/US9434690_c9416_e2.json.gz"
+  },
+  "US9434690_c9417_e2": {
+    "patent": "US9434690",
+    "context_id": 9417,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Plasma kallikrein",
+    "eligible": 31,
+    "terminal_eligible": 31,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9434690_c9417_e2.archive.json.gz",
+        "original_sha256": "4298ae2e6e60f16e62db884c1eb14033413d387ff1592c64f7f302ee3a8a9744",
+        "sha256": "7edea231219d23a8323e7e81dfd4c854f02bc7abb3107aa9f01cc5012b188a2a"
+      }
+    },
+    "screen_network": "networks/US9434690_c9417_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 31,
+    "observations": "observations/US9434690_c9417_e2.json.gz"
+  },
+  "US9434690_c9418_e2": {
+    "patent": "US9434690",
+    "context_id": 9418,
+    "endpoint_id": 2,
+    "endpoint": "IC50",
+    "target_name": "Plasma kallikrein",
+    "eligible": 47,
+    "terminal_eligible": 47,
+    "added_prepared_internal": 0,
+    "versions": {
+      "archive": {
+        "file": "networks/US9434690_c9418_e2.archive.json.gz",
+        "original_sha256": "346cd44dee27803cede84620c22fe6fa615ad965c0dc81a0b000301c6976775b",
+        "sha256": "2878d38ee9db1e50ce2ebad1bb8028a9837fc80b8310d800e771e652f72cdc04"
+      }
+    },
+    "screen_network": "networks/US9434690_c9418_e2.archive.json.gz",
+    "screen_revision": "archive",
+    "screen_eligible": 47,
+    "observations": "observations/US9434690_c9418_e2.json.gz"
+  }
+}

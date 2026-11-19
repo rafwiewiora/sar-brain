@@ -1,0 +1,71 @@
+patent,context_id,endpoint_id,target_name,endpoint,screen_eligible,screen_revision,screen_network
+US8501732,5208,2,Mitogen-activated protein kinase 8,IC50,73,archive,networks/US8501732_c5208_e2.archive.json.gz
+US8501936,5189,2,Focal adhesion kinase 1,IC50,92,head_reviewed,networks/US8501936_c5189_e2.head_reviewed.json.gz
+US8501936,5190,2,Tyrosine-protein kinase JAK2,IC50,96,reviewed,networks/US8501936_c5190_e2.reviewed.json.gz
+US8501936,5191,2,Tyrosine-protein kinase JAK3,IC50,89,reviewed,networks/US8501936_c5191_e2.reviewed.json.gz
+US8524917,5221,2,Sphingosine 1-phosphate receptor 3,IC50,40,archive,networks/US8524917_c5221_e2.archive.json.gz
+US8592426,5401,1,Kininogen-1,Ki,21,archive,networks/US8592426_c5401_e1.archive.json.gz
+US8592426,5402,2,Kininogen-1,IC50,21,archive,networks/US8592426_c5402_e2.archive.json.gz
+US8592431,5407,2,Acetyl-coenzyme A transporter 1,IC50,20,archive,networks/US8592431_c5407_e2.archive.json.gz
+US8623889,5524,1,Tyrosine-protein kinase ABL1,Ki,52,archive,networks/US8623889_c5524_e1.archive.json.gz
+US8637532,5619,2,Aurora kinase A,IC50,21,archive,networks/US8637532_c5619_e2.archive.json.gz
+US8653263,5640,1,Orexin receptor type 2,Ki,36,archive,networks/US8653263_c5640_e1.archive.json.gz
+US8653263,5641,1,Orexin/Hypocretin receptor type 1,Ki,36,archive,networks/US8653263_c5641_e1.archive.json.gz
+US8703768,5719,2,"cAMP and cAMP-inhibited cGMP 3',5'-cyclic phosphodiesterase 10A",IC50,38,archive,networks/US8703768_c5719_e2.archive.json.gz
+US8765940,5835,1,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Ki,100,reviewed,networks/US8765940_c5835_e1.reviewed.json.gz
+US8772480,5879,1,"Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit alpha isoform",Ki,59,archive,networks/US8772480_c5879_e1.archive.json.gz
+US8772480,5880,2,Serine/threonine-protein kinase mTOR,IC50,23,archive,networks/US8772480_c5880_e2.archive.json.gz
+US8785638,5906,2,Gag-Pol polyprotein,IC50,28,archive,networks/US8785638_c5906_e2.archive.json.gz
+US8796280,5952,1,Prostaglandin D2 receptor 2,Ki,36,archive,networks/US8796280_c5952_e1.archive.json.gz
+US8841455,6042,2,Macrophage colony-stimulating factor 1 receptor,IC50,26,archive,networks/US8841455_c6042_e2.archive.json.gz
+US8846719,6055,1,Gamma-aminobutyric acid receptor subunit alpha-5,Ki,163,archive,networks/US8846719_c6055_e1.archive.json.gz
+US8889870,6208,2,Vascular endothelial growth factor receptor 2,IC50,23,archive,networks/US8889870_c6208_e2.archive.json.gz
+US8921389,6273,2,Egl nine homolog 1,IC50,61,archive,networks/US8921389_c6273_e2.archive.json.gz
+US8952169,6410,2,Sodium channel protein type 9 subunit alpha,IC50,63,archive,networks/US8952169_c6410_e2.archive.json.gz
+US8952169,6412,2,Sodium channel protein type 9 subunit alpha,IC50,45,archive,networks/US8952169_c6412_e2.archive.json.gz
+US9012443,6602,2,Sodium channel protein type 9 subunit alpha,IC50,34,archive,networks/US9012443_c6602_e2.archive.json.gz
+US9012461,6646,2,Focal adhesion kinase 1,IC50,28,archive,networks/US9012461_c6646_e2.archive.json.gz
+US9012461,6647,3,Focal adhesion kinase 1,Kd,25,archive,networks/US9012461_c6647_e3.archive.json.gz
+US9012461,6648,2,Focal adhesion kinase 1,IC50,28,archive,networks/US9012461_c6648_e2.archive.json.gz
+US9034866,6707,1,Mitogen-activated protein kinase kinase kinase 14,Ki,54,archive,networks/US9034866_c6707_e1.archive.json.gz
+US9034907,6717,1,Glutaminyl-peptide cyclotransferase,Ki,20,archive,networks/US9034907_c6717_e1.archive.json.gz
+US9034907,6717,2,Glutaminyl-peptide cyclotransferase,IC50,20,archive,networks/US9034907_c6717_e2.archive.json.gz
+US9073881,6907,2,Eukaryotic translation initiation factor 4E,IC50,46,archive,networks/US9073881_c6907_e2.archive.json.gz
+US9079866,6939,1,Arachidonate 5-lipoxygenase-activating protein,Ki,88,archive,networks/US9079866_c6939_e1.archive.json.gz
+US9120749,7095,2,Maternal embryonic leucine zipper kinase,IC50,73,archive,networks/US9120749_c7095_e2.archive.json.gz
+US9150519,7235,1,Sphingosine 1-phosphate receptor 1,Ki,23,archive,networks/US9150519_c7235_e1.archive.json.gz
+US9150519,7236,4,Sphingosine 1-phosphate receptor 1,EC50,74,archive,networks/US9150519_c7236_e4.archive.json.gz
+US9169259,7371,2,Tyrosine-protein kinase SYK [360-635],IC50,44,archive,networks/US9169259_c7371_e2.archive.json.gz
+US9181266,7482,2,Poly [ADP-ribose] polymerase tankyrase-1,IC50,36,archive,networks/US9181266_c7482_e2.archive.json.gz
+US9181266,7483,2,Poly [ADP-ribose] polymerase tankyrase-2,IC50,37,archive,networks/US9181266_c7483_e2.archive.json.gz
+US9181272,7487,2,Cytochrome P450 family 11 subfamily B member 2,IC50,23,archive,networks/US9181272_c7487_e2.archive.json.gz
+US9187429,7550,4,"Cytochrome P450 11B1, mitochondrial",EC50,26,archive,networks/US9187429_c7550_e4.archive.json.gz
+US9187429,7551,4,"Cytochrome P450 11B2, mitochondrial",EC50,25,archive,networks/US9187429_c7551_e4.archive.json.gz
+US9216981,7710,2,Serine/threonine-protein kinase B-raf,IC50,21,archive,networks/US9216981_c7710_e2.archive.json.gz
+US9216981,7711,4,Serine/threonine-protein kinase B-raf,EC50,21,archive,networks/US9216981_c7711_e4.archive.json.gz
+US9238644,7861,2,Vascular endothelial growth factor receptor 3,IC50,50,archive,networks/US9238644_c7861_e2.archive.json.gz
+US9238644,7863,2,Vascular endothelial growth factor receptor 3,IC50,22,archive,networks/US9238644_c7863_e2.archive.json.gz
+US9242970,7895,2,Orexin/Hypocretin receptor type 1,IC50,209,reviewed,networks/US9242970_c7895_e2.reviewed.json.gz
+US9242970,7896,2,Orexin receptor type 2,IC50,210,reviewed,networks/US9242970_c7896_e2.reviewed.json.gz
+US9249085,7924,4,Prostaglandin E2 receptor EP2 subtype,EC50,39,archive,networks/US9249085_c7924_e4.archive.json.gz
+US9266832,8033,4,Alpha-synuclein,EC50,50,archive,networks/US9266832_c8033_e4.archive.json.gz
+US9278981,8205,2,Tyrosine-protein kinase ABL1 [64-515],IC50,79,archive,networks/US9278981_c8205_e2.archive.json.gz
+US9278981,8207,2,Tyrosine-protein kinase ABL1 [64-515],IC50,91,archive,networks/US9278981_c8207_e2.archive.json.gz
+US9290451,8134,4,Cannabinoid receptor 2,EC50,218,archive,networks/US9290451_c8134_e4.archive.json.gz
+US9290451,8135,4,Cannabinoid receptor 1,EC50,47,archive,networks/US9290451_c8135_e4.archive.json.gz
+US9303012,8415,4,Cannabinoid receptor 2,EC50,85,archive,networks/US9303012_c8415_e4.archive.json.gz
+US9346815,8730,1,Tyrosine-protein kinase JAK1,Ki,21,archive,networks/US9346815_c8730_e1.archive.json.gz
+US9346815,8731,1,Tyrosine-protein kinase JAK2,Ki,21,archive,networks/US9346815_c8731_e1.archive.json.gz
+US9388176,8991,2,Vascular endothelial growth factor receptor 2,IC50,24,archive,networks/US9388176_c8991_e2.archive.json.gz
+US9394285,9067,4,5'-AMP-activated protein kinase catalytic subunit alpha-1/subunit beta-1/subunit gamma-1,EC50,51,archive,networks/US9394285_c9067_e4.archive.json.gz
+US9394290,9070,2,"Cytochrome P450 11B1, mitochondrial",IC50,30,archive,networks/US9394290_c9070_e2.archive.json.gz
+US9394290,9071,2,"Cytochrome P450 11B2, mitochondrial",IC50,20,archive,networks/US9394290_c9071_e2.archive.json.gz
+US9409866,9171,4,Cannabinoid receptor 2,EC50,98,archive,networks/US9409866_c9171_e4.archive.json.gz
+US9409892,9202,2,Prolyl hydroxylase EGLN2,IC50,40,archive,networks/US9409892_c9202_e2.archive.json.gz
+US9409892,9204,2,Egl nine homolog 1,IC50,40,archive,networks/US9409892_c9204_e2.archive.json.gz
+US9409895,9207,2,Autotaxin,IC50,29,archive,networks/US9409895_c9207_e2.archive.json.gz
+US9428502,9374,2,Fatty acid synthase,IC50,24,archive,networks/US9428502_c9374_e2.archive.json.gz
+US9434690,9415,2,Coagulation factor XI,IC50,31,archive,networks/US9434690_c9415_e2.archive.json.gz
+US9434690,9416,2,Coagulation factor XI,IC50,57,archive,networks/US9434690_c9416_e2.archive.json.gz
+US9434690,9417,2,Plasma kallikrein,IC50,31,archive,networks/US9434690_c9417_e2.archive.json.gz
+US9434690,9418,2,Plasma kallikrein,IC50,47,archive,networks/US9434690_c9418_e2.archive.json.gz
