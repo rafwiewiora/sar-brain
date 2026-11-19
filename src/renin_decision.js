@@ -114,12 +114,6 @@ function renderRankBoard(move){
  panel.dataset.index=index;
  panel.innerHTML='<div class="rankTitle"><h2>'+esc(title)+'</h2>'+btn+'</div><figure class="rankFigure"><figcaption>'+subtitle+' · '+current.size+' candidates'+label+'</figcaption><svg id="movingRanks" viewBox="0 0 925 320" role="group" aria-label="Candidate ranks, select a line to inspect"></svg></figure>'+
  '<section class="rankInfo"><header><b>Compound details</b>'+selector+'</header><div class="infoBody"><div class="infoMol">'+level.drawings[id]+'</div><div><small>'+role+'</small><h3>'+esc(name(id))+'</h3><p>'+modelLine+range+'</p>'+result+'</div><div class="infoMovement"><b>'+rankText+'</b>'+selectedRanks+(price!==undefined?'<p>'+cost(price)+(held?' paid':' from stock')+'</p>':'')+(note&&id===pick?'<p>'+note+'</p>':'')+'</div></div>'+batchList+'</section>';
- // Fit the chemical drawing itself; the stored SVG includes a wide export margin.
- const molecule=panel.querySelector('.infoMol svg');
- if(molecule){
-  const bounds=molecule.getBBox(),pad=8;
-  if(bounds.width&&bounds.height)molecule.setAttribute('viewBox',[bounds.x-pad,bounds.y-pad,bounds.width+2*pad,bounds.height+2*pad].join(' '));
- }
  $('rankInspect').onchange=e=>{watchCompound=e.target.value;renderRankBoard({...move,decision:{...d,progress:done?1:0}});};
  const chart=$('movingRanks'),xs=[115,407,705],y=r=>48+(r-1)*247/Math.max(1,d.axisCount-1);
  function inspect(n){watchCompound=n;renderRankBoard({...move,decision:{...d,progress:done?1:0}});$('rankInspect').focus();}
