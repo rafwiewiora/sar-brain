@@ -1,0 +1,6 @@
+.prepScheme svg{display:block;width:100%;max-height:37vh;margin:auto}
+.priceUpdate{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 4px;font-weight:650}
+.priceSquare{display:grid;width:56px;height:52px;align-items:center;border:2px solid #8256c7;border-radius:7px;text-align:center;background:#f2ebfa;color:#653f9e;font-size:28px}
+.priceSquare b{grid-area:1/1}.oldPrice{animation:oldPrice 2.7s both}.newPrice{animation:newPrice 2.7s both}
+@keyframes oldPrice{0%,60%{opacity:1}85%,100%{opacity:0}}@keyframes newPrice{0%,60%{opacity:0}85%,100%{opacity:1}}
+@media(prefers-reduced-motion:reduce),print{.oldPrice,.newPrice{animation:none}.priceSquare{display:flex;width:auto;padding:1px 8px}.oldPrice:after{content:' → ';white-space:pre}}

@@ -17,6 +17,7 @@ const familyColors={
 const num=(v,places=1)=>Number(v.toFixed(places)).toString();
 const mol=id=>D.molecules[id]?.svg||'<span class="emptyDrawing">Drawing unavailable</span>';
 let path=D.movie?'movie':'hindsight',view='brain',frameIndex=0,focus=null,panelId=null,timer=null,chartWidth=0;
+let watchSquare=null;
 const frames=()=>D.paths[path], current=()=>frames()[frameIndex], initial=()=>frames()[0];
 const panelFor=id=>D.panels.find(p=>p.id===id);
 const defaultTarget=()=>current().focus||current().targets.at(-1)||'CPD_20';
@@ -262,7 +263,7 @@ function renderRetro(){
   const buttons=group.ids.filter(id=>id in f.quotes).map(id=>{
    const made=f.made.includes(id),cost=f.quotes[id],less=cost<start[id];
    const label=display(id)+' · '+(made?'already made':cost+' steps from current inventory');
-   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"><b>'+(made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
+   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(id===watchSquare?' storySquare':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"><b>'+(made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
   }).join('');
   const drawing=D.molecules[group.goal]?'<div class="mol">'+mol(group.goal)+'</div>':'';
   return '<article class="platformCard '+(kept?'kept':'')+'"><h3>'+E(title)+'</h3><p class="muted">'+(kept?'Retained':'')+((kept&&costHint)?' · ':'')+E(costHint)+'</p><div class="platformContents">'+drawing+'<div class="squarelist">'+buttons+'</div></div></article>';
@@ -294,8 +295,11 @@ if(D.movie){
  document.querySelector('.key .pred').parentElement.lastChild.textContent=D.movie.ideal?'Ideal FEP prediction':'FEP prediction';
  document.querySelector('details').innerHTML='<summary>Replay assumptions</summary><p>'+E(D.movie.assumptions)+'</p>';
  for(const [id,delta] of [['prev',-1],['next',1],['play',0]])$(id).onclick=()=>parent.postMessage({type:'navigate',delta},'*');
+ let lastGuidedMove=null;
  window.addEventListener('message',e=>{
   if(e.source!==parent||e.data?.type!=='brain-frame')return;
+  if(e.data.autoView&&lastGuidedMove!==e.data.moveIndex){view=e.data.autoView;closePopup();}
+  lastGuidedMove=e.data.moveIndex;watchSquare=e.data.watchSquare;
   const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=[e.data.focus];
   go(i);
   const {phase,delta}=e.data;document.body.dataset.phase=phase;

@@ -34,6 +34,8 @@ main{max-width:none;width:100%;padding:10px clamp(12px,1.5vw,26px) 10px}header{p
 .status .metric{display:grid;min-width:118px;align-content:center;gap:3px;font:650 15px/1.15 system-ui;color:var(--mid)}
 .status .metric strong{display:block;font:750 40px/1 system-ui;font-variant-numeric:tabular-nums;letter-spacing:-.04em;transform-origin:left}
 .status #queries{color:#087b73}
+.squarelist .cell.storySquare{outline:3px solid #7645af;outline-offset:-3px}
+@media(prefers-reduced-motion:no-preference){body[data-phase=pop] .storySquare.discount b{animation:squareDrop .7s ease-out}@keyframes squareDrop{30%{transform:scale(1.4);color:#6236a9}}}
 </style></head><body><main>
 <header><div><h1>RENIN · Routes to the 1 nM compound</h1><p>15 measured references on 16 March 2006. CPD 270 was recorded on 23 October 2007.</p></div><nav id="paths" aria-label="Replay strategy"><button data-path="hindsight">Hindsight</button><button data-path="forward">Forward strategy</button></nav></header>
 <div class="bar"><nav id="views" aria-label="Visualization"><button data-view="brain">SAR Brain</button><button data-view="retro">Squares + retrosynthesis</button></nav>

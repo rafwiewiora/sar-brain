@@ -30,6 +30,8 @@ def build():
         "m_307314": source("abl-ex171.svg"),
         "m_307318": source("abl-ex175.svg"),
     }
+    renin_board = datasets["boards"]["RENIN"]
+    renin_board["platformReaction"] = source("renin-i5-step.svg")
     OUT.mkdir(exist_ok=True)
     game = source("world.html").replace("__ENGINE__", source("engine.js"))
     world = source("world.js")
@@ -42,15 +44,15 @@ def build():
     datasets["draws"] = {key: json.loads((ROOT / "data" / (key + ".draws.json")).read_text()) for key in datasets["boards"]}
     datasets["gameTemplate"] = game.replace("__WORLD__", "\n".join([board_logic, source("renin_decision.js"), source("game_embed.js")]))
     datasets["brainTemplate"] = source("replay.html").replace("__DEMO_SCRIPT__", source("replay.js"))
-    logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "native_movie.js"))
-    story_logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "story.js"))
+    logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "native_movie.js", "story_cards.js"))
+    story_logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "story_cards.js", "story.js"))
     for key, level in datasets["boards"].items():
         story_data = {"board": level, "draws": datasets["draws"][key]}
-        story = source("story.html").replace("__TARGET__", key).replace("__DATA__", inline_json(story_data)).replace("__LOGIC__", story_logic)
+        story = source("story.html").replace("__CARD_CSS__", source("story_cards.css")).replace("__TARGET__", key).replace("__DATA__", inline_json(story_data)).replace("__LOGIC__", story_logic)
         (OUT / (key + "_intro.html")).write_text(story, encoding="utf-8")
     renin = datasets["native"]["RENIN"]
     renin["openingInventory"] = renin.pop("archivedPaths")["forward"][0]["inventory"]
-    movie = source("movie.html").replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
+    movie = source("movie.html").replace("__CARD_CSS__", source("story_cards.css")).replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
     (OUT / "strategy_movie.html").write_text(movie, encoding="utf-8")
     ranks = "strategy_movie.html#RENIN/hard/3/0.80/ranks"
     for page in ("RENIN_ranks.html", "RENIN_choice.html"):
@@ -60,7 +62,7 @@ def build():
             encoding="utf-8",
         )
     for path in (ROOT / "media").iterdir():
-        if path.suffix not in (".mp4", ".pdf"):
+        if path.suffix != ".pdf":
             continue
         shutil.copyfile(path, OUT / path.name)
 

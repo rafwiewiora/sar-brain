@@ -109,3 +109,37 @@ for key, mol in molecules.items():
     campaign["native"]["molecules"][key]["svg"] = svg
 archive.write_bytes(gzip.compress(json.dumps(campaign,separators=(",",":")).encode(),mtime=0))
 print(f"{len(molecules)} scaffold-aligned drawings, common frame {width} × {height}")
+
+# Example 1, step 5 of US8580813B2. Hold each reactant in the product's pose.
+i5 = molecules["m_3ce6dce6f7fc"]
+acid = Chem.MolFromSmiles("O=C(O)c1c(Cl)n(-c2ccccc2)c2cccnc12")
+amine = Chem.MolFromSmiles("CC(C)(C)OC(=O)N1CCNCC1")
+for reagent, pattern in [(acid, Chem.MolFromSmarts("O=Cc1c(Cl)n(-c2ccccc2)c2cccnc12")), (amine, amine)]:
+    product_atoms = i5.GetSubstructMatch(pattern)
+    reagent_atoms = reagent.GetSubstructMatch(pattern)
+    assert product_atoms and reagent_atoms
+    rdDepictor.GenerateDepictionMatching2DStructure(reagent, i5, list(zip(product_atoms, reagent_atoms)))
+
+species = []
+for mol, center, available in [(acid,115,210),(amine,337,175),(i5,787,346)]:
+    drawer = rdMolDraw2D.MolDraw2DSVG(width,height)
+    drawer.drawOptions().clearBackground = False
+    drawer.SetScale(width,height,lo,hi)
+    drawer.DrawMolecule(mol)
+    drawer.FinishDrawing()
+    points = [drawer.GetDrawCoords(i) for i in range(mol.GetNumAtoms())]
+    x,y = min(p.x for p in points)-15,min(p.y for p in points)-15
+    w,h = max(p.x for p in points)+15-x,max(p.y for p in points)+15-y
+    paths = drawer.GetDrawingText().split("<!-- END OF HEADER -->")[1].split("</svg>")[0]
+    species.append((center,available,x,y,w,h,paths))
+scale = min(min(available/w,166/h) for _,available,_,_,w,h,_ in species)
+scheme = ['<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azaindole acid and Boc-piperazine couple to form I5" viewBox="0 0 968 216">']
+for center,_,x,y,w,h,paths in species:
+    scheme.append(f'<svg x="{center-w*scale/2:.2f}" y="{89-h*scale/2:.2f}" width="{w*scale:.2f}" height="{h*scale:.2f}" viewBox="{x} {y} {w} {h}">{paths}</svg>')
+scheme.append('<g font-family="system-ui,sans-serif" text-anchor="middle" fill="#20364d"><text x="231" y="95" font-size="25">+</text><path d="M437 88H597l-9 -6m9 6-9 6" fill="none" stroke="#6743ae" stroke-width="2.5"/>')
+for y,text in [(51,"1. TOTU, NMM"),(73,"DMF, rt, 30 min"),(120,"2. Add Boc-piperazine"),(141,"stir overnight")]:
+    scheme.append(f'<text x="517" y="{y}" font-size="15">{text}</text>')
+for x,text in [(115,"Azaindole acid"),(337,"Boc-piperazine"),(787,"I5 · azaindole chloride")]:
+    scheme.append(f'<text x="{x}" y="194" font-weight="650" font-size="19">{text}</text>')
+scheme.append('</g></svg>')
+(ROOT/"src"/"renin-i5-step.svg").write_text("".join(scheme))

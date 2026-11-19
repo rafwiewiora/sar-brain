@@ -115,10 +115,6 @@ function renderRankBoard(move){
  panel.innerHTML='<div class="rankTitle"><h2>'+esc(title)+'</h2>'+btn+'</div><figure class="rankFigure"><figcaption>'+subtitle+' · '+current.size+' candidates'+label+'</figcaption><svg id="movingRanks" viewBox="0 0 925 320" role="group" aria-label="Candidate ranks, select a line to inspect"></svg></figure>'+
  '<section class="rankInfo"><header><b>Compound details</b>'+selector+'</header><div class="infoBody"><div class="infoMol">'+level.drawings[id]+'</div><div><small>'+role+'</small><h3>'+esc(name(id))+'</h3><p>'+modelLine+range+'</p>'+result+'</div><div class="infoMovement"><b>'+rankText+'</b>'+selectedRanks+(price!==undefined?'<p class="price">'+cost(price)+(held?' paid':' from stock')+'</p>':'')+(note&&id===pick?'<p class="access">'+note+'</p>':'')+'</div></div>'+batchList+'</section>';
  if(d.story){
-  const [heading,detail]=d.story.lines;
-  const caption=document.createElement('div');caption.className='moveStory';
-  caption.innerHTML='<h3>'+esc(heading)+'</h3><p>'+esc(detail)+'</p>';
-  panel.querySelector('.infoBody').after(caption);
   if(id===pick&&d.story.focus){
    const selector={assay:'.decisionResult',price:'.infoMovement .price',link:'.infoMovement .access',rank:'.infoMovement>b'}[d.story.focus];
    const evidence=panel.querySelector(selector);

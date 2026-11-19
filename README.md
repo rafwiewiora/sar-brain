@@ -14,9 +14,9 @@ From a clone, run `python3 build.py` (Python 3.8 or later, standard library only
 | ABL1 | 79 compounds | No |
 | S1P1 | 74 compounds | No |
 
-Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a playable replay and a recorded film. The recording and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.80 with Hard error for RENIN and LoMap 0.60 with Medium error for ABL1 and S1P1. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
+Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a web replay and a separate deck. The replay and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.80 with Hard error for RENIN and LoMap 0.60 with Medium error for ABL1 and S1P1. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
 
-Play `dist/strategy_movie.html` from its opening frame for the captioned RENIN run. Each caption follows the selected action. Outlines identify the specific assay, synthesis price, FEP connection, or rank change discussed. The closing scene compares synthesis operations and total spending against the SAR + cost run.
+Open `dist/strategy_movie.html` to start the web replay automatically. **Step slides** introduces each move before the live rankings, inventory, and counters update. Pause to read, or select **Play this move** to dismiss the slide early. The default RENIN replay and its separate deck share slide content, including the patent’s preparation of the retained azaindole chloride. During the first synthesis, the live squares show the price of CPD 121 falling from nine steps to two. Other replay settings show slide previews drawn from their own actions.
 
 Open `dist/RENIN_ranks.html` at the first RENIN synthesis decision. Each line follows one candidate across the three score columns. Watch the ranks move after an assay or FEP screen. The batch picks were committed at the start of the batch. Click a line or use Inspect to follow its structure, forecast, and synthesis price beneath the plot. Purchased FEP predictions include the replay’s error draw and use SAR as fallback. All three columns include the same novelty term.
 
@@ -47,6 +47,6 @@ Run `node scripts/summarize.cjs` before rebuilding if a change affects the simul
 
 - `src/` contains the game engine, decision rules and viewer sources.
 - `data/` contains frozen campaign inputs, structures and archived replay records. The application can be rebuilt without rerunning extraction or mapping.
-- `media/` contains all three target recordings of the two synchronized views.
+- `media/` contains the separate slide PDFs and historical recordings. The web build copies the PDFs.
 
 [Future ideas](FUTURE_IDEAS.md)
