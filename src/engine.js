@@ -1,6 +1,5 @@
 const gameErrorScale={easy:.5,medium:1,hard:2};
 const gameSigma=(score,difficulty)=>gameErrorScale[difficulty]*(.5+5*(1-score))/2.5;
-const gamePurse=level=>level.key==='RENIN'?45:100;
 // A prepared molecular node represents one distinct, paid reaction output.
 function campaign(level, sigmaForScore = () => 0, {completeBatch=false}={}) {
   const {order,products,rx,routes,stages}=level;

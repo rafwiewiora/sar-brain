@@ -4,7 +4,7 @@ main{max-width:none;padding:0}header,nav{padding:8px 14px}header{gap:10px}header
 #scene{margin:0;max-width:none;display:grid;grid-template-columns:1fr 1fr;border-block:1px solid #dbe3ef;height:calc(100svh - 135px);min-height:390px}section.pane{position:relative;min-width:0;overflow:hidden;background:white}section.pane+section{border-left:2px solid #cbd5e1}.pane iframe{position:absolute;top:0;left:0;transform-origin:top left;border:0;background:white}body{overflow-x:hidden}nav{border:0}.pane:fullscreen iframe{background:white}
 @media(max-width:740px){#scene{display:flex;flex-direction:column;height:auto}.pane{height:75vw;min-height:300px}.pane+section.pane{border-left:0;border-top:2px solid #cbd5e1}}@media(min-width:741px) and (max-width:1100px){#scene{height:calc(100svh - 170px)}}
 .paneLabel{height:25px;font:600 12px/24px system-ui;padding:0 14px;color:#243853;border-bottom:1px solid #dbe3ef;background:#f8fafc}.paneLabel span{font-weight:400;color:#52647c;margin-left:8px}.pane iframe{top:25px}</style><main><header><strong>SAR Brain</strong><label>Campaign <select id="target"></select></label><label>Replay <select id="mode"><option value="board">Current game</option><option value="archive">Original archive</option></select></label><label>Strategy <select id="policy"></select></label><label id="cutLabel">LoMap ≥ <select id="cut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label id="errorLabel">Difficulty <select id="error"><option value="ideal">Ideal (0 error)</option><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><a id="filmLink" href="RENIN_strategy_movie.mp4">RENIN film</a><a id="boardLink" href="medicinal_chemistry_world_map.html">Play the board</a></header>
-<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Before the move</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>After the move</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer id="rule"></footer></main>
+<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Before the move</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>After the move</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
 <script id="data" type="application/json">__DATA__</script><script>__SCENE__
 const data=JSON.parse(document.querySelector('#data').textContent),$=id=>document.getElementById(id);
 let index=0,timer=null, projection,liveLevel,generation=0,tick=0,ready=new Set(),painted=new Set();
@@ -50,14 +50,26 @@ function show(i,keep=false){
 }
 function setup(){
  stop();const i=+$('policy').value;
- active=isGame()?playStrategy(board(),moviePolicies[i],+$('cut').value,$('error').value):board().runs[i];
+ const cutoff=+$('cut').value,error=$('error').value;
+ const usesFep=['hybrid','local'].includes(moviePolicies[i]?.[0]);
+ const summary=isGame()&&usesFep&&error!=='ideal'?data.draws[$('target').value][[i,cutoff,error]]:null;
+ const level=summary?sampledLevel(board(),summary.seed):board();
+ active=isGame()?playStrategy(level,moviePolicies[i],cutoff,error):board().runs[i];
+ const dollars=n=>n===null?'unreached':'$'+n;
+ if(summary){
+  $('sample').textContent='Median replay · '+dollars(summary.median)+' to hit · 10th–90th percentile '+dollars(summary.low)+'–'+dollars(summary.high)+' · '+summary.wins+'/'+summary.count+' reached the hit. ';
+ }else{
+  $('sample').textContent=isGame()?'Deterministic replay. ':'Archived trajectory. ';
+ }
+ if(!isGame()&&$('target').value==='RENIN')active={...active,rule:i===0?'Ideal FEP · rank by predicted affinity + new neighbors · make two per batch.':'Winner supplied · follow the five-move hindsight path.'};
+
  const key=$('target').value;
  $('filmLink').hidden=key==='S1P1';$('filmLink').href=key+'_strategy_movie.mp4';$('filmLink').textContent=key+' film';
- liveLevel=isGame()?{...board(),edges:board().edges.filter(e=>e[2]>=+$('cut').value-1e-12)}:{...data.archiveLevels[key]};
+ liveLevel=isGame()?{...level,edges:level.edges.filter(e=>e[2]>=+$('cut').value-1e-12)}:{...data.archiveLevels[key]};
  projection=project(key,liveLevel,active,data.native[key],!isGame(),!isGame()||$('error').value==='ideal');
  generation++;ready.clear();$('game').srcdoc=embed(data.gameTemplate,'__LEVELS__',{[key]:liveLevel});
  $('brainPane').srcdoc=embed(data.brainTemplate,'__DEMO_DATA__',projection.D);fit();
- $('cutLabel').hidden=$('errorLabel').hidden=!isGame();show(0);
+ $('cutLabel').hidden=$('errorLabel').hidden=!isGame()||!usesFep;show(0);
 }
 function chooseTarget(){stop();$('boardLink').href='medicinal_chemistry_world_map.html#'+$('target').value;
  options($('policy'),isGame()?moviePolicies.map((p,i)=>[i,p[1]]):board().runs.map((r,i)=>[i,r.method]));setup();}

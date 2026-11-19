@@ -35,6 +35,7 @@ def build():
     board_logic, startup, _ = world.rpartition("\nload(")
     if not startup:
         raise ValueError("Missing standalone board entry point")
+    datasets["draws"] = {key: json.loads((ROOT / "data" / (key + ".draws.json")).read_text()) for key in datasets["boards"]}
     datasets["gameTemplate"] = game.replace("__WORLD__", board_logic + "\n" + source("game_embed.js"))
     datasets["brainTemplate"] = source("replay.html").replace("__DEMO_SCRIPT__", source("replay.js"))
     logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "native_movie.js"))

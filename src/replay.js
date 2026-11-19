@@ -47,6 +47,9 @@ function changeLabel(){
 function render(){
  const f=current();
  $('caption').textContent=changeLabel();
+ if(D.movie&&!D.movie.archived){
+  $('money').hidden=false;$('money').innerHTML='<strong>$'+(f.spent+f.queries)+'</strong> spent';
+ }
  $('cost').textContent=f.spent;$('made').textContent=(f.made.length-D.startingReferences.length)+' new compounds';
  $('queries').textContent=f.queries+' FEP '+(f.queries===1?'query':'queries');
  $('shortResult').textContent=!D.movie&&frameIndex===frames().length-1?'Largest advance in recorded date · '+f.maxLeap+' days':'';

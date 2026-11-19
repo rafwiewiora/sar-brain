@@ -58,7 +58,7 @@ function project(key,level,run,base,archive,ideal){
   (D.paths.movie??=[]).push(frame);previousMade=new Set(made);
  }
  D.startingReferences=opening.map(cid);
- D.movie={target:key,endpoint:level.endpoint,ideal,policy:run.method,
+ D.movie={archived:archive,target:key,endpoint:level.endpoint,ideal,policy:run.method,
   title:key==='RENIN'?'RENIN · Routes to the 1 nM compound':key+' · Routes to the best measured compound',
   subtitle:key==='RENIN'?'15 measured references on 16 March 2006. CPD 270 was recorded on 23 October 2007.':level.patent+' · '+level.order.length+' compounds',
   assumptions:[run.rule,run.setting||'Archived ideal predictions.'].join(' ')};

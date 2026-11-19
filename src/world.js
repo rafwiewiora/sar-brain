@@ -10,17 +10,11 @@ try{const prior=localStorage.getItem('sarbrain-board-difficulty');if(Object.hasO
 const key=()=> 'sarbrain-board-v4-'+level.key+'-'+difficulty;
 // Same affine score dependence as the ABL1 replay, normalized at 0.60.
 const sigmaForScore=score=>gameSigma(score,difficulty);
-const purse=()=>gamePurse(level);
 const spentCash=()=>g.history.reduce((total,a)=>total+(a.type==='query'?1:a.cost),0);
-const remainingCash=()=>purse()-spentCash();
-function quote(type,id){
- const dollars=type==='query'?1:g.price(id);
- return {dollars,ok:dollars<=remainingCash()};
-}
 function play(type,id,parent){
- return (type==='query'||type==='make'||type==='prepare') && level.routes[id] && quote(type,id).ok && g.act(type,id,parent);
+ return (type==='query'||type==='make'||type==='prepare') && level.routes[id] && g.act(type,id,parent);
 }
-function finished(){return g.goal()||!available().some(n=>quote('make',n).ok);}
+function finished(){return g.goal();}
 
 const save=()=>{try{localStorage.setItem(key(),JSON.stringify({legacyOpening:!!level.legacyStock&&!level.openingPlatform,moves:g.history.map(({type,id,parent})=>({type,id,parent}))}));}catch{}};
 const available=()=>level.order.filter(n=>!g.stock.has(n));
@@ -142,8 +136,8 @@ function map(){
 function row(label,value){return '<div><span>'+esc(label)+'</span><b>'+esc(value)+'</b></div>';}
 const btn=(type,label,cls='',disabled=false)=>'<button data-action="'+type+'" class="'+cls+'" '+(disabled?'disabled':'')+'>'+esc(label)+'</button>';
 function moveButton(type,id,label,cls=''){
- const q=quote(type,id);
- return btn(type,label+' · $'+q.dollars,cls,!q.ok||finished());
+ const dollars=type==='query'?1:g.price(id);
+ return btn(type,label+' · $'+dollars,cls,finished());
 }
 function inspector(){
  const id=stage||pinned,made=g.stock.has(id);
@@ -175,9 +169,9 @@ function inspector(){
  $('detail').innerHTML=detail;$('actions').innerHTML=buttons;
 }
 function render(){
- model=layout();$('goal').textContent=g.goal()?'Hit confirmed at '+nm(g.best)+'.':finished()?'Campaign over. No remaining analog fits your budget.':'Find and assay the '+nm(g.best)+' hit before your budget runs out.';
+ model=layout();$('goal').textContent=g.goal()?'Hit confirmed at '+nm(g.best)+'.':'Find and assay the '+nm(g.best)+' hit.';
  const stat=(n,s)=>'<span><b>'+esc(n)+'</b>'+s+'</span>';
- $('stats').innerHTML=stat('$'+remainingCash(),'Cash left')+stat(g.history.length,'Moves played')+stat(nm(level.products[model.best].p),'Best assay');
+ $('stats').innerHTML=stat('$'+spentCash(),'Money spent')+stat(g.history.length,'Moves played')+stat(nm(level.products[model.best].p),'Best assay');
  map();inspector();$('notice').textContent=message;
  $('find').innerHTML=level.order.map(n=>'<option value="'+n+'" '+(n===pinned?'selected':'')+'>'+esc(name(n))+(g.stock.has(n)?' ✓':'')+'</option>').join('');
 }
@@ -213,7 +207,7 @@ $('difficulty').onchange=e=>{
  try{localStorage.setItem('sarbrain-board-difficulty',difficulty);}catch{}
  load(level.key);
 };
-$('guide').onclick=()=>openDialog('<h2>How to play</h2><p>Start with $'+purse()+' and '+level.stock.filter(n=>idx.has(n)).length+' measured references. '+(level.openingPlatform?'These are three analogs with the fewest additional steps from one sampled upstream intermediate. ':'')+'Find and assay the '+nm(g.best)+' hit. Every hollow dot is a real compound with its activity hidden.</p><p><b>Make &amp; assay.</b> Pay $1 per missing synthesis operation. The assay is included. Its result updates SAR, and the intermediates you made stay in inventory.</p><p><b>Stock an intermediate.</b> Pay for its preparation now. Every analog whose route shares those operations becomes cheaper. The lower lane shows reusable stops on the selected route.</p><p><b>Predict.</b> Spend $1 to predict from the measured reference with the highest LoMap score of at least 0.60. At 0.60, simulated Gaussian error (1σ) is 0.5, 1 or 2 kcal/mol on Easy, Medium or Hard. Error decreases linearly to one fifth of that at score 1.00. Predictions stay fixed. Each difficulty saves its own game. Assay the hit to win.</p><p>Candidates are grouped by fingerprint similarity. The center shows the selected analog and leading moves by SAR or SAR with current price.</p><p>'+esc(level.patent)+' · '+(level.key==='RENIN'?'26 costed analogs and 15 early references':level.order.length+' costed compounds')+'. Prices are game dollars. Starting stock is supplied.</p>'+btn('restart','Restart board'));
+$('guide').onclick=()=>openDialog('<h2>How to play</h2><p>Start with '+level.stock.filter(n=>idx.has(n)).length+' measured references. '+(level.openingPlatform?'These are three analogs with the fewest additional steps from one sampled upstream intermediate. ':'')+'Find and assay the '+nm(g.best)+' hit. Every hollow dot is a real compound with its activity hidden.</p><p><b>Make &amp; assay.</b> Pay $1 per missing synthesis operation. The assay is included. Its result updates SAR, and the intermediates you made stay in inventory.</p><p><b>Stock an intermediate.</b> Pay for its preparation now. Every analog whose route shares those operations becomes cheaper. The lower lane shows reusable stops on the selected route.</p><p><b>Predict.</b> Spend $1 to predict from the measured reference with the highest LoMap score of at least 0.60. At 0.60, simulated Gaussian error (1σ) is 0.5, 1 or 2 kcal/mol on Easy, Medium or Hard. Error decreases linearly to one fifth of that at score 1.00. Predictions stay fixed. Each difficulty saves its own game. Assay the hit to win.</p><p>Candidates are grouped by fingerprint similarity. The center shows the selected analog and leading moves by SAR or SAR with current price.</p><p>'+esc(level.patent)+' · '+(level.key==='RENIN'?'26 costed analogs and 15 early references':level.order.length+' costed compounds')+'. Prices are game dollars. Starting stock is supplied.</p>'+btn('restart','Restart board'));
 $('dialogBody').onclick=e=>{const b=e.target.closest('[data-action]');if(!b)return;if(b.dataset.action==='restart')restart();else if(b.dataset.action==='confirm'){$('dialog').close();load(level.key,true);}};
 $('close').onclick=()=>$('dialog').close();
 load(Object.hasOwn(levels,location.hash.slice(1))?location.hash.slice(1):'S1P1');

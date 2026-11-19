@@ -1,0 +1,194 @@
+{
+  "0,0.6,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 55,
+    "median": 35,
+    "low": 35,
+    "high": 35
+  },
+  "0,0.6,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 89,
+    "median": 35,
+    "low": 35,
+    "high": 45
+  },
+  "0,0.6,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 79,
+    "median": 39,
+    "low": 35,
+    "high": 59
+  },
+  "0,0.7,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 48,
+    "median": 39,
+    "low": 39,
+    "high": 39
+  },
+  "0,0.7,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 53,
+    "median": 39,
+    "low": 39,
+    "high": 39
+  },
+  "0,0.7,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 83,
+    "median": 39,
+    "low": 39,
+    "high": 49
+  },
+  "0,0.8,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 60,
+    "median": 39,
+    "low": 39,
+    "high": 42
+  },
+  "0,0.8,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 95,
+    "median": 39,
+    "low": 38,
+    "high": 43
+  },
+  "0,0.8,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 80,
+    "median": 42,
+    "low": 38,
+    "high": 53
+  },
+  "0,0.9,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 94,
+    "median": 35,
+    "low": 35,
+    "high": 53
+  },
+  "0,0.9,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 83,
+    "median": 37,
+    "low": 35,
+    "high": 53
+  },
+  "0,0.9,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 88,
+    "median": 39,
+    "low": 35,
+    "high": 52
+  },
+  "4,0.6,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 55,
+    "median": 35,
+    "low": 35,
+    "high": 35
+  },
+  "4,0.6,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 89,
+    "median": 35,
+    "low": 35,
+    "high": 45
+  },
+  "4,0.6,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 79,
+    "median": 39,
+    "low": 35,
+    "high": 59
+  },
+  "4,0.7,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 48,
+    "median": 39,
+    "low": 39,
+    "high": 39
+  },
+  "4,0.7,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 53,
+    "median": 39,
+    "low": 39,
+    "high": 39
+  },
+  "4,0.7,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 83,
+    "median": 39,
+    "low": 39,
+    "high": 49
+  },
+  "4,0.8,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 60,
+    "median": 39,
+    "low": 39,
+    "high": 42
+  },
+  "4,0.8,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 95,
+    "median": 39,
+    "low": 38,
+    "high": 43
+  },
+  "4,0.8,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 80,
+    "median": 42,
+    "low": 38,
+    "high": 53
+  },
+  "4,0.9,easy": {
+    "count": 101,
+    "wins": 101,
+    "seed": 62,
+    "median": 47,
+    "low": 46,
+    "high": 51
+  },
+  "4,0.9,medium": {
+    "count": 101,
+    "wins": 101,
+    "seed": 18,
+    "median": 47,
+    "low": 42,
+    "high": 51
+  },
+  "4,0.9,hard": {
+    "count": 101,
+    "wins": 101,
+    "seed": 54,
+    "median": 46,
+    "low": 42,
+    "high": 51
+  }
+}
