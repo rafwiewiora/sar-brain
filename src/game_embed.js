@@ -8,6 +8,7 @@ $('actions').onclick=e=>{const a=e.target.closest('[data-action]')?.dataset.acti
 $('dialogBody').onclick=null;
 $('bulkFep').onclick=null;
 $('bulkFep').onpointerenter=$('bulkFep').onpointerleave=$('bulkFep').onfocus=$('bulkFep').onblur=null;
+document.body.classList.add('movieBoard');
 let activeMove;
 const drawBoard=render;
 if(level.key==='RENIN')installReninDecision();

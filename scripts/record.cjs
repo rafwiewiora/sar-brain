@@ -91,17 +91,18 @@ async function main(){
      const after=phase==='pop'||phase==='settled';
      const expected=await page.evaluate(after=>{
       const current=run().frames[index],previous=run().frames[Math.max(0,index-1)],f=after?current:previous;
-      return {total:f.spent+f.queries,action:current.action,count:current.targets.length,dq:current.queries-previous.queries,
+      return {total:f.spent+f.queries,steps:f.spent,queries:f.queries,ds:current.spent-previous.spent,action:current.action,count:current.targets.length,dq:current.queries-previous.queries,
               dm:current.spent+current.queries-previous.spent-previous.queries,beat:projection.D.paths.movie[index].beat};
      },after);
      const cash=await board.locator('#stats b').first().textContent();
-     if(cash!=='$'+expected.total||await brain.locator('#money').textContent()!==cash+' spent')throw Error('Ledger mismatch: '+target+'/'+i+'/'+phase);
+     if(cash!=='$'+expected.total||await brain.locator('#cost').textContent()!==String(expected.steps)||await brain.locator('#queries').textContent()!==String(expected.queries))throw Error('Ledger mismatch: '+target+'/'+i+'/'+phase);
      if(!after&&expected.action==='query'){
       if(!(await board.locator('button.agentMove').innerText()).includes(target==='RENIN'?'eligible · $'+expected.count:'all eligible · '+expected.count))throw Error('Bulk selection highlight');
       const marked=target==='RENIN'?await board.locator('[data-batch-target]').count():await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
       if(marked!==expected.count)throw Error('Queried map coverage');
      }else if(!after&&expected.action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
-     if(after&&expected.dm&&await brain.locator('#money').getAttribute('data-gain')!=='+$'+expected.dm)throw Error('Missing spend increase');
+     if(after&&expected.dm&&await board.locator('#stats b').first().getAttribute('data-gain')!=='+$'+expected.dm)throw Error('Missing spend increase');
+     if(after&&expected.ds&&await brain.locator('#cost').getAttribute('data-gain')!=='+'+expected.ds)throw Error('Missing step increase');
      if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
      if(target!=='RENIN'&&phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
      if(target==='RENIN'){

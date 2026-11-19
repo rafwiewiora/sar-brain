@@ -61,11 +61,8 @@ function render(){
   tag.textContent={unlock:'Reference unlocked',prediction:'FEP prediction',assay:'Assay confirmed'}[f.beat];
   $('caption').prepend(tag);
  }
- if(D.movie&&!D.movie.archived){
-  $('money').hidden=false;$('money').innerHTML='<strong>$'+(f.spent+f.queries)+'</strong> spent';
- }
- $('cost').textContent=f.spent;$('made').textContent=(f.made.length-D.startingReferences.length)+' new compounds';
- $('queries').textContent=f.queries+' FEP '+(f.queries===1?'query':'queries');
+ $('cost').textContent=f.spent;
+ $('queries').textContent=f.queries;
  $('shortResult').textContent=!D.movie&&frameIndex===frames().length-1?'Largest advance in recorded date · '+f.maxLeap+' days':'';
  $('position').textContent=(frameIndex+1)+' / '+frames().length;
  $('prev').disabled=frameIndex===0;$('next').disabled=frameIndex===frames().length-1;
@@ -302,7 +299,7 @@ if(D.movie){
   const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=[e.data.focus];
   go(i);
   const {phase,delta}=e.data;document.body.dataset.phase=phase;
-  for(const [id,amount,prefix] of [['money',delta.money,'+$'],['queries',delta.queries,'+'],['cost',delta.steps,'+']]){
+  for(const [id,amount,prefix] of [['queries',delta.queries,'+'],['cost',delta.steps,'+']]){
    const el=$(id);
    if((phase==='pop'||phase==='settled')&&amount)el.dataset.gain=prefix+amount;
    else delete el.dataset.gain;

@@ -22,7 +22,7 @@ Open `dist/RENIN_ranks.html` at the first RENIN synthesis decision. Each line fo
 
 The current game charges $1 per missing synthesis operation and $1 per FEP query. The spend counter starts at $0 and has no cap. An assay is included when a compound is made. The initial inventory is supplied. The cash unit represents a game cost. RENIN’s recorded dates locate the historical measurements on the plot. Elapsed laboratory time is an open modeling question.
 
-The three candidate cards show a selection. **Run FEP on all eligible** shows the full count and total price before purchase. You can also predict one compound from its card. The replay marks every compound in the FEP batch, depresses the chosen button, then updates spending and query counts on both panels together. In the ABL1 example, the structures for Ex 171 and Ex 175 are aligned on their shared scaffold. Teal marks the ring alcohol and hydroxymethyl groups in their respective patent structures.
+The three candidate cards show a selection. **Run FEP on all eligible** shows the full count and total price before purchase. You can also predict one compound from its card. The replay marks every compound in the FEP batch, depresses the chosen button, then updates money spent on the left and the synthesis-step and FEP-query counters on the right. In the ABL1 example, the structures for Ex 171 and Ex 175 are aligned on their shared scaffold. Teal marks the ring alcohol and hydroxymethyl groups in their respective patent structures.
 
 ## Replay strategies
 
