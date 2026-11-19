@@ -55,7 +55,7 @@ python3 corpus/tools/patent.py inspect fak-reviewed.json.gz m_230788
 
 Adding those three documented operations changes the recorded cost to the later FAK chloride intermediate `m_230809` from **3 to 6**. Keep both network revisions, the evidence file and the hash of the revision used for each replay. Seed indices and database molecule IDs are meaningful only within their revision.
 
-The package supports route lookup, pricing and SAR comparisons for all 70 contexts. To promote one to a browser game, choose its starting inventory, check the stock boundary and assay endpoint, and prepare its structures and any FEP mappings at the intended cutoff. The existing browser campaigns are in [data](../data/). The dated RetroDMTA campaigns are a separate collection.
+The package supports route lookup, pricing and SAR comparisons for all 70 contexts. To promote one to a browser game, choose its starting inventory, check the stock boundary and assay endpoint, and prepare its structures and any FEP mappings at the intended cutoff. The existing browser campaigns are in [data](../data/). See the separate [RetroDMTA coverage and route provenance](retrodmta/README.md) for the four dated campaigns.
 
 ## Source credit
 
