@@ -7,6 +7,7 @@ const root=path.resolve(__dirname,'..'),dist=path.join(root,'dist');
 async function main(){
  const browser=await chromium.launch(),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'sar-story-'));
  const page=await browser.newPage({viewport:{width:2240,height:1000}});
+ await page.addInitScript(()=>{window.capturePhases=true;});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const ready=()=>page.waitForFunction(()=>typeof tick!=='undefined'&&document.body.dataset.ready===String(tick),null,{timeout:20000});
  try{
@@ -23,7 +24,7 @@ async function main(){
   if(await page.locator('#boardCut').inputValue()!=='0.80'||await page.locator('#difficulty').inputValue()!=='hard'||!(await bulk.innerText()).includes('5 compounds · $5'))throw Error('RENIN opening rules');
   await page.selectOption('#boardCut','0.60');
   if(!(await bulk.innerText()).includes('26 compounds · $26'))throw Error('RENIN cutoff switch');
-  for(const target of ['RENIN','ABL1','S1P1']){
+  for(const target of (process.argv.length>2?process.argv.slice(2):['RENIN','ABL1','S1P1'])){
    await page.goto(pathToFileURL(path.join(dist,target+'_intro.html')).href);await page.waitForSelector('#title:not(:empty)');
    const slides=[];
    for(let i=0;i<11;i++){
@@ -40,6 +41,10 @@ async function main(){
    await page.addStyleTag({content:'@page{size:320mm 180mm;margin:0}@media print{article{box-sizing:border-box;padding:12mm 14mm;width:320mm;height:180mm;break-after:page}article:last-child{break-after:auto}.controls{display:none}body{margin:0}}'});
    await page.pdf({path:path.join(dist,target+'_slides.pdf'),preferCSSPageSize:true,printBackground:true});
    await page.goto(pathToFileURL(path.join(dist,'strategy_movie.html')).href+'#'+target);await ready();
+   if(target==='ABL1'){
+    const colors=await page.frameLocator('#brainPane').locator('.platform-button').evaluateAll(items=>[...new Set(items.map(el=>getComputedStyle(el).getPropertyValue('--family').trim()))]);
+    if(colors.length!==6||!colors.includes('#7c3aed')||colors.includes('#64748b'))throw Error('ABL1 intermediate family colors');
+   }
    const policyList=await page.locator('#policy option').allTextContents();
    if(policyList.length!==5||policyList[3]!=='FEP with SAR fallback + cost')throw Error('Invalid policy options');
    for(const policy of ['0','1','2','oracle']){
@@ -60,20 +65,32 @@ async function main(){
    const len=await page.evaluate(()=>run().frames.length), manifest=[];
    for(let i=0;i<len;i++){
     await page.evaluate(i=>step(i),i);await ready();
-    const total=await page.evaluate(()=>run().frames[index].spent+run().frames[index].queries);
-    if(await page.frameLocator('#brainPane').locator('#money').innerText()!=='$'+total+' spent')throw Error('Ledger mismatch');
-    const action=await page.evaluate(()=>run().frames[index].action);
-    const board=page.frameLocator('#game');
-    if(action==='query'){
-     const count=await page.evaluate(()=>run().frames[index].targets.length);
-     if(!(await board.locator('button.agentMove').innerText()).includes('all eligible · '+count))throw Error('Bulk selection highlight');
-     const marked=await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
-     if(marked!==count)throw Error('Queried map coverage');
-    }else if(action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
-    const name=target+i+'.png';
-    await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
-    const seconds=await page.evaluate(()=>projection.D.paths.movie[index].seconds);
-    manifest.push("file '"+name+"'",'duration '+(seconds??(i===0||i===len-1?3:2)));
+    const board=page.frameLocator('#game'),brain=page.frameLocator('#brainPane');
+    const sequence=await page.evaluate(()=>index?moments:[['settled',0]]);
+    const seconds=await page.evaluate(()=>index?duration():3);
+    for(let j=0;j<sequence.length;j++){
+     const [phase,start]=sequence[j];
+     await page.evaluate(v=>setPhase(v),phase);await ready();
+     const after=phase==='pop'||phase==='settled';
+     const expected=await page.evaluate(after=>{
+      const current=run().frames[index],previous=run().frames[Math.max(0,index-1)],f=after?current:previous;
+      return {total:f.spent+f.queries,action:current.action,count:current.targets.length,dq:current.queries-previous.queries,
+              dm:current.spent+current.queries-previous.spent-previous.queries,beat:projection.D.paths.movie[index].beat};
+     },after);
+     const cash=await board.locator('#stats b').first().textContent();
+     if(cash!=='$'+expected.total||await brain.locator('#money').textContent()!==cash+' spent')throw Error('Ledger mismatch: '+target+'/'+i+'/'+phase);
+     if(!after&&expected.action==='query'){
+      if(!(await board.locator('button.agentMove').innerText()).includes('all eligible · '+expected.count))throw Error('Bulk selection highlight');
+      const marked=await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
+      if(marked!==expected.count)throw Error('Queried map coverage');
+     }else if(!after&&expected.action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
+     if(after&&expected.dm&&await brain.locator('#money').getAttribute('data-gain')!=='+$'+expected.dm)throw Error('Missing spend increase');
+     if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
+     if(phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
+     const name=target+i+'-'+phase+'.png';
+     await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
+     manifest.push("file '"+name+"'",'duration '+((sequence[j+1]?.[1]??1)-start)*seconds);
+    }
    }
    manifest.push(manifest.at(-2));fs.writeFileSync(path.join(tmp,'frames.txt'),manifest.join('\n')+'\n');
    const film=path.join(root,'media',target+'_strategy_movie.mp4');

@@ -18,11 +18,23 @@ render=function(){
   $('stats').innerHTML='<span><b>'+f.spent+'</b>Synthesis steps</span><span><b>'+f.queries+'</b>FEP queries</span><span><b>'+nm(level.products[model.best].p)+'</b>Best assay</span>';
   $('goal').textContent='Replay the recorded selections from the original starting inventory.';
  }
-  const bulk=playAction==='query-all';
+ const {phase,delta,pair}=activeMove,after=phase==='pop'||phase==='settled';
+ document.body.dataset.phase=phase;
+ const bulk=!after&&playAction==='query-all';
  $('bulkFep').classList.toggle('agentMove',bulk);
- if(bulk||playAction==='query')markFepTargets(activeMove.targets);
- if(!bulk&&pinned===agentFocus&&!stage){
+ if(!after&&(bulk||playAction==='query'))markFepTargets(activeMove.targets);
+ if(!after&&!bulk&&pinned===agentFocus&&!stage){
   $('actions').querySelector('[data-action="'+playAction+'"]')?.classList.add('agentMove');
+ }
+ if(after&&delta.money)$('stats').querySelector('b').dataset.gain='+$'+delta.money;
+ document.querySelector('.pairCard')?.remove();
+ if(pair){
+  const matched=level.comparisonDrawings?.[pair.from]&&level.comparisonDrawings?.[pair.to];
+  const drawings=matched?level.comparisonDrawings:level.drawings;
+  const molecule=(n,label)=>'<div>'+drawings[n]+'<strong>'+esc(name(n))+'</strong><small>'+label+'</small></div>';
+  const box=document.createElement('div');box.className='pairCard';
+  box.innerHTML='<h3>'+(pair.measured?'Assay confirmed':'Reference → FEP prediction')+'</h3><div class="pairMols">'+molecule(pair.from,'Measured · '+nm(level.products[pair.from].p))+'<b>→</b>'+molecule(pair.to,(pair.measured?'Measured · ':'Predicted · ')+nm(pair.measured?level.products[pair.to].p:g.forecasts.get(pair.to).p))+'</div>'+(matched?'<p class="sub">Ring–OH → ring–CH₂OH</p>':'');
+  $('map').parentElement.append(box);
  }
 };
 
@@ -41,7 +53,7 @@ window.addEventListener('message',e=>{
  }
  if(f.quotes){const base=g.price;g.price=n=>f.quotes[n]??base(n);}
  g.history.push(...f.history);
- activeMove={archived,f,playAction,targets,agentFocus:focus};pinned=focus;stage=null;message=info;render();
+ activeMove={archived,f,playAction,targets,phase:e.data.phase,delta:e.data.delta,pair:e.data.pair,agentFocus:focus};pinned=focus;stage=null;message=info;render();
  document.body.dataset.tick=e.data.tick;
  parent.postMessage({type:'painted',side:'board',tick:e.data.tick},'*');
 });

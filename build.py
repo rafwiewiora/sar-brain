@@ -26,6 +26,10 @@ def build():
         for field in datasets:
             datasets[field][key] = campaign[field]
 
+    datasets["boards"]["ABL1"]["comparisonDrawings"] = {
+        "m_307314": source("abl-ex171.svg"),
+        "m_307318": source("abl-ex175.svg"),
+    }
     OUT.mkdir(exist_ok=True)
     game = source("world.html").replace("__ENGINE__", source("engine.js"))
     world = source("world.js")

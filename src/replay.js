@@ -10,7 +10,10 @@ const depthPeers=new Map();
 for(const c of all){if(!depthPeers.has(c.depth))depthPeers.set(c.depth,[]);depthPeers.get(c.depth).push(c.id);}
 const offsets=new Map();
 for(const ids of depthPeers.values())ids.sort().forEach((id,i)=>offsets.set(id,ids.length===1?0:.8*(i/(ids.length-1)-.5)));
-const familyColors={Indole:'#7c3aed','Azaindole · [3,2-b]':'#2563eb','Azaindole · [2,3-b]':'#0891b2','Azaindole · [2,3-c]':'#0d9488','Azaindole · [3,2-c]':'#be185d',Indolizine:'#d97706',Pyrrolopyridazine:'#92400e',Acylguanidine:'#64748b'};
+const familyColors={
+ 'Stage 174.1':'#7c3aed','Stage 169.2':'#2563eb','Stage 185.2':'#0891b2',
+ 'Stage 189.1':'#0d9488',Benzamides:'#b45309',Nicotinamides:'#4f65a5',
+ Indole:'#7c3aed','Azaindole · [3,2-b]':'#2563eb','Azaindole · [2,3-b]':'#0891b2','Azaindole · [2,3-c]':'#0d9488','Azaindole · [3,2-c]':'#be185d',Indolizine:'#d97706',Pyrrolopyridazine:'#92400e',Acylguanidine:'#64748b'};
 const num=(v,places=1)=>Number(v.toFixed(places)).toString();
 const mol=id=>D.molecules[id]?.svg||'<span class="emptyDrawing">Drawing unavailable</span>';
 let path=D.movie?'movie':'hindsight',view='brain',frameIndex=0,focus=null,panelId=null,timer=null,chartWidth=0;
@@ -297,7 +300,14 @@ if(D.movie){
  window.addEventListener('message',e=>{
   if(e.source!==parent||e.data?.type!=='brain-frame')return;
   const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=[e.data.focus];
-  go(i);document.body.dataset.tick=e.data.tick;
+  go(i);
+  const {phase,delta}=e.data;document.body.dataset.phase=phase;
+  for(const [id,amount,prefix] of [['money',delta.money,'+$'],['queries',delta.queries,'+'],['cost',delta.steps,'+']]){
+   const el=$(id);
+   if((phase==='pop'||phase==='settled')&&amount)el.dataset.gain=prefix+amount;
+   else delete el.dataset.gain;
+  }
+  document.body.dataset.tick=e.data.tick;
   parent.postMessage({type:'painted',side:'brain',tick:e.data.tick},'*');
  });
  parent.postMessage({type:'loaded',side:'brain'},'*');

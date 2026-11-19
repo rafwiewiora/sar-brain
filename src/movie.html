@@ -4,7 +4,7 @@ main{max-width:none;padding:0}header,nav{padding:8px 14px}header{gap:10px}header
 #scene{margin:0;max-width:none;display:grid;grid-template-columns:1fr 1fr;border-block:1px solid #dbe3ef;height:calc(100svh - 135px);min-height:390px}section.pane{position:relative;min-width:0;overflow:hidden;background:white}section.pane+section{border-left:2px solid #cbd5e1}.pane iframe{position:absolute;top:0;left:0;transform-origin:top left;border:0;background:white}body{overflow-x:hidden}nav{border:0}.pane:fullscreen iframe{background:white}
 @media(max-width:740px){#scene{display:flex;flex-direction:column;height:auto}.pane{height:75vw;min-height:300px}.pane+section.pane{border-left:0;border-top:2px solid #cbd5e1}}@media(min-width:741px) and (max-width:1100px){#scene{height:calc(100svh - 170px)}}
 .paneLabel{height:25px;font:600 12px/24px system-ui;padding:0 14px;color:#243853;border-bottom:1px solid #dbe3ef;background:#f8fafc}.paneLabel span{font-weight:400;color:#52647c;margin-left:8px}.pane iframe{top:25px}</style><main><header><strong>SAR Brain</strong><label>Campaign <select id="target"></select></label><label>Strategy <select id="policy"></select></label><label id="routeLabel" hidden>Oracle route <select id="route"><option value="fep">Shortest FEP path</option><option value="direct">Direct synthesis</option></select></label><label id="cutLabel">LoMap ≥ <select id="cut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label id="errorLabel">Difficulty <select id="error"><option value="ideal">Ideal (0 error)</option><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><a id="storyLink">Story slides</a><a id="filmLink" href="RENIN_strategy_movie.mp4">RENIN film</a><a id="boardLink" href="medicinal_chemistry_world_map.html">Play the board</a></header>
-<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Before the move</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>After the move</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
+<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Selected action</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>Recorded state</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
 <script id="data" type="application/json">__DATA__</script><script>__SCENE__
 const data=JSON.parse(document.querySelector('#data').textContent),$=id=>document.getElementById(id);
 let index=0,timer=null, projection,liveLevel,generation=0,tick=0,ready=new Set(),painted=new Set();
@@ -17,13 +17,27 @@ function fit(){
 }
 new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit);
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
+let phase='settled',phaseTimers=[];
+function duration(){
+ return Math.max(1.05,projection.D.paths.movie[index].seconds??2.6);
+}
+const moments=[['aim',0],['press',.17],['pop',.39],['settled',.65]];
+function setPhase(value){
+ phase=value;tick++;painted.clear();delete document.body.dataset.ready;sync();
+}
 function sync(){
  if(!projection||ready.size<2)return;
- const f=run().frames[index],n=projection.node($('focus').value),intent=f.action==='open'?'':f.action;
- const before=projection.states[Math.max(0,index-1)];
- put('board',{type:'board-frame',tick,focus:n,f:before,info:projection.D.paths.movie[index].caption,
-   playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
- put('brain',{type:'brain-frame',index,tick,focus:projection.cid(n)});
+ const f=run().frames[index],intent=f.action==='open'?'':f.action;
+ const after=phase==='pop'||phase==='settled',prior=Math.max(0,index-1),at=after?index:prior;
+ const old=run().frames[prior],dq=f.queries-old.queries,ds=f.spent-old.spent;
+ const delta={queries:dq,steps:ds,money:dq+ds};
+ const focus=projection.node($('focus').value),beat=projection.D.paths.movie[index];
+ const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
+   {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
+ put('board',{type:'board-frame',tick,phase,delta,pair,focus,f:projection.states[at],
+   info:after?beat.caption:'',playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
+ const priorTargets=run().frames[at].targets;
+ put('brain',{type:'brain-frame',index:at,tick,phase,delta,focus:projection.cid(after?focus:priorTargets[priorTargets.length-1])});
 }
 window.addEventListener('message',e=>{
  const side=['board','brain'].find(k=>e.source===frameEl(k).contentWindow);if(!side)return;
@@ -46,7 +60,12 @@ function show(i,keep=false){
  if(!keep){options($('focus'),f.targets.map(n=>[n,b.products[n].name]));$('focus').value=f.targets.reduce((a,c)=>(f.action==='query'?(f.forecasts?.[a]??b.products[a].p)>(f.forecasts?.[c]??b.products[c].p):b.products[a].p>b.products[c].p)?a:c);}
  const beat=projection.D.paths.movie[index];
  if(!keep&&beat.beat==='prediction')$('focus').value=projection.node(beat.candidate);
- tick++;painted.clear();delete document.body.dataset.ready;sync();
+ phaseTimers.forEach(clearTimeout);phaseTimers=[];
+ const animated=index>0&&!keep;
+ setPhase(animated?'aim':'settled');
+ if(animated&&!window.capturePhases){
+  for(const [name,fraction] of moments.slice(1))phaseTimers.push(setTimeout(()=>setPhase(name),duration()*1000*fraction));
+ }
  $('count').textContent=(index+1)+' / '+r.frames.length;$('scrub').max=r.frames.length-1;$('scrub').value=index;
  $('prev').disabled=index===0;$('next').disabled=index===r.frames.length-1;if($('next').disabled)stop();
  $('rule').textContent=r.rule+(index===r.frames.length-1?'  '+(r.end||(Math.max(...f.made.map(n=>b.products[n].p))===Math.max(...Object.values(b.products).map(x=>x.p))?'Winner assayed.':'No eligible move remains.')):'');
@@ -93,7 +112,7 @@ $('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$
 function step(i){stop();show(i);}
 $('prev').onclick=()=>step(index-1);$('next').onclick=()=>step(index+1);$('scrub').oninput=e=>step(+e.target.value);
 $('play').onclick=()=>{if(timer){stop();return;}if(index===run().frames.length-1)show(0);function advance(){
-  timer=setTimeout(()=>{show(index+1);if(timer)advance();},(projection.D.paths.movie[index].seconds??2.6)*1000);
+  timer=setTimeout(()=>{show(index+1);if(timer)advance();},duration()*1000);
  }advance();$('play').textContent='Pause';};
 document.addEventListener('keydown',e=>{if(['SELECT','INPUT','BUTTON','A'].includes(e.target.tagName))return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();step(index+(e.key==='ArrowRight'?1:-1));}});
 </script></html>
