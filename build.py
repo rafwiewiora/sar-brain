@@ -26,14 +26,14 @@ def build():
         for field in datasets:
             datasets[field][key] = campaign[field]
 
-    datasets["boards"]["ABL1"]["comparisonDrawings"] = {
-        "m_307314": source("abl-ex171.svg"),
-        "m_307318": source("abl-ex175.svg"),
-    }
-    renin_board = datasets["boards"]["RENIN"]
-    renin_board["platformReaction"] = source("renin-i5-step.svg")
-    renin_board["reuseDrawings"] = [source("renin-i5-before-reuse.svg"), source("renin-121-after-reuse.svg")]
-    renin_board["fepPairDrawings"] = [source("renin-fep-239.svg"), source("renin-fep-270.svg")]
+    evidence = json.loads((ROOT / "data/patents/story_evidence.json").read_text())
+    for key, level in datasets["boards"].items():
+        notes = evidence.get(key, {})
+        for prep in notes.get("preparations", {}).values():
+            prep["drawing"] = source(prep["drawing"])
+        for pair in notes.get("pairs", []):
+            pair["drawings"] = [source(filename) for filename in pair["drawings"]]
+        level["storyEvidence"] = notes
     OUT.mkdir(exist_ok=True)
     game = source("world.html").replace("__ENGINE__", source("engine.js"))
     world = source("world.js")
@@ -49,14 +49,17 @@ def build():
     logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "native_movie.js", "story_cards.js"))
     story_logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "story_cards.js", "story.js"))
     for key, level in datasets["boards"].items():
+        with gzip.open(ROOT / "data" / "rank-comparison" / (key + ".json.gz"), "rt") as stream:
+            level["rankStructures"] = json.load(stream)
+        precursors = {n for stage in level["stages"] for n in level["rx"].get(stage, {}).get("inputs", [])}
+        molecules = datasets["native"][key]["molecules"]
+        level["precursorDrawings"] = {n: molecules[n]["svg"] for n in sorted(precursors)
+                                      if n not in level["drawings"] and n in molecules}
         story_data = {"board": level, "draws": datasets["draws"][key]}
         story = source("story.html").replace("__CARD_CSS__", source("story_cards.css")).replace("__TARGET__", key).replace("__DATA__", inline_json(story_data)).replace("__LOGIC__", story_logic)
         (OUT / (key + "_intro.html")).write_text(story, encoding="utf-8")
     renin = datasets["native"]["RENIN"]
     renin["openingInventory"] = renin.pop("archivedPaths")["forward"][0]["inventory"]
-    for key, level in datasets["boards"].items():
-        with gzip.open(ROOT / "data" / "rank-comparison" / (key + ".json.gz"), "rt") as stream:
-            level["rankStructures"] = json.load(stream)
     movie = source("movie.html").replace("__CARD_CSS__", source("story_cards.css")).replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
     (OUT / "strategy_movie.html").write_text(movie, encoding="utf-8")
     ranks = "strategy_movie.html#RENIN/hard/3/0.80/ranks"

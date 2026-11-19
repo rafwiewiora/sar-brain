@@ -1,5 +1,5 @@
 // Translate one saved sequence of decisions into the board and the SAR Brain.
-function project(key,level,run,base,ideal){
+function project(key,level,run,base,ideal,narration){
  const D={...base,paths:{},reactions:{...base.reactions},panels:[...base.panels]};
  const byNode=Object.fromEntries(Object.values(D.compounds).map(c=>[c.node,c.id]));
  const cid=n=>byNode[n]||n, node=n=>D.compounds[n]?.node||n;
@@ -52,25 +52,17 @@ function project(key,level,run,base,ideal){
   states.push({inventory:[...new Set([...inv,...made])],spent:raw.spent,queries:raw.queries,forecasts:estimates,parents,history:[...history],quotes:Object.fromEntries(Object.entries(frame.quotes).map(([id,v])=>[node(id),v]))});
   (D.paths.movie??=[]).push(frame);previousMade=new Set(made);
  }
- if(key==='ABL1'&&run.frames.length>1){
-  const final=run.frames.at(-1),winner=node(base.winner),parent=final.parents[winner];
-  const prediction=run.frames.findIndex(f=>f.action==='query'&&f.targets.includes(winner));
-  const confirmation=run.frames.findIndex(f=>f.action==='make'&&f.targets.includes(winner));
-  const neighbors=new Set(level.edges.filter(([a,b])=>a===winner||b===winner).map(([a,b])=>a===winner?b:a));
-  const unlock=run.frames.findIndex(f=>f.made.some(n=>neighbors.has(n)));
-  if(parent&&prediction>0&&confirmation>prediction){
-   const firstRef=run.frames[unlock]?.made.find(n=>neighbors.has(n));
-   const beats=D.paths.movie, label=n=>level.products[n].name;
-   const nm=p=>Number((10**(9-p)).toPrecision(2))+' nM';
-   function beat(index,kind,title,ref){
-    Object.assign(beats[index],{beat:kind,caption:title,reference:cid(ref),candidate:cid(winner)});
+ if(narration){
+  const {stories,winner,name,activity}=narration;
+  for(const [i,s] of stories.entries()){
+   const beat=D.paths.movie[i],f=run.frames[i];
+   if(s.kind==='make'&&s.unlocked.includes(winner)){
+    Object.assign(beat,{beat:'unlock',reference:cid(s.id),candidate:cid(winner),caption:name(s.id)+' opens an FEP link to '+name(winner)+'.'});
+   }else if(s.kind==='query'){
+    Object.assign(beat,{beat:'prediction',reference:cid(s.reference),candidate:cid(s.candidate),caption:s.card[0]+'.'});
+   }else if(s.kind==='make'&&f.parents[s.id]){
+    Object.assign(beat,{beat:'assay',reference:cid(f.parents[s.id]),candidate:cid(s.id),caption:name(s.id)+' measures '+activity(s.id)+'.'});
    }
-   if(unlock>0&&unlock<prediction)beat(unlock,'unlock',label(firstRef)+' is assayed. '+label(winner)+' is now within one FEP move.',firstRef);
-   beat(prediction,'prediction',label(parent)+' → '+label(winner)+' · FEP predicts '+nm(final.forecasts[winner])+'.',parent);
-   beat(confirmation,'assay',label(winner)+' assayed at '+nm(level.products[winner].p)+' · campaign best.',parent);
-   beats.forEach((frame,i)=>{
-    frame.seconds=frame.beat?3.8:i===0||i===1?1.8:.62;
-   });
   }
  }
  D.startingReferences=opening.map(cid);

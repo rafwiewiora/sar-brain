@@ -37,19 +37,6 @@ new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
 let phase='settled',inspected=false;
 let playing=false,segment='intro',remaining=0,deadline=0,deck=null;
-// Narration belongs to the published RENIN replay and its paired SAR comparison.
-const reninStory = [
- {action:'open',after:['Find a 1 nM renin inhibitor','Start with 15 assays. Each new synthesis step and each simulated FEP prediction costs $1.']},
- {action:'query',count:5,before:['Which molecules look worth making?','The agent can predict five neighbors of its measured compounds. Other candidates keep their SAR estimates.'],after:['Five predictions change the shortlist','CPD 177 rises to first. The agent commits to two compounds in this batch.']},
- {action:'make',name:'CPD 177',before:['Test the first prediction','CPD 177 ranks first with FEP. Preparing and assaying it takes nine synthesis steps.'],after:['The first prediction is too optimistic','FEP predicted 78 nM for CPD 177. The assay gives 513 nM.'],focus:'assay',tone:'caution'},
- {action:'make',name:'CPD 121',before:['The first synthesis also made an intermediate','Reusing it cuts the price of CPD 121 from nine steps to two.'],after:['Two more steps buy a stronger compound','CPD 121 measures 115 nM. Its batch partner already paid for the shared chemistry.'],focus:'price'},
- {action:'query',count:19,before:['New references extend FEP’s reach','The two assays make 19 more compounds eligible for prediction.'],after:['Choose the next pair','Using the new predictions and current synthesis prices, the agent selects CPD 223 and CPD 239.']},
- {action:'make',name:'CPD 223',before:['Test the next prediction','CPD 223 takes two steps from the current stock.'],after:['CPD 223 sets a new best','Its measured potency is 6 nM. One more compound is already committed in this batch.'],focus:'assay'},
- {action:'make',name:'CPD 239',before:['Make the second compound in the batch','CPD 239 also takes two synthesis steps. Its assay will make it available as an FEP reference.'],after:['A weaker compound opens the decisive link','At 9 nM, CPD 239 trails the 6 nM lead. It gives the agent its first eligible FEP link to CPD 270.'],focus:'link'},
- {action:'query',count:1,before:['One new prediction is available','CPD 270 ranks eighth under the active strategy. The agent can now query it from CPD 239.'],after:['One prediction changes the decision','FEP predicts 1.01 nM. CPD 270 moves from eighth to first. Both SAR columns still rank it fourteenth.'],focus:'rank'},
- {action:'make',name:'CPD 270',before:['Spend two steps to test CPD 270','The 1.01 nM value is a noisy prediction. The agent must make the compound and assay it.'],after:['The assay confirms 1 nM','This replay used 17 synthesis steps versus 21 for SAR + cost (19% fewer). With 25 FEP queries, it spent $42 versus $21.'],focus:'assay'}
-];
-let narrated=false;
 function addedStages(frameIndex){
  if(!frameIndex)return [];
  const f=run().frames[frameIndex],before=new Set(run().frames[frameIndex-1].stock);
@@ -89,24 +76,12 @@ function paintFrame(index,phase,holding){
  const focus=holding?projection.node(beat.candidate||f.targets.at(-1)):projection.node($('focus').value);
  const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
    {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
- const cue=narrated?reninStory[index]:null;
- const story=cue&&$('withSlides').checked?{lines:after?cue.after:cue.before,focus:after?cue.focus:undefined,tone:cue.tone}:null;
- const decision={story,ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
-   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:1250/PLAYBACK_RATE,addedStages:addedStages(index),stock:f.stock,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
- if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
-  const priorSet=new Set(old.made),now=new Set(f.made);
-  const reachable=new Set();
-  for(const [a,b] of liveLevel.edges){if(priorSet.has(a))reachable.add(b);if(priorSet.has(b))reachable.add(a);}
-  const newly=new Set();
-  for(const [a,b] of liveLevel.edges){
-   if(now.has(a)&&!now.has(b)&&!reachable.has(b))newly.add(b);
-   if(now.has(b)&&!now.has(a)&&!reachable.has(a))newly.add(a);
-  }
-  decision.unlocked=[...newly];
- }
+ const scene=deck.stories[index];
+ const decision={ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
+   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:1250/PLAYBACK_RATE,addedStages:addedStages(index),stock:f.stock,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:scene.unlocked};
  put('board',{type:'board-frame',index,tick,phase,delta,pair,focus,decision,inspected,f:projection.states[phase==='charge'?prior:at],cash:f.spent+f.queries,
    info:after?beat.caption:'',playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
- put('brain',{type:'brain-frame',transport:transportState(),autoView:narrated&&$('withSlides').checked?(index===2||index===3?'retro':'brain'):null,watchSquare:narrated&&$('withSlides').checked&&index===2?'CPD_121':null,moveIndex:index,index:at,tick,phase:phase==='charge'?'pop':after?'settled':phase,delta,focus:projection.cid(after?focus:old.targets[old.targets.length-1])});
+ put('brain',{type:'brain-frame',transport:transportState(),autoView:$('withSlides').checked?scene.view:null,watchSquare:$('withSlides').checked&&scene.watch?projection.cid(scene.watch):null,moveIndex:index,index:at,tick,phase:phase==='charge'?'pop':after?'settled':phase,delta,focus:projection.cid(after?focus:old.targets[old.targets.length-1])});
 }
 window.addEventListener('message',e=>{
  const side=['board','brain'].find(k=>e.source===frameEl(k).contentWindow);if(!side)return;
@@ -169,23 +144,6 @@ function setPlaying(value){
  for(const side of ready)put(side,{type:'clock',paused:!playing,transport:transportState()});
  displayTime();startClock();
 }
-function genericCard(f){
- const b=board(),previous=run().frames[Math.max(0,index-1)];
- const title=f.action==='open'?'Start with '+f.made.length+' measured references':f.action==='query'?'Predict '+f.targets.length+' eligible compounds':'Make and assay '+b.products[f.targets[0]].name;
- const ids=f.targets.slice(0,3),visual='<div class="gallery">'+ids.map(n=>'<div class="mol">'+b.drawings[n]+'<b>'+b.products[n].name+'</b></div>').join('')+'</div>';
- const foot=f.action==='make'?(f.spent-previous.spent)+' synthesis steps from current inventory.':f.action==='query'?'One simulated FEP query per eligible compound.':'Opening compounds and their assays are supplied.';
- return [title,visual,foot];
-}
-function cardForStep(){
- const f=run().frames[index];
- if(!deck)return genericCard(f);
- const slide=narrated?[1,2,3,4,null,null,5,6,7][index]:deck.slideForFrame.get(f);
- if(slide===undefined)return genericCard(f);
- if(narrated&&index===0)return [deck.slides[slide][0],deck.slides[slide][1],reninStory[0].after[1]+' The goal is a 1 nM inhibitor.'];
- if(slide!==null)return deck.slides[slide];
- if(f.action==='query')return [reninStory[index].before[0],deck.ledger([[f.targets.length,'new FEP queries'],['$'+(f.queries-run().frames[index-1].queries),'cost of this screen']]),reninStory[index].before[1]];
- return [reninStory[index].before[0],deck.gallery([deck.mol(f.targets[0],'Selected for assay')]),reninStory[index].before[1]];
-}
 function layoutSheet(){
  const r=$('scene').getBoundingClientRect();
  document.documentElement.style.setProperty('--sheet-top',Math.max(0,r.top)+'px');
@@ -215,7 +173,7 @@ function showVictory(){
  const potency=Number((10**(9-b.products[id].p)).toPrecision(3))+' nM';
  const detail=b.products[id].name+' · '+potency+' measured';
  const costs=f.spent+' synthesis steps · '+f.queries+' FEP queries · $'+(f.spent+f.queries)+' spent';
- showCard(['Campaign won',b.drawings[id]+'<h2>'+detail+'</h2>',costs+(narrated?' · 19% fewer synthesis steps than SAR + cost (21 steps).':'')],true);
+ showCard(['Campaign won',b.drawings[id]+'<h2>'+detail+'</h2>',costs+'. '+deck.comparisonNote],true);
  dockResult(true);
 }
 function showComparison(){
@@ -246,7 +204,7 @@ function displayBeat(position){
  if(changedMove)inspected=false;
  remaining=beat.hold||phaseMotion[beat.phase]/PLAYBACK_RATE;
  dockResult(false);$('reveal').hidden=false;$('stepSheet').hidden=true;
- if(segment==='intro')showCard(cardForStep());
+ if(segment==='intro')showCard(deck.stories[index].card);
  if(segment==='outro')showVictory();
  if(segment==='comparison')showComparison();
  setPhase(beat.phase);
@@ -274,12 +232,7 @@ function setup(){
  const summary=usesFep&&error!=='ideal'?data.draws[$('target').value][[i,cutoff,error]]:null;
  const level=summary?sampledLevel(board(),summary.seed):board();
  active=oracle?hindsightReplay(level,cutoff,$('route').value==='direct'):playStrategy(level,moviePolicies[i],cutoff,error);
- narrated=level.key==='RENIN'&&!oracle&&i===3&&cutoff===.8&&error==='hard'&&active.frames.length===reninStory.length&&reninStory.every((cue,j)=>{
-  const frame=active.frames[j];
-  return frame.action===cue.action&&(!cue.name||level.products[frame.targets[0]].name===cue.name)&&(!cue.count||frame.targets.length===cue.count);
- });
- const preset=replayDefaults(level.key);
- deck=!oracle&&i===3&&cutoff===+preset.cut&&error===preset.error?campaignDeck(level,active):null;
+ deck=campaignNarration(level,active,cutoff,usesFep||(oracle&&$('route').value==='fep'));
  const dollars=n=>n===null?'unreached':'$'+n;
  if(summary){
   $('sample').textContent='Median replay · '+dollars(summary.median)+' to hit · 10th–90th percentile '+dollars(summary.low)+'–'+dollars(summary.high)+' · '+summary.wins+'/'+summary.count+' reached the hit. ';
@@ -288,10 +241,11 @@ function setup(){
  }
  const key=$('target').value;
  $('boardLink').href='medicinal_chemistry_world_map.html#'+key+'/'+(oracle||error==='ideal'?replayDefaults(key).error:error)+'/'+$('cut').value;
- $('storyLink').href=key+'_intro.html';
+ const settings=new URLSearchParams({policy:$('policy').value,cut:$('cut').value,error,route:$('route').value});
+ $('storyLink').href=key+'_intro.html?'+settings;
 
  liveLevel={...level,edges:level.edges.filter(e=>e[2]>=cutoff-1e-12)};
- projection=project(key,liveLevel,active,data.native[key],oracle||error==='ideal');
+ projection=project(key,liveLevel,active,data.native[key],oracle||error==='ideal',deck);
  generation++;ready.clear();$('game').srcdoc=embed(data.gameTemplate,'__LEVELS__',{[key]:liveLevel});
  $('brainPane').srcdoc=embed(data.brainTemplate,'__DEMO_DATA__',projection.D);fit();
  $('cutLabel').hidden=!(usesFep||(oracle&&$('route').value==='fep'));$('errorLabel').hidden=!usesFep;$('routeLabel').hidden=!oracle;$('focus').replaceChildren();makeTimeline();displayBeat(0);
@@ -310,6 +264,7 @@ if(['ideal',...Object.keys(gameErrorScale)].includes(modeKey))$('error').value=m
 if(policyKey==='hindsight'||policyKey==='oracle')$('policy').value='oracle';
 else if(['0','1','2','3'].includes(policyKey))$('policy').value=policyKey;
 if(['0.60','0.70','0.80','0.90'].includes(cutKey))$('cut').value=cutKey;
+if(isOracle()&&entryKey==='direct')$('route').value='direct';
 chooseTarget();
 if(entryKey==='ranks'||entryKey==='choice'){
  const firstPick=run().frames.findIndex(f=>f.ranking);

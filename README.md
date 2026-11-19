@@ -2,6 +2,8 @@
 
 Play a medicinal chemistry campaign using structures, assay measurements and synthesis routes. Choose a compound, buy an FEP prediction or prepare an intermediate. Making an analog reveals its assay and keeps the intermediates for subsequent syntheses. The goal is to assay the strongest compound in the campaign at the lowest total spend.
 
+[Read the introduction to the medicinal chemistry environment](docs/preprint.md)
+
 ## Run locally
 
 From a clone, run `python3 build.py` (Python 3.8 or later, standard library only). Open **dist/medicinal_chemistry_world_map.html** to play, or **dist/strategy_movie.html** to watch the game and the SAR Brain advance together. Both pages work offline.
@@ -14,9 +16,11 @@ From a clone, run `python3 build.py` (Python 3.8 or later, standard library only
 | ABL1 | 79 compounds | No |
 | S1P1 | 74 compounds | No |
 
-Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a web replay and a separate deck. The replay and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.80 with Hard error for RENIN and LoMap 0.60 with Medium error for ABL1 and S1P1. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
+Each target has a web replay, an interactive story deck and a PDF of its default story. RENIN opens at LoMap 0.80 with Hard error. ABL1 and S1P1 open at 0.60 with Medium error. All three default to **FEP with SAR fallback + cost**. The final slide compares four strategies. Dots are medians, and whiskers span the middle 50% for the selected metric. The replay also reports the 10th–90th percentile range for spend.
 
-The interactive viewer plays 34 forward settings per campaign (102 across the three campaigns). Two SAR strategies each have one deterministic run. Each of the two FEP-with-SAR-fallback strategies supports four LoMap cutoffs (0.60, 0.70, 0.80, 0.90) and four error settings (Ideal, Easy, Medium, Hard). The hindsight control is additional. The viewer builds these replays on selection. The standalone MP4 files in `media/` are historical recordings.
+Each campaign supports 34 forward settings. Two SAR strategies each have one deterministic run. Each FEP strategy supports four LoMap cutoffs (0.60, 0.70, 0.80, 0.90) and four error settings (Ideal, Easy, Medium, Hard). The hindsight oracle is additional. **Story slides** opens the selected replay’s milestones. Both views derive scenes in the browser from the same trajectory. A change in retained inventory can reveal a recorded preparation, a concrete price reduction or a later reuse. A newly eligible FEP neighbor, purchased prediction and measured assay are distinct events. The deck identifies the eventual winner retrospectively. The strategy itself only sees information available at each move.
+
+Verified reaction schemes and annotated structure pairs can be registered once by molecular ID in `data/patents/story_evidence.json`. Other platforms use the recorded reaction inputs and intermediate structure. No per-setting movie or slide sequence is stored.
 
 Open `dist/strategy_movie.html` to open the replay at the first slide. **Step slides** introduces each move before the live rankings, inventory, and counters update. The viewer opens paused. **Play** starts the countdown on the current slide. Each slide lasts 10 seconds. The button press, cash update and rank animations run at 75% speed. The 5-second countdown appears only on the completed move’s summary immediately before the next slide. **Play this move** skips the rest of the slide and starts the action. Use **Pause** to hold your place, the arrows to move one beat in either direction, or the slider to jump by whole moves. The default RENIN replay and its separate deck share slide content, including the patent’s preparation of the retained azaindole chloride. During the first synthesis, the live squares show the price of CPD 121 falling from nine steps to two. Other replay settings show slide previews drawn from their own actions.
 
@@ -58,6 +62,6 @@ Run `node scripts/summarize.cjs` before rebuilding if a change affects the simul
 - `src/` contains the game engine, decision rules and viewer sources.
 - `data/` contains frozen campaign inputs, structures and archived replay records. The application can be rebuilt without rerunning extraction or mapping.
 - `scripts/rank_structures.py` uses RDKit and the frozen SMILES to rebuild the scaffold-aligned comparison drawings in `data/rank-comparison/`.
-- `media/` contains the separate slide PDFs and historical recordings. The web build copies the PDFs.
+- `media/` contains the separate slide PDFs for the campaign defaults. The web build copies the PDFs.
 
 [Future ideas](FUTURE_IDEAS.md)

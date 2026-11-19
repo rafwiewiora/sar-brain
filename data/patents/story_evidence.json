@@ -1,0 +1,50 @@
+{
+  "RENIN": {
+    "preparations": {
+      "m_3ce6dce6f7fc": {
+        "drawing": "renin-i5-step.svg",
+        "source": "https://patents.google.com/patent/US8580813B2/en#:~:text=Step5%3A%204-(2-Chloro",
+        "citation": "Patent \u00b7 Example 1, step 5"
+      }
+    },
+    "pairs": [
+      {
+        "ids": [
+          "m_3ce6dce6f7fc",
+          "m_118e6370d769"
+        ],
+        "drawings": [
+          "renin-i5-before-reuse.svg",
+          "renin-121-after-reuse.svg"
+        ],
+        "note": "Peach marks the departing groups. Green marks the added 2-methylbenzyl group."
+      },
+      {
+        "ids": [
+          "m_3cc8afac850d",
+          "m_26aee314ee17"
+        ],
+        "drawings": [
+          "renin-fep-239.svg",
+          "renin-fep-270.svg"
+        ],
+        "note": "The marked substituents differ between these analogs."
+      }
+    ]
+  },
+  "ABL1": {
+    "pairs": [
+      {
+        "ids": [
+          "m_307314",
+          "m_307318"
+        ],
+        "drawings": [
+          "abl-ex171.svg",
+          "abl-ex175.svg"
+        ],
+        "note": "The marked substituents are ring\u2013OH and ring\u2013CH\u2082OH."
+      }
+    ]
+  }
+}

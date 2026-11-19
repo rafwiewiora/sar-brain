@@ -66,11 +66,11 @@ render=function(){
  }
  document.querySelector('.pairCard')?.remove();
  if(pair){
-  const matched=level.comparisonDrawings?.[pair.from]&&level.comparisonDrawings?.[pair.to];
-  const drawings=matched?level.comparisonDrawings:level.drawings;
+  const matched=level.storyEvidence?.pairs?.find(entry=>entry.ids.includes(pair.from)&&entry.ids.includes(pair.to));
+  const drawings=matched?Object.fromEntries(matched.ids.map((n,i)=>[n,matched.drawings[i]])):level.drawings;
   const molecule=(n,label)=>'<div>'+drawings[n]+'<strong>'+esc(name(n))+'</strong><small>'+label+'</small></div>';
   const box=document.createElement('div');box.className='pairCard';
-  box.innerHTML='<h3>'+(pair.measured?'Assay confirmed':'Reference → FEP prediction')+'</h3><div class="pairMols">'+molecule(pair.from,'Measured · '+nm(level.products[pair.from].p))+'<b>→</b>'+molecule(pair.to,(pair.measured?'Measured · ':'Predicted · ')+nm(pair.measured?level.products[pair.to].p:g.forecasts.get(pair.to).p))+'</div>'+(matched?'<p class="sub">Ring–OH → ring–CH₂OH</p>':'');
+  box.innerHTML='<h3>'+(pair.measured?'Assay confirmed':'Reference → FEP prediction')+'</h3><div class="pairMols">'+molecule(pair.from,'Measured · '+nm(level.products[pair.from].p))+'<b>→</b>'+molecule(pair.to,(pair.measured?'Measured · ':'Predicted · ')+nm(pair.measured?level.products[pair.to].p:g.forecasts.get(pair.to).p))+'</div>'+(matched?'<p class="sub">'+esc(matched.note)+'</p>':'');
   $('map').parentElement.append(box);
  }
 };

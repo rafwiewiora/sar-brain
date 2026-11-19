@@ -1,57 +1,140 @@
-function campaignDeck(B,run){
-const esc=x=>String(x).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-const name=id=>B.products[id]?.name||B.stages[id], p=id=>B.products[id].p;
-const nm=value=>Number((10**(9-value)).toPrecision(3)).toLocaleString('en-US',{maximumFractionDigits:3})+' nM';
-const value=id=>nm(p(id));
-const preset=replayDefaults(B.key);
-
-const frames=run.frames,initial=frames[0],final=frames.at(-1),makes=frames.filter(f=>f.action==='make');
-const winner=final.made.reduce((a,b)=>p(a)>p(b)?a:b),first=makes[0],firstId=first.targets[0];
-const firstQuery=frames.find(f=>f.action==='query'),ref=final.parents[winner],discount=makes.find(f=>f.changes[winner]);
-const oracle=hindsightReplay(B,+preset.cut);
-const winRoute=B.routes[winner],discountIndex=frames.indexOf(discount);
-const stage=(discount?winRoute.filter(n=>B.stages[n]&&discount.stock.includes(n)&&!frames[discountIndex-1].stock.includes(n)):winRoute.filter(n=>B.stages[n])).at(-1);
-const mol=(id,note='',drawing=B.drawings[id])=>'<div class="mol">'+drawing+'<b>'+esc(name(id))+'</b><small>'+esc(note)+'</small></div>';
-const gallery=(items,arrows=false)=>'<div class="gallery">'+items.join(arrows?'<span class="arrow">→</span>':'')+'</div>';
-const ledger=items=>'<div class="ledger">'+items.map(([n,label])=>'<div><b>'+esc(n)+'</b>'+esc(label)+'</div>').join('')+'</div>';
-const bestStart=initial.made.slice().sort((a,b)=>p(b)-p(a));
-const refMake=makes.find(f=>f.targets.includes(ref));
-const predictionFrame=frames.find(f=>f.action==='query'&&f.targets.includes(winner));
-const wMake=makes.find(f=>f.made.includes(winner)), winPrice=wMake?.amounts[winner];
-const startPrice=campaign(B).price(winner);
-const familySize=stage?B.order.filter(n=>B.routes[n].includes(stage)).length:0;
-const slides=[
- ['Find the strongest '+B.key+' compound',gallery([mol(bestStart[0],value(bestStart[0])+' · best starting assay'),mol(winner,value(winner)+' · campaign target')]),'The replay sees an unmade compound’s assay only after it is made.'],
- [initial.made.length+' measured compounds supply the opening references',gallery(bestStart.slice(0,3).map(n=>mol(n,value(n)))),initial.made.length>3?'The three strongest opening assays are shown.':'The same opening inventory is supplied to all four strategies.'],
- ['The first screen buys '+firstQuery.targets.length+' local FEP predictions',ledger([[B.order.length-initial.made.length,'unmade candidates'],[firstQuery.targets.length,'reachable from stock'],['$'+firstQuery.queries,'spent on predictions']]),'One query costs $1. The strategy uses SAR for candidates outside the FEP neighborhood.'],
- ['The first synthesis is '+name(firstId),gallery([mol(firstId,'Assay '+value(firstId))]),'Chosen using '+first.decision.model+' · '+first.amounts[firstId]+' synthesis steps from starting stock.'],
- discount?[name(discount.targets[0])+' makes the winner cheaper to synthesize',gallery([mol(discount.targets[0],'Product made · '+value(discount.targets[0])),...(stage?[mol(stage,'Retained while making '+name(discount.targets[0]))]:[]),mol(winner,discount.changes[winner].join(' → ')+' remaining steps')]),'A shared preparation is now in inventory.']:
- ['The winner’s route passes through a reusable intermediate',gallery([mol(stage,familySize+' candidate routes use it'),mol(winner,startPrice+' steps from the opening inventory')],true),'This replay reaches the winner on its first synthesis.'],
- [refMake?name(ref)+' becomes the reference after a '+refMake.decision.model+' selection':name(ref)+' is already available as a reference',gallery([mol(ref,'Measured '+value(ref)),mol(winner,'FEP neighbor')],true),refMake?'The assay opens a new set of one-hop predictions.':'The starting reference can support this comparison before any new synthesis.'],
- ['FEP predicts '+nm(final.forecasts[winner])+' for '+name(winner),gallery([mol(ref,'Reference · '+value(ref)),mol(winner,'Predicted · '+nm(final.forecasts[winner]))],true),'Prediction purchased in round '+predictionFrame.batch+' · one fixed error draw per transformation.'],
- ['The assay confirms '+value(winner)+' for '+name(winner),gallery([mol(winner,'Measured '+value(winner))]),'Synthesis '+(makes.indexOf(wMake)+1)+' of '+makes.length+' · '+winPrice+' additional steps on this move.'],
- ['The campaign spends $'+run.total+' to confirm the hit',ledger([['$'+run.steps,'synthesis'],['$'+final.queries,'FEP queries'],['$'+run.total,'total spent']]),makes.length+' new synthesis decisions · median-spend trajectory among 101 paired error draws.'],
- [oracle.won?'Hindsight reaches the winner in '+oracle.hops+' FEP '+(oracle.hops===1?'hop':'hops'):'The opening FEP network cannot reach the winner',oracle.won?gallery(oracle.path.map((n,i)=>mol(n,i?'Known destination':'Opening reference')),true):gallery([mol(ref,'Reached in the forward run via SAR'),mol(winner,'Known destination')],true),oracle.won?'Oracle path costs $'+oracle.total+' including queries. Direct synthesis with the winner supplied costs $'+oracle.directCost+'.':'At LoMap '+preset.cut+' the winner is in another component. Knowing its identity would allow direct synthesis for $'+oracle.directCost+'.'],
- ['Four strategies, one opening inventory','','']
-];
-
- if(B.key==='RENIN' && stage && B.platformReaction){
-  const next=makes[1].targets[0],change=discount.changes[next];
-  const square='<div class="priceUpdate"><span>'+name(next)+'</span><div class="priceSquare"><b class="oldPrice">'+change[0]+'</b><b class="newPrice">'+change[1]+'</b></div><span>steps from stock</span></div>';
-  slides[3]=['Prepare I5 on the route to '+name(firstId),'<div class="prepScheme">'+B.platformReaction+'</div>'+square,
-   'Green follows Boc-piperazine into I5. Purple marks the new amide bond. <a href="https://patents.google.com/patent/US8580813B2/en#:~:text=Step5%3A%204-(2-Chloro" target="_blank" rel="noopener">Patent · Example 1, step 5 ↗</a>'];
-  slides[4]=['Reuse I5 to make '+name(next)+' in two steps',gallery([mol(stage,'Peach · chloride and Boc removed',B.reuseDrawings[0]),mol(next,'Green · 2-methylbenzyl added. Purple · new C–C bond.',B.reuseDrawings[1])],true),
-   name(firstId)+' measured '+value(firstId)+' against a '+nm(first.decision.estimate)+' prediction. Its route still saved seven synthesis steps on '+name(next)+'.'];
-  if(name(ref)==='CPD 239'&&name(winner)==='CPD 270'){
-   const [left,right]=B.fepPairDrawings;
-   const pair=gallery([mol(ref,'Reference · '+value(ref)+' · Cl in peach',left),mol(winner,'Predicted · '+nm(final.forecasts[winner])+' · Me and F in green',right)],true);
-   slides[5][1]=gallery([mol(ref,'Measured reference · '+value(ref),left),mol(winner,'New FEP neighbor',right)],true);
-   slides[6][1]=pair;
+// Derive chemistry scenes from the completed simulation. These annotations never enter the policy.
+function campaignNarration(board,run,cutoff,useFep){
+ const {frames}=run,open=frames[0],final=frames.at(-1);
+ const name=n=>board.products[n]?.name||board.stages[n];
+ const potency=n=>Number((10**(9-n)).toPrecision(3)).toLocaleString('en-US',{maximumFractionDigits:4})+' nM';
+ const activity=n=>potency(board.products[n].p);
+ const best=ids=>ids.reduce((a,b)=>board.products[b].p>board.products[a].p?b:a);
+ const winner=best(run.won?final.made:board.order),opening=campaign(board);
+ const mol=(n,label='',drawing)=>'<div class="mol">'+(drawing||board.drawings[n])+'<b>'+name(n)+'</b><small>'+label+'</small></div>';
+ const gallery=items=>'<div class="gallery">'+items.join('')+'</div>';
+ function pair(a,b,left,right){
+  const ids=[a,b],entry=board.storyEvidence?.pairs?.find(e=>ids.every(n=>e.ids.includes(n)));
+  const rank=ids.map(n=>board.rankStructures?.[n]);
+  let svgs=ids.map(n=>board.drawings[n]),note='';
+  if(entry){
+   svgs=ids.map(n=>entry.drawings[entry.ids.indexOf(n)]);note=entry.note;
+  }else if(rank.every(Boolean)){
+   const keys=[...new Set(rank.flatMap(r=>Object.keys(r.sites)))].filter(k=>rank[0].sites[k]?.[0]!==rank[1].sites[k]?.[0]);
+   svgs=rank.map(r=>r.svg.replace('<!-- END OF HEADER -->','<g fill="#83d7ae" stroke="#83d7ae">'+keys.map(k=>r.sites[k]?.[2]||'').join('')+'</g>'));
+   if(keys.length)note='Green marks the groups that differ.';
+  }
+  return {visual:gallery([mol(a,left,svgs[0]),'<span class="arrow">→</span>',mol(b,right,svgs[1])]),note};
+ }
+ function prep(stage){
+  const record=board.storyEvidence?.preparations?.[stage];
+  if(record)return {visual:'<div class="prepScheme">'+record.drawing+'</div>',note:'<a href="'+record.source+'" target="_blank" rel="noopener">'+record.citation+' ↗</a>'};
+  const rx=board.rx[stage],inputs=(rx?.inputs||[]).map(n=>board.drawings[n]||board.precursorDrawings?.[n]);
+  if(!inputs.length||inputs.some(svg=>!svg))return {visual:gallery([mol(stage,'Retained intermediate')]),note:rx?.name||''};
+  const structures=inputs.map(svg=>'<div class="mol">'+svg+'</div>').join('<span>+</span>');
+  return {visual:gallery([structures,'<span class="arrow">→</span>',mol(stage,rx.name)]),note:''};
+ }
+ const square=(n,change)=>'<div class="priceUpdate"><span>'+name(n)+'</span><div class="priceSquare"><b class="oldPrice">'+change[0]+'</b><b class="newPrice">'+change[1]+'</b></div><span>steps from stock</span></div>';
+ const neighbors=new Map(board.order.map(n=>[n,[]]));
+ if(useFep)for(const [a,b,s] of board.edges)if(s>=cutoff-1e-12){neighbors.get(a).push(b);neighbors.get(b).push(a);}
+ const stories=frames.map((f,i)=>{
+  const prev=frames[Math.max(0,i-1)],id=f.targets[0],added=f.stock.filter(n=>!prev.stock.includes(n));
+  const step={kind:f.action,added,unlocked:[],watch:null,view:'brain',id};
+  if(f.action==='open'){
+   const top=open.made.slice().sort((a,b)=>board.products[b].p-board.products[a].p).slice(0,3);
+   step.card=[open.made.length+' measured compounds supply the opening references',gallery(top.map(n=>mol(n,activity(n)+' measured'))),'Each new synthesis operation and each simulated FEP query costs $1.'];
+  }else if(f.action==='query'){
+   const target=f.targets.includes(winner)?winner:f.targets.reduce((a,b)=>f.forecasts[a]>f.forecasts[b]?a:b);
+   const ref=f.parents[target],p=pair(ref,target,'Measured · '+activity(ref),'Predicted · '+potency(f.forecasts[target]));
+   step.reference=ref;step.candidate=target;
+   const rank=s=>s?.entries.find(e=>e.id===target)?.ranks[s.activeColumn];
+   const before=rank(prev.liveRanks),after=rank(f.liveRanks);
+   const shift=before&&after?' · strategy rank #'+before+' → #'+after:'';
+   step.card=['FEP predicts '+potency(f.forecasts[target])+' for '+name(target),p.visual,'$'+(f.queries-prev.queries)+' for '+f.targets.length+' new '+(f.targets.length===1?'prediction':'predictions')+shift+'. '+p.note];
+  }else{
+   const route=board.routes[id],cost=f.spent-prev.spent;
+   const saved=opening.price(id)-cost,retained=route.filter(n=>prev.stock.includes(n)&&board.stages[n]).at(-1);
+   const candidates=Object.keys(f.changes);
+   const committed=(f.ranking?.shortlisted||[]).filter(n=>candidates.includes(n));
+   // Prefer the next committed batch partner, otherwise the largest evidenced saving.
+   const sorted=candidates.slice().sort((a,b)=>(f.changes[b][0]-f.changes[b][1])-(f.changes[a][0]-f.changes[a][1]));
+   const watch=committed[0]||sorted[0];
+   const stage=added.filter(n=>watch&&board.routes[watch].includes(n)).at(-1)||added.at(-1);
+   const newly=neighbors.get(id).filter(n=>!f.made.includes(n)&&!neighbors.get(n).some(m=>prev.made.includes(m)));
+   step.unlocked=newly;step.reused=retained;step.cost=cost;step.saved=saved;step.watch=watch;step.stage=stage;
+   const prediction=f.decision?.estimate??prev.forecasts[id],model=f.decision?.model||(Number.isFinite(prediction)?'FEP':'');
+   const stronger=board.products[id].p>board.products[best(prev.made)].p;
+   const assay=name(id)+' measured '+activity(id)+(stronger?' (new best)':'')+(model?' · '+model+' predicted '+potency(prediction):'');
+   const growth=newly.length?' · '+newly.length+' newly reachable by FEP':'';
+   const delta=watch?f.changes[watch]:null;
+   const expense=cost+' synthesis '+(cost===1?'step':'steps')+' from current stock';
+   const short=n=>name(n).split(' · ')[0];
+   if(stage){
+    const scheme=prep(stage);
+    step.card=['Prepare '+short(stage)+' on the route to '+name(id),scheme.visual+(watch?square(watch,delta):''),[assay,expense+growth,scheme.note].filter(Boolean).join(' · ')];
+    step.view='retro';
+   }else if(newly.includes(winner)){
+    const p=pair(id,winner,'Measured · '+activity(id),'Newly reachable');
+    step.card=[name(id)+' opens an FEP link to '+name(winner),p.visual,assay+' · '+expense+'. '+p.note];
+   }else if(retained&&saved>0){
+    const p=pair(retained,id,'Already in stock','Measured · '+activity(id));
+    step.card=['Reuse '+short(retained)+' to make '+name(id),p.visual,assay+' · '+opening.price(id)+' steps from opening stock → '+cost+' now. '+p.note];step.view='retro';
+   }else{
+    step.card=['Make and assay '+name(id),gallery([mol(id,activity(id)+' measured')]),assay+' · '+expense+growth];
+   }
+   if(run.won&&i===frames.length-1){
+    // Keep preparation visible if this winning synthesis also introduced a platform.
+    if(!stage)step.card=['The assay confirms '+activity(id)+' for '+name(id),step.card[1],step.card[2]];
+    step.view='brain';
+   }
+  }
+  return step;
+ });
+ let comparisonNote='';
+ if(run.won&&run.method!==moviePolicies[1][1]){
+  const baseline=playStrategy(board,moviePolicies[1],cutoff,'ideal',false);
+  if(baseline.won&&baseline.steps){
+   const percent=Math.round(100*Math.abs(run.steps-baseline.steps)/baseline.steps);
+   comparisonNote=run.steps===baseline.steps?'Same synthesis cost as SAR + cost':percent+'% '+(run.steps<baseline.steps?'fewer':'more')+' synthesis steps than SAR + cost';
+   comparisonNote+=' ('+baseline.steps+' steps, $'+baseline.total+' total).';
   }
  }
- // Several events can coincide in one move. Show the most specific matching slide.
- const slideForFrame=new Map([[initial,1],[firstQuery,2],[first,3],[discount,4],[refMake,5],[predictionFrame,6],[wMake,7]]);
- return {slideForFrame,slides,winner,name,mol,gallery,ledger,run,preset,value};
+ return {stories,winner,activity,name,mol,gallery,pair,comparisonNote};
+}
+function campaignSlides(board,run,narration,cutoff){
+ const {stories,winner,activity,name,mol,gallery,pair,comparisonNote}=narration,final=run.frames.at(-1),start=run.frames[0],bestStart=start.made.reduce((a,b)=>board.products[a].p>board.products[b].p?a:b);
+ const makes=stories.filter(s=>s.kind==='make'),queries=stories.filter(s=>s.kind==='query');
+ const comparison=['Four strategies, one opening inventory','',''];
+ const outcome=[run.won?'The campaign spends $'+run.total+' to confirm the hit':'The winner is unreachable at this cutoff',gallery([mol(run.won?winner:bestStart,run.won?activity(winner)+' measured':'Opening reference')]),run.steps+' synthesis steps · '+final.queries+' FEP queries · $'+run.total+' total. '+comparisonNote];
+ const title=['Find the strongest '+board.key+' compound',gallery([mol(bestStart,'Best starting assay · '+activity(bestStart)),mol(winner,'Campaign target · '+activity(winner))]),'The target is supplied here for the retrospective comparison.'];
+ if(!makes.length)return [title,stories[0].card,outcome,comparison];
+ const oracle=hindsightReplay(board,cutoff);
+ const oracleSlide=[oracle.won?'Hindsight reaches the winner in '+oracle.hops+' FEP '+(oracle.hops===1?'hop':'hops'):'The opening FEP network cannot reach the winner',oracle.won?gallery(oracle.path.map((n,i)=>mol(n,i?'':'Starting reference'))):gallery([mol(winner,'Known destination')]),'Known-winner direct synthesis costs $'+oracle.directCost+(oracle.won?' · shortest FEP path costs $'+oracle.total:' · no eligible path at LoMap '+cutoff.toFixed(2))];
+ // In a longer trajectory, keep the milestones that explain how the winning experiment became possible.
+ const discount=makes.find(s=>s.watch===winner||run.frames[stories.indexOf(s)].changes[winner]);
+ const winningQuery=queries.find(s=>s.candidate===winner);
+ if(winningQuery&&run.won){
+  const platformMove=discount||makes.find(s=>s.stage)||makes.find(s=>s.reused);
+  let platformSlide;
+  if(platformMove){
+   const f=run.frames[stories.indexOf(platformMove)],id=platformMove.stage||platformMove.reused;
+   const beneficiary=f.changes[winner]?winner:platformMove.watch;
+   const visual=[mol(platformMove.id,'Compound made · '+activity(platformMove.id))];
+   if(id)visual.push(mol(id,platformMove.stage?'Prepared on this route':'Used from stock'));
+   if(beneficiary)visual.push(mol(beneficiary,f.changes[beneficiary].join(' → ')+' remaining steps'));
+   platformSlide=[beneficiary?name(platformMove.id)+' lowers the price of '+name(beneficiary):'The route to '+name(platformMove.id)+' uses a shared intermediate',gallery(visual),id?board.order.filter(n=>board.routes[n].includes(id)).length+' candidate routes include '+name(id)+'.':'Shared operations are retained in stock.'];
+  }else{
+   platformSlide=['Price the winning synthesis from current stock',gallery([mol(winner,activity(winner)+' measured')]),makes.at(-1).cost+' operations on the winning move.'];
+  }
+  const ref=winningQuery.reference,refMake=makes.find(s=>s.id===ref);
+  const reference=pair(ref,winner,'Measured · '+activity(ref),'Eligible FEP neighbor');
+  const refSlide=[name(ref)+(refMake?' becomes an assayed FEP reference':' is an opening reference'),reference.visual,'This measured reference supports the purchased prediction for '+name(winner)+'. '+reference.note];
+  const winSlide=['The assay confirms '+activity(winner)+' for '+name(winner),gallery([mol(winner,activity(winner)+' measured')]),makes.at(-1).cost+' synthesis operations on this move.'];
+  const firstQuery=run.frames[stories.indexOf(queries[0])];
+  const firstScreen=['The first screen buys '+firstQuery.targets.length+' FEP predictions',queries[0].card[1],queries[0].card[2]];
+  // The recap separates contributions that may coincide in the same experimental move.
+  if(platformMove===makes[0]&&makes[1]?.reused&&makes[1]?.saved&&makes[1].view==='retro')platformSlide=makes[1].card;
+  return [title,stories[0].card,firstScreen,makes[0].card,platformSlide,refSlide,winningQuery.card,winSlide,outcome,oracleSlide,comparison];
+ }
+ const milestones=new Set([stories[0],queries[0],makes[0],makes.find(s=>s.stage),makes.find(s=>s.saved>0&&s.reused),discount,makes.find(s=>s.unlocked.includes(winner)),queries.find(s=>s.candidate===winner),makes.at(-1)]);
+ const slides=[title,...stories.filter(s=>milestones.has(s)).map(s=>s.card)];
+ slides.push(outcome,oracleSlide,comparison);
+ return slides;
 }
 
 function strategyComparison(B,draws,cut,error,metric,winnerName){

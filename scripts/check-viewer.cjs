@@ -88,7 +88,7 @@ for(const key of ['ABL1','S1P1']){
  while(await p.evaluate(()=>phase!=='settled'))await next();
  if(await left.locator('.board').isVisible()||!await topMatches('after')||!await left.locator('.stockRow').isVisible())throw Error(key+' summary missing');
 }
-for(const k of ['RENIN','ABL1','S1P1']){await p.goto(url+k+'_intro.html#slide-5');await p.waitForSelector('#title:not(:empty)',{timeout:2000});console.log('deck',k,await p.locator('#title').innerText());await p.evaluate(()=>show(10));if(!await p.locator('svg.chart').count())throw Error('comparison failed')}
+for(const k of ['RENIN','ABL1','S1P1']){await p.goto(url+k+'_intro.html#slide-5');await p.waitForSelector('#title:not(:empty)',{timeout:2000});console.log('deck',k,await p.locator('#title').innerText());await p.evaluate(()=>show(slides.length-1));if(!await p.locator('svg.chart').count())throw Error('comparison failed')}
 await p.goto(url+'medicinal_chemistry_world_map.html#RENIN/hard/0.80');
 const winner=await p.evaluate(()=>level.order.find(n=>level.products[n].name==='CPD 270'));
 await p.selectOption('#find',winner);await p.locator('#actions [data-action="make"]').click();
