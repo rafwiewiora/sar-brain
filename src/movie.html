@@ -22,7 +22,7 @@ function sync(){
  const f=run().frames[index],n=projection.node($('focus').value),intent=f.action==='open'?'':f.action;
  const before=projection.states[Math.max(0,index-1)];
  put('board',{type:'board-frame',tick,focus:n,f:before,info:projection.D.paths.movie[index].caption,
-   playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,archived:false,setting:isOracle()?'ideal':$('error').value});
+   playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
  put('brain',{type:'brain-frame',index,tick,focus:projection.cid(n)});
 }
 window.addEventListener('message',e=>{
@@ -40,10 +40,12 @@ let active;
 const isOracle=()=>$('policy').value==='oracle';
 const board=()=>data.boards[$('target').value],run=()=>active;
 function options(el,items){el.replaceChildren(...items.map(([v,t])=>new Option(t,v)));}
-function stop(){clearInterval(timer);timer=null;$('play').textContent='Play';}
+function stop(){clearTimeout(timer);timer=null;$('play').textContent='Play';}
 function show(i,keep=false){
  const r=run(),b=board();index=Math.max(0,Math.min(i,r.frames.length-1));const f=r.frames[index];
  if(!keep){options($('focus'),f.targets.map(n=>[n,b.products[n].name]));$('focus').value=f.targets.reduce((a,c)=>(f.action==='query'?(f.forecasts?.[a]??b.products[a].p)>(f.forecasts?.[c]??b.products[c].p):b.products[a].p>b.products[c].p)?a:c);}
+ const beat=projection.D.paths.movie[index];
+ if(!keep&&beat.beat==='prediction')$('focus').value=projection.node(beat.candidate);
  tick++;painted.clear();delete document.body.dataset.ready;sync();
  $('count').textContent=(index+1)+' / '+r.frames.length;$('scrub').max=r.frames.length-1;$('scrub').value=index;
  $('prev').disabled=index===0;$('next').disabled=index===r.frames.length-1;if($('next').disabled)stop();
@@ -63,6 +65,7 @@ function setup(){
   $('sample').textContent=oracle?'Known winner · direct synthesis $'+active.directCost+'. ':'Deterministic replay. ';
  }
  const key=$('target').value;
+ $('boardLink').href='medicinal_chemistry_world_map.html#'+key+'/'+(oracle||error==='ideal'?replayDefaults(key).error:error)+'/'+$('cut').value;
  $('storyLink').href=key+'_intro.html';
  $('filmLink').href=key+'_strategy_movie.mp4';$('filmLink').textContent=key+' film';
  liveLevel={...level,edges:level.edges.filter(e=>e[2]>=cutoff-1e-12)};
@@ -71,19 +74,26 @@ function setup(){
  $('brainPane').srcdoc=embed(data.brainTemplate,'__DEMO_DATA__',projection.D);fit();
  $('cutLabel').hidden=!(usesFep||(oracle&&$('route').value==='fep'));$('errorLabel').hidden=!usesFep;$('routeLabel').hidden=!oracle;show(0);
 }
-function chooseTarget(){stop();$('boardLink').href='medicinal_chemistry_world_map.html#'+$('target').value;setup();}
+function chooseTarget(){stop();setup();}
 options($('policy'),[...moviePolicies.map((p,i)=>[i,p[1]]),['oracle','Hindsight oracle']]);$('policy').value='3';
 options($('target'),Object.keys(data.boards).map(k=>[k,k]));
 const [campaignKey,modeKey,policyKey,cutKey]=location.hash.slice(1).split('/');
 $('target').value=data.boards[campaignKey]?campaignKey:'RENIN';
+function applyDefaults(){
+ const defaults=replayDefaults($('target').value);
+ $('cut').value=defaults.cut;$('error').value=defaults.error;
+}
+applyDefaults();
 if(['ideal',...Object.keys(gameErrorScale)].includes(modeKey))$('error').value=modeKey;
 if(policyKey==='hindsight'||policyKey==='oracle')$('policy').value='oracle';
 else if(['0','1','2','3'].includes(policyKey))$('policy').value=policyKey;
 if(['0.60','0.70','0.80','0.90'].includes(cutKey))$('cut').value=cutKey;
 chooseTarget();
-$('target').onchange=chooseTarget;$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>show(index,true);
+$('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>show(index,true);
 function step(i){stop();show(i);}
 $('prev').onclick=()=>step(index-1);$('next').onclick=()=>step(index+1);$('scrub').oninput=e=>step(+e.target.value);
-$('play').onclick=()=>{if(timer){stop();return;}if(index===run().frames.length-1)show(0);timer=setInterval(()=>show(index+1),2600);$('play').textContent='Pause';};
+$('play').onclick=()=>{if(timer){stop();return;}if(index===run().frames.length-1)show(0);function advance(){
+  timer=setTimeout(()=>{show(index+1);if(timer)advance();},(projection.D.paths.movie[index].seconds??2.6)*1000);
+ }advance();$('play').textContent='Pause';};
 document.addEventListener('keydown',e=>{if(['SELECT','INPUT','BUTTON','A'].includes(e.target.tagName))return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();step(index+(e.key==='ArrowRight'?1:-1));}});
 </script></html>

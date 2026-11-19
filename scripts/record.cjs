@@ -19,6 +19,10 @@ async function main(){
   await page.reload();
   if(!await bulk.isDisabled()||!await page.evaluate(()=>g.forecasts.size===24&&spentCash()===24))throw Error('Bulk purchase persistence');
   if(!await page.locator('#stats').innerText().then(t=>t.includes('2Moves played')||t.match(/2\s+Moves played/)))throw Error('Bulk move count');
+  await page.selectOption('#level','RENIN');
+  if(await page.locator('#boardCut').inputValue()!=='0.80'||await page.locator('#difficulty').inputValue()!=='hard'||!(await bulk.innerText()).includes('5 compounds · $5'))throw Error('RENIN opening rules');
+  await page.selectOption('#boardCut','0.60');
+  if(!(await bulk.innerText()).includes('26 compounds · $26'))throw Error('RENIN cutoff switch');
   for(const target of ['RENIN','ABL1','S1P1']){
    await page.goto(pathToFileURL(path.join(dist,target+'_intro.html')).href);await page.waitForSelector('#title:not(:empty)');
    const slides=[];
@@ -68,7 +72,8 @@ async function main(){
     }else if(action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
     const name=target+i+'.png';
     await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
-    manifest.push("file '"+name+"'",'duration '+(i===0||i===len-1?'3':'2'));
+    const seconds=await page.evaluate(()=>projection.D.paths.movie[index].seconds);
+    manifest.push("file '"+name+"'",'duration '+(seconds??(i===0||i===len-1?3:2)));
    }
    manifest.push(manifest.at(-2));fs.writeFileSync(path.join(tmp,'frames.txt'),manifest.join('\n')+'\n');
    const film=path.join(root,'media',target+'_strategy_movie.mp4');

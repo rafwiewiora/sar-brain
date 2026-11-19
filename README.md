@@ -14,7 +14,7 @@ From a clone, run `python3 build.py` (Python 3.8 or later, standard library only
 | ABL1 | 79 compounds | No |
 | S1P1 | 74 compounds | No |
 
-Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a playable replay and a recorded film. The recording and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.60 and Medium error. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
+Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro.html`, `dist/S1P1_intro.html`), a playable replay and a recorded film. The recording and slides 1–10 follow the same actual median-spend run of **FEP with SAR fallback + cost** at LoMap 0.80 with Hard error for RENIN and LoMap 0.60 with Medium error for ABL1 and S1P1. On slide 11, compare all four strategies and change the cutoff, difficulty or cost metric. Each dot is the median for its chosen metric and the whiskers span the middle 50% on the same opening hand. The replay reports the wider 10th–90th percentile range for spend.
 
 ## What a move costs
 

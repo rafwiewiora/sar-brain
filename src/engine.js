@@ -1,3 +1,6 @@
+function replayDefaults(target){
+ return target==='RENIN'?{cut:'0.80',error:'hard'}:{cut:'0.60',error:'medium'};
+}
 const gameErrorScale={easy:.5,medium:1,hard:2};
 const gameSigma=(score,difficulty)=>gameErrorScale[difficulty]*(.5+5*(1-score))/2.5;
 // A prepared molecular node represents one distinct, paid reaction output.

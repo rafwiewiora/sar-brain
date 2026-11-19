@@ -3,11 +3,14 @@ const $=id=>document.getElementById(id), esc=x=>String(x).replaceAll('&','&amp;'
 const name=id=>B.products[id]?.name||B.stages[id], p=id=>B.products[id].p;
 const nm=value=>Number((10**(9-value)).toPrecision(3)).toLocaleString('en-US',{maximumFractionDigits:3})+' nM';
 const value=id=>nm(p(id));
-const run=playStrategy(sampledLevel(B,draws['3,0.6,medium'].seed),moviePolicies[3],.6,'medium');
+const preset=replayDefaults(B.key);
+$('cut').value=preset.cut;$('error').value=preset.error;
+const presetLabel='LoMap ≥ '+preset.cut+' · '+$('error').selectedOptions[0].text;
+const run=playStrategy(sampledLevel(B,draws[[3,+preset.cut,preset.error]].seed),moviePolicies[3],+preset.cut,preset.error);
 const frames=run.frames,initial=frames[0],final=frames.at(-1),makes=frames.filter(f=>f.action==='make');
 const winner=final.made.reduce((a,b)=>p(a)>p(b)?a:b),first=makes[0],firstId=first.targets[0];
 const firstQuery=frames.find(f=>f.action==='query'),ref=final.parents[winner],discount=makes.find(f=>f.changes[winner]);
-const oracle=hindsightReplay(B,.6);
+const oracle=hindsightReplay(B,+preset.cut);
 const winRoute=B.routes[winner],discountIndex=frames.indexOf(discount);
 const stage=(discount?winRoute.filter(n=>B.stages[n]&&discount.stock.includes(n)&&!frames[discountIndex-1].stock.includes(n)):winRoute.filter(n=>B.stages[n])).at(-1);
 const mol=(id,note='')=>'<div class="mol">'+B.drawings[id]+'<b>'+esc(name(id))+'</b><small>'+esc(note)+'</small></div>';
@@ -30,7 +33,7 @@ const slides=[
  ['FEP predicts '+nm(final.forecasts[winner])+' for '+name(winner),gallery([mol(ref,'Reference · '+value(ref)),mol(winner,'Predicted · '+nm(final.forecasts[winner]))],true),'Prediction purchased in round '+predictionFrame.batch+' · one fixed error draw per transformation.'],
  ['The assay confirms '+value(winner)+' for '+name(winner),gallery([mol(winner,'Measured '+value(winner))]),'Synthesis '+(makes.indexOf(wMake)+1)+' of '+makes.length+' · '+winPrice+' additional steps on this move.'],
  ['The campaign spends $'+run.total+' to confirm the hit',ledger([['$'+run.steps,'synthesis'],['$'+final.queries,'FEP queries'],['$'+run.total,'total spent']]),makes.length+' new synthesis decisions · median-spend trajectory among 101 paired error draws.'],
- [oracle.won?'Hindsight reaches the winner in '+oracle.hops+' FEP '+(oracle.hops===1?'hop':'hops'):'The opening FEP network cannot reach the winner',oracle.won?gallery(oracle.path.map((n,i)=>mol(n,i?'Known destination':'Opening reference')),true):gallery([mol(ref,'Reached in the forward run via SAR'),mol(winner,'Known destination')],true),oracle.won?'Oracle path costs $'+oracle.total+' including queries. Direct synthesis with the winner supplied costs $'+oracle.directCost+'.':'At LoMap 0.60 the winner is in another component. Knowing its identity would allow direct synthesis for $'+oracle.directCost+'.'],
+ [oracle.won?'Hindsight reaches the winner in '+oracle.hops+' FEP '+(oracle.hops===1?'hop':'hops'):'The opening FEP network cannot reach the winner',oracle.won?gallery(oracle.path.map((n,i)=>mol(n,i?'Known destination':'Opening reference')),true):gallery([mol(ref,'Reached in the forward run via SAR'),mol(winner,'Known destination')],true),oracle.won?'Oracle path costs $'+oracle.total+' including queries. Direct synthesis with the winner supplied costs $'+oracle.directCost+'.':'At LoMap '+preset.cut+' the winner is in another component. Knowing its identity would allow direct synthesis for $'+oracle.directCost+'.'],
  ['Four strategies, one opening inventory','','']
 ];
 function summary(){
@@ -51,10 +54,10 @@ let index=0;
 function show(i){
  index=Math.min(10,Math.max(0,i));const [title,body,foot]=slides[index],compare=index===10;
  $('title').textContent=title;$('visual').innerHTML=compare?summary():body;
- $('context').textContent=B.key+(compare?' · Strategy comparison · LoMap ≥ '+$('cut').value+' · '+$('error').selectedOptions[0].text:' · FEP with SAR fallback + cost · LoMap ≥ 0.60 · Medium');
+ $('context').textContent=B.key+(compare?' · Strategy comparison · LoMap ≥ '+$('cut').value+' · '+$('error').selectedOptions[0].text:' · FEP with SAR fallback + cost · '+presetLabel);
  $('foot').textContent=compare?($('error').value==='ideal'?'Ideal predictions · deterministic strategies · same starting compounds.':'Dot = median · whiskers = middle 50% across 101 FEP error draws · same starting compounds.'):foot;
  $('controls').hidden=!compare;$('prev').disabled=index===0;$('next').textContent=compare?'Play →':'→';$('counter').textContent=(index+1)+' / 11';
- $('movie').href='strategy_movie.html#'+B.key+'/'+(compare?$('error').value:'medium')+'/3/'+(compare?$('cut').value:'0.60');
+ $('movie').href='strategy_movie.html#'+B.key+'/'+(compare?$('error').value:preset.error)+'/3/'+(compare?$('cut').value:preset.cut);
  history.replaceState(null,'','#slide-'+(index+1));
 }
 function next(){if(index===10)location.href=$('movie').href;else show(index+1);}

@@ -5,9 +5,16 @@ const cost=n=>n+' '+(n===1?'step':'steps');
 const teal='#087f82',purple='#7549ca',ink='#17263a',grey='#556982';
 let level,g,idx,pinned,stage,message,model;
 const errorAtCutoff=gameErrorScale;
-let difficulty='medium';
-try{const prior=localStorage.getItem('sarbrain-board-difficulty');if(Object.hasOwn(errorAtCutoff,prior))difficulty=prior;}catch{}
-const key=()=> 'sarbrain-board-v4-'+level.key+'-'+difficulty;
+let difficulty='medium',cut='0.60';
+const key=()=> 'sarbrain-board-v4-'+level.key+'-'+difficulty+(cut==='0.60'?'':'-'+cut);
+function chooseBoard(k,error,cutoff){
+ const preset=replayDefaults(k);
+ let settings={};
+ try{settings=JSON.parse(localStorage.getItem('sarbrain-rules-'+k)||'{}')||{};}catch{}
+ difficulty=[error,settings.error,preset.error].find(v=>Object.hasOwn(errorAtCutoff,v));
+ cut=[cutoff,settings.cut,preset.cut].find(v=>['0.60','0.70','0.80','0.90'].includes(v));
+ load(k);
+}
 // Same affine score dependence as the ABL1 replay, normalized at 0.60.
 const sigmaForScore=score=>gameSigma(score,difficulty);
 const spentCash=()=>g.history.reduce((total,a)=>total+(a.type==='query'?1:a.cost),0);
@@ -21,11 +28,11 @@ const available=()=>level.order.filter(n=>!g.stock.has(n));
 const similarity=(a,b)=>level.sim[idx.get(a)][idx.get(b)];
 const name=n=>g.name(n);
 function load(k,reset=false){
- level=levels[k];$('strategyReplay').href='strategy_movie.html#'+k+'/'+difficulty;
+ level={...levels[k],edges:levels[k].edges.filter(e=>e[2]>=Number(cut)-1e-12)};$('boardCut').value=cut;$('strategyReplay').href='strategy_movie.html#'+k+'/'+difficulty+'/3/'+cut;
  let saved=null,migrated=false;
  if(!reset){try{
    saved=JSON.parse(localStorage.getItem(key())||'null');
-   if(!saved && difficulty==='medium'){
+   if(!saved && difficulty==='medium' && cut==='0.60'){
      const previous=level.openingPlatform?localStorage.getItem('sarbrain-board-v3-'+k):null;
      const moves=JSON.parse(previous||localStorage.getItem('sarbrain-board-v2-'+k)||'[]');
      if(moves.length){saved={moves,legacyOpening:!!level.legacyStock&&!previous};migrated=true;}
@@ -216,14 +223,14 @@ $('bulkFep').onclick=()=>{
 };
 $('bulkFep').onpointerenter=$('bulkFep').onfocus=()=>markFepTargets(g.eligibleFep());
 $('bulkFep').onpointerleave=$('bulkFep').onblur=()=>markFepTargets([]);
-$('level').onchange=e=>load(e.target.value);$('find').onchange=e=>select(e.target.value,'compound');
-$('difficulty').onchange=e=>{
- const next=e.target.value;if(!Object.hasOwn(errorAtCutoff,next))return;
- save();difficulty=next;
- try{localStorage.setItem('sarbrain-board-difficulty',difficulty);}catch{}
+$('level').onchange=e=>chooseBoard(e.target.value);$('find').onchange=e=>select(e.target.value,'compound');
+$('difficulty').onchange=$('boardCut').onchange=()=>{
+ save();difficulty=$('difficulty').value;cut=$('boardCut').value;
+ try{localStorage.setItem('sarbrain-rules-'+level.key,JSON.stringify({error:difficulty,cut}));}catch{}
  load(level.key);
 };
-$('guide').onclick=()=>openDialog('<h2>How to play</h2><p>Start with '+level.stock.filter(n=>idx.has(n)).length+' measured references. '+(level.openingPlatform?'These are three analogs with the fewest additional steps from one sampled upstream intermediate. ':'')+'Find and assay the '+nm(g.best)+' hit. Every hollow dot is a real compound with its activity hidden.</p><p><b>Make &amp; assay.</b> Pay $1 per missing synthesis operation. The assay is included. Its result updates SAR, and the intermediates you made stay in inventory.</p><p><b>Stock an intermediate.</b> Pay for its preparation now. Every analog whose route shares those operations becomes cheaper. The lower lane shows reusable stops on the selected route.</p><p><b>Predict.</b> Spend $1 to predict from the measured reference with the highest LoMap score of at least 0.60. At 0.60, simulated Gaussian error (1σ) is 0.5, 1 or 2 kcal/mol on Easy, Medium or Hard. Error decreases linearly to one fifth of that at score 1.00. Predictions stay fixed. Each difficulty saves its own game. Assay the hit to win.</p><p>Candidates are grouped by fingerprint similarity. The center shows the selected analog and leading moves by SAR or SAR with current price.</p><p>'+esc(level.patent)+' · '+(level.key==='RENIN'?'26 costed analogs and 15 early references':level.order.length+' costed compounds')+'. Prices are game dollars. Starting stock is supplied.</p>'+btn('restart','Restart board'));
+$('guide').onclick=()=>openDialog('<h2>How to play</h2><p>Start with '+level.stock.filter(n=>idx.has(n)).length+' measured references. '+(level.openingPlatform?'These are three analogs with the fewest additional steps from one sampled upstream intermediate. ':'')+'Find and assay the '+nm(g.best)+' hit. Every hollow dot is a real compound with its activity hidden.</p><p><b>Make &amp; assay.</b> Pay $1 per missing synthesis operation. The assay is included. Its result updates SAR, and the intermediates you made stay in inventory.</p><p><b>Stock an intermediate.</b> Pay for its preparation now. Every analog whose route shares those operations becomes cheaper. The lower lane shows reusable stops on the selected route.</p><p><b>Predict.</b> Spend $1 to predict from the measured reference with the highest LoMap score of at least '+cut+'. At 0.60, simulated Gaussian error (1σ) is 0.5, 1 or 2 kcal/mol on Easy, Medium or Hard. Error decreases linearly to one fifth of that at score 1.00. Predictions stay fixed. Each difficulty saves its own game. Assay the hit to win.</p><p>Candidates are grouped by fingerprint similarity. The center shows the selected analog and leading moves by SAR or SAR with current price.</p><p>'+esc(level.patent)+' · '+(level.key==='RENIN'?'26 costed analogs and 15 early references':level.order.length+' costed compounds')+'. Prices are game dollars. Starting stock is supplied.</p>'+btn('restart','Restart board'));
 $('dialogBody').onclick=e=>{const b=e.target.closest('[data-action]');if(!b)return;if(b.dataset.action==='restart')restart();else if(b.dataset.action==='confirm'){$('dialog').close();load(level.key,true);}};
 $('close').onclick=()=>$('dialog').close();
-load(Object.hasOwn(levels,location.hash.slice(1))?location.hash.slice(1):'S1P1');
+const [startKey,startError,startCut]=location.hash.slice(1).split('/');
+chooseBoard(Object.hasOwn(levels,startKey)?startKey:'S1P1',startError,startCut);

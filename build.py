@@ -32,7 +32,7 @@ def build():
     board = game.replace("__WORLD__", world).replace("__LEVELS__", inline_json(datasets["boards"]))
     (OUT / "medicinal_chemistry_world_map.html").write_text(board, encoding="utf-8")
 
-    board_logic, startup, _ = world.rpartition("\nload(")
+    board_logic, startup, _ = world.rpartition("\nconst [startKey,startError,startCut]=")
     if not startup:
         raise ValueError("Missing standalone board entry point")
     datasets["draws"] = {key: json.loads((ROOT / "data" / (key + ".draws.json")).read_text()) for key in datasets["boards"]}

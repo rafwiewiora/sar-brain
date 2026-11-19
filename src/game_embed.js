@@ -2,7 +2,7 @@
 level=Object.values(levels)[0];
 idx=new Map(level.order.map((n,i)=>[n,i]));
 $('level').value=level.key;
-$('level').disabled=$('difficulty').disabled=true;
+$('level').disabled=$('difficulty').disabled=$('boardCut').disabled=true;
 $('strategyReplay').hidden=true;
 $('actions').onclick=e=>{const a=e.target.closest('[data-action]')?.dataset.action;if(['inspect-stage','back','next'].includes(a))action(a);};
 $('dialogBody').onclick=null;
@@ -29,7 +29,7 @@ render=function(){
 window.addEventListener('message',e=>{
  if(e.source!==parent||e.data?.type!=='board-frame')return;
  const {f,focus,info,playAction,targets,archived,setting}=e.data;
- difficulty=setting;
+ difficulty=setting;cut=e.data.cutoff;$('boardCut').value=cut;
  if(setting==='ideal'&&!$('difficulty').querySelector('[value="ideal"]'))$('difficulty').add(new Option('Ideal','ideal'));
  $('difficulty').value=setting;
  g=campaign(level,s=>setting==='ideal'?0:gameSigma(s,setting));

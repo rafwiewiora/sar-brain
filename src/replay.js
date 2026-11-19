@@ -5,6 +5,11 @@ const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt
 const display=id=>D.movie && D.compounds[id]?.name || id.replace('CPD_','CPD ');
 const dateLabel=date=>new Date(date+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
 const all=Object.values(D.compounds), families=[...new Set([...D.groups.map(g=>g.family),...all.map(c=>c.family)])].sort();
+// Give compounds a stable horizontal slot within their integer depth.
+const depthPeers=new Map();
+for(const c of all){if(!depthPeers.has(c.depth))depthPeers.set(c.depth,[]);depthPeers.get(c.depth).push(c.id);}
+const offsets=new Map();
+for(const ids of depthPeers.values())ids.sort().forEach((id,i)=>offsets.set(id,ids.length===1?0:.8*(i/(ids.length-1)-.5)));
 const familyColors={Indole:'#7c3aed','Azaindole · [3,2-b]':'#2563eb','Azaindole · [2,3-b]':'#0891b2','Azaindole · [2,3-c]':'#0d9488','Azaindole · [3,2-c]':'#be185d',Indolizine:'#d97706',Pyrrolopyridazine:'#92400e',Acylguanidine:'#64748b'};
 const num=(v,places=1)=>Number(v.toFixed(places)).toString();
 const mol=id=>D.molecules[id]?.svg||'<span class="emptyDrawing">Drawing unavailable</span>';
@@ -47,6 +52,12 @@ function changeLabel(){
 function render(){
  const f=current();
  $('caption').textContent=changeLabel();
+ $('caption').classList.toggle('storyBeat',!!f.beat);
+ if(f.beat){
+  const tag=document.createElement('span');
+  tag.textContent={unlock:'Reference unlocked',prediction:'FEP prediction',assay:'Assay confirmed'}[f.beat];
+  $('caption').prepend(tag);
+ }
  if(D.movie&&!D.movie.archived){
   $('money').hidden=false;$('money').innerHTML='<strong>$'+(f.spent+f.queries)+'</strong> spent';
  }
@@ -79,7 +90,10 @@ function renderBrain(){
  const undated=!!D.movie&&!D.startingDate;
  const maxDepth=Math.max(16,...all.map(c=>c.depth||0),...D.groups.map(g=>g.depth));
  const dx=d=>left+(d+.5)/(maxDepth+1.5)*span;
- const cx=c=>undated?dx(c.depth):x(c.date);
+ const spread=undated&&D.movie.target==='ABL1';
+ const depths=[...depthPeers.keys()].filter(Number.isFinite),minD=Math.min(...depths),maxD=Math.max(...depths);
+ const column=d=>left+(d-minD+.55)/(maxD-minD+1.1)*span;
+ const cx=c=>spread?column(c.depth+offsets.get(c.id)):undated?dx(c.depth):x(c.date);
  const value=c=>!made.has(c.id)?f.forecasts?.[c.id]??c.pIC50:c.pIC50;
  const gy=g=>laneTop+(families.indexOf(g.family)+.5)*spacing;
  const text=(xx,yy,s,extra='')=>'<text x="'+xx+'" y="'+yy+'" '+extra+'>'+E(s)+'</text>';
@@ -87,14 +101,15 @@ function renderBrain(){
  let out='<svg style="display:block" width="100%" height="'+h+'" viewBox="0 0 '+w+' '+h+'" role="group" aria-label="RENIN affinity by recorded date and retained platforms by synthetic depth"><g font-size="12" fill="#536678">';
  for(let p=Math.ceil(ymin);p<=Math.floor(ymax);p++){out+=line(left,y(p),right,y(p),'stroke="#e6ebef"')+text(left-12,y(p)+4,p,'text-anchor="end"')}
  out+=text(13,(top+base)/2,(D.movie?D.movie.target+' p'+D.movie.endpoint:'RENIN pIC50'),'text-anchor="middle" transform="rotate(-90 13 '+((top+base)/2)+')"');
- if(undated){for(let d=0;d<=maxDepth;d+=2)out+=line(dx(d),top,dx(d),base,'stroke="#edf0f4"')+text(dx(d),base+16,d,'text-anchor="middle"');}
+ if(spread){for(const d of depths)out+=line(column(d),top,column(d),base,'stroke="#e6ebef"')+text(column(d),base+16,d,'text-anchor="middle"');}
+ else if(undated){for(let d=0;d<=maxDepth;d+=2)out+=line(dx(d),top,dx(d),base,'stroke="#edf0f4"')+text(dx(d),base+16,d,'text-anchor="middle"');}
  else {for(const [t,label] of [['2006-04-01','Apr 2006'],['2006-07-01','Jul 2006'],['2007-01-01','Jan 2007'],['2007-07-01','Jul 2007'],['2008-01-01','Jan 2008']]){
   out+=line(x(t),top,x(t),base,'stroke="#edf0f4"')+text(x(t),base+16,label,'text-anchor="middle"');
  }
  out+=line(x(D.startingDate),top,x(D.startingDate),base,'stroke="#9daebf" stroke-dasharray="3 4"');
  out+=text(x(D.startingDate),top-9,'Starting inventory','text-anchor="middle"');
  }
- out+=text((left+right)/2,base+37,undated?'Synthetic dependency depth (operations)':'Recorded experimental date','text-anchor="middle" font-weight="600"');
+ out+=text((left+right)/2,base+37,spread?'Synthetic depth · dots spread within each depth':undated?'Synthetic dependency depth (operations)':'Recorded experimental date','text-anchor="middle" font-weight="600"');
  out+='<rect x="'+left+'" y="'+laneTop+'" width="'+span+'" height="'+laneHeight+'" fill="#f8fafc"/>';
  for(let i=0;i<families.length;i++){const pos=laneTop+(i+.5)*spacing;out+=text(left-9,pos+4,families[i],'text-anchor="end" fill="#64748b"')+line(left,pos,right,pos,'stroke="#e2e8f0"')}
  for(let j=0;j<=maxDepth;j+=2)out+=line(dx(j),laneTop,dx(j),last,'stroke="#eef0f3"')+text(dx(j),last+17,j,'text-anchor="middle"');
@@ -121,13 +136,19 @@ function renderBrain(){
  }
  out+='</g>';
  for(const [a,b] of f.edges){const A=D.compounds[a],B=D.compounds[b];out+=line(cx(A),y(value(A)),cx(B),y(value(B)),'stroke="#087f7e" stroke-dasharray="6 5" stroke-width="'+(fresh.has(b)?2.5:1.2)+'" opacity="'+(fresh.has(b)?1:.46)+'"')}
+ const spotlight=new Set(f.beat==='unlock'?[f.reference]:f.beat?[f.reference,f.candidate]:[]);
+ if(f.beat&&f.beat!=='unlock'){
+  const a=D.compounds[f.reference],b=D.compounds[f.candidate];
+  out+=line(cx(a),y(value(a)),cx(b),y(value(b)),'stroke="white" stroke-width="8" pointer-events="none"')+line(cx(a),y(value(a)),cx(b),y(value(b)),'stroke="#007b76" stroke-width="4" stroke-dasharray="7 4" pointer-events="none"');
+ }
  const level=c=>fresh.has(c.id)&&made.has(c.id)?3:made.has(c.id)?2:known.has(c.id)?1:0;
- for(const c of [...all].sort((a,b)=>level(a)-level(b))){
+ for(const c of [...all].sort((a,b)=>Number(spotlight.has(a.id))-Number(spotlight.has(b.id))||level(a)-level(b))){
   const l=level(c),px=cx(c),py=y(value(c)),r=fresh.has(c.id)?8.2:[3.7,4.2,5.3,8.2][l];
+  if(spotlight.has(c.id))out+='<circle cx="'+px+'" cy="'+py+'" r="14" fill="#ccf2ee" stroke="#007b76" stroke-width="2" pointer-events="none"/>';
   const title=display(c.id)+' · '+(c.date?dateLabel(c.date):'Depth '+c.depth)+(known.has(c.id)?' · '+num(10**(9-value(c)),2)+' nM':'');
   out+='<g class="tap" role="button" tabindex="'+(l?0:-1)+'" data-cpd="'+c.id+'" aria-label="'+E(title)+'"><title>'+E(title)+'</title><circle cx="'+px+'" cy="'+py+'" r="'+(r+2)+'" fill="transparent"/><circle class="vis" cx="'+px+'" cy="'+py+'" r="'+r+'" fill="'+(l>=2?tint(c.pIC50):l===1?'white':'#dbe2e9')+'" stroke="'+(l===3?'#16263b':l===1?'#087f7e':'none')+'" stroke-width="2.3"/></g>';
  }
- const currentLabels=[...fresh].map(id=>D.compounds[id]).filter(Boolean);
+ const currentLabels=[...(spotlight.size?spotlight:fresh)].map(id=>D.compounds[id]).filter(Boolean);
  const labels=[];
  for(const c of currentLabels){const px=cx(c),py=y(value(c));let yy=py<top+25?py+21:py-12;
   while(labels.some(z=>Math.abs(z[0]-px)<105&&Math.abs(z[1]-yy)<15))yy+=18;
