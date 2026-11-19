@@ -20,6 +20,12 @@ Open `dist/strategy_movie.html` to start the web replay automatically. **Step sl
 
 Open `dist/RENIN_ranks.html` at the first RENIN synthesis decision. Each line follows one candidate across the three score columns. Watch the ranks move after an assay or FEP screen. The batch picks were committed at the start of the batch. Click a line or use Inspect to follow its structure, forecast, and synthesis price beneath the plot. Purchased FEP predictions include the replay’s error draw and use SAR as fallback. All three columns include the same novelty term.
 
+## Patent evidence
+
+Save each verified preparation in `data/patents/<publication-number>.md` as it is extracted for a viewer. Use a heading with the patent example and step, the viewer’s intermediate label, and a recognizable chemical name. Include the internal molecule ID, reaction partners, reported conditions and isolation data, and a link to the exact procedure. Keep replay costs under a separate **Replay use** note.
+
+The records are plain text and searchable offline by patent number, target, intermediate, compound or reagent. The first entry is [RENIN · I5 · Example 1, step 5](data/patents/US8580813B2.md).
+
 ## What a move costs
 
 The current game charges $1 per missing synthesis operation and $1 per FEP query. The spend counter starts at $0 and has no cap. An assay is included when a compound is made. The initial inventory is supplied. The cash unit represents a game cost. RENIN’s recorded dates locate the historical measurements on the plot. Elapsed laboratory time is an open modeling question.
