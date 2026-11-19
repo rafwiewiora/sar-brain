@@ -27,19 +27,29 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
    if(!candidates.length)break;
    const base=Object.fromEntries(candidates.map(n=>{
      const sar=g.sar(n),estimate=wantsFep?(g.forecasts.get(n)?.p??sar.p):sar.p;
-     return [n,{estimate,utility:estimate+sar.novelty,model:wantsFep&&g.forecasts.has(n)?'FEP':'SAR'}];
+     return [n,{sar:sar.p,novelty:sar.novelty,estimate,utility:estimate+sar.novelty,model:wantsFep&&g.forecasts.has(n)?'FEP':'SAR'}];
    }));
    function score(n){const cost=mode==='aware'||mode==='hybrid'?g.price(n):1;return base[n].utility-.5*Math.log(Math.max(1,cost));}
+   let ranking=null;
+   if(record&&level.key==='RENIN'){
+    const ids=candidates.slice(), activeColumn=mode==='sar'?0:mode==='aware'?1:2;
+    const entries=ids.map(id=>{
+     const v=base[id],price=g.price(id),costPenalty=.5*Math.log(Math.max(1,price));
+     const sar=v.sar+v.novelty,fep=(g.forecasts.get(id)?.p??v.sar)+v.novelty;
+     return {id,scores:[sar,sar-costPenalty,fep-(mode==='hybridFree'?0:costPenalty)],ranks:[]};
+    });
+    for(let col=0;col<3;col++)entries.slice().sort((a,b)=>b.scores[col]-a.scores[col]).forEach((e,i)=>{e.ranks[col]=i+1;});
+    ranking={entries,activeColumn,fepCost:mode!=='hybridFree',batch};
+   }
    const batchPicks=candidates.sort((a,b)=>score(b)-score(a)).slice(0,batchSize);
+   if(ranking)ranking.shortlisted=batchPicks.slice();
    while(batchPicks.length&&!g.goal()){
      batchPicks.sort((a,b)=>score(b)-score(a));
      const n=batchPicks.shift();if(g.stock.has(n))continue;
      const before=record?quotes():{},price=g.price(n);
-     const alternative=record&&level.key==='RENIN'?batchPicks.find(id=>!g.stock.has(id)):null;
-     const shortlist=alternative?[n,alternative].map(id=>({id,estimate:base[id].estimate,model:base[id].model,price:g.price(id),score:score(id)})):null;
      if(!g.act('make',n))throw Error('Invalid policy move');
      const changes={};if(record)for(const [id,v] of Object.entries(quotes()))if(v<before[id])changes[id]=[before[id],v];
-     capture(batch,'make',[n],{amounts:{[n]:price},changes,decision:base[n],shortlist});
+     capture(batch,'make',[n],{amounts:{[n]:price},changes,decision:base[n],ranking});
    }
  }
  const end=g.goal()?'Winner assayed.':'No eligible FEP candidate remains.';

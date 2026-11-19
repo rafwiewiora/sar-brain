@@ -62,23 +62,11 @@ async function main(){
    await page.goto(pathToFileURL(path.join(dist,target+'_intro.html')).href+'#slide-11');
    const storyCost=await page.evaluate(()=>run.total);if(storyCost!==expected)throw Error('Slide trajectory differs from movie');
    await Promise.all([page.waitForURL('**/strategy_movie.html#**'),page.locator('#movie').click()]);await ready();
-   if(target==='RENIN'){
-    const choice=await page.evaluate(()=>run().frames.findIndex(f=>f.action==='compare'));
-    if(choice<0)throw Error('Missing the RENIN shortlist');
-    for(const id of ['A','B']){
-     await page.evaluate(i=>step(i),choice);await ready();
-     const board=page.frameLocator('#game');
-     if(await board.locator('.choiceOption').count()!==2||await board.locator('.decisionResult').count())throw Error('Invalid shortlist reveal');
-     await board.getByRole('button',{name:'Choose '+id}).click();
-     await page.waitForFunction(i=>index===i+1,choice);await ready();
-     if(!(await board.locator('.decisionNote').innerText()).includes('Your pick'))throw Error('Missing replay comparison');
-    }
-   }
    const len=await page.evaluate(()=>run().frames.length), manifest=[];
    for(let i=0;i<len;i++){
     await page.evaluate(i=>step(i),i);await ready();
     const board=page.frameLocator('#game'),brain=page.frameLocator('#brainPane');
-    const sequence=await page.evaluate(()=>index&&run().frames[index].action!=='compare'?moments:[['settled',0]]);
+    const sequence=await page.evaluate(()=>index?moments:[['settled',0]]);
     const seconds=await page.evaluate(()=>index?duration():3);
     for(let j=0;j<sequence.length;j++){
      const [phase,start]=sequence[j];
@@ -100,6 +88,14 @@ async function main(){
      if(after&&expected.dq&&await brain.locator('#queries').getAttribute('data-gain')!=='+'+expected.dq)throw Error('Missing FEP increase');
      if(phase==='settled'&&expected.beat==='prediction'&&await board.locator('.pairCard svg').count()!==2)throw Error('Missing structure comparison');
      if(target==='RENIN'){
+      if(expected.action==='make'){
+       const ranks=await page.evaluate(()=>run().frames[index].ranking);
+       const rendered=await board.locator('.rankSeries').count();
+       if(rendered!==ranks.entries.length)throw Error('Incomplete rank plot');
+       const pick=await page.evaluate(()=>run().frames[index].targets[0]);
+       if(!ranks.shortlisted.includes(pick)||ranks.entries.find(e=>e.id===pick).ranks[ranks.activeColumn]>ranks.shortlisted.length)throw Error('Incorrect selected line');
+       if((await board.locator('.rankRange').first().innerText()).indexOf('±1σ')<0)throw Error('Missing modeled error for this FEP pick');
+      }
       const cards=await board.locator('.decisionMol').count();
       if(cards<1||cards>2||expected.action==='make'&&cards!==1)throw Error('Unexpected RENIN structures');
       if(expected.action==='make'&&await board.locator('.decisionResult').count()!==Number(after))throw Error('Assay reveal timing');

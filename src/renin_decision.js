@@ -3,13 +3,40 @@ function installReninDecision(){
  document.body.classList.add('reninReplay');
  const panel=document.createElement('section');
  panel.id='reninDecision';
- panel.addEventListener('click',e=>{
-  const pick=e.target.closest('button[data-pick]');
-  if(pick)parent.postMessage({type:'pick',id:pick.dataset.pick,tick:Number(document.body.dataset.tick)},'*');
- });
  document.querySelector('.board').replaceWith(panel);
  document.querySelector('.heading h1').textContent='RENIN';
  document.querySelector('.heading p').hidden=true;
+}
+
+// All columns use the same observations and stock at the start of this batch.
+function reninRankPlot(ranking,pick){
+ const {entries,activeColumn,shortlisted}=ranking,xs=[120,422,732],y=r=>45+(r-1)*248/Math.max(1,entries.length-1);
+ const labels=['SAR only','SAR + cost',ranking.fepCost?'FEP or SAR + cost':'FEP or SAR'];
+ const text=(x,y,value,anchor='middle',extra='')=>'<text x="'+x+'" y="'+y+'" text-anchor="'+anchor+'" '+extra+'>'+esc(value)+'</text>';
+ const dots=(entry,color,r)=>xs.map((x,i)=>'<circle cx="'+x+'" cy="'+y(entry.ranks[i])+'" r="'+r+'" fill="'+color+'"/>').join('');
+ let out=xs.map((x,i)=>text(x,22,labels[i],'middle',i===activeColumn?'class="activeRank"':'')).join('');
+ out+='<rect x="66" y="36" width="683" height="'+(y(shortlisted.length+.5)-36)+'" rx="4" fill="#eaf6f1"/>';
+ for(const r of [1,5,10,15,20,25].filter(r=>r<=entries.length)){
+  out+='<path d="M66 '+y(r)+'H745" stroke="#dbe2e8"/>'+text(53,y(r)+4,r,'end');
+ }
+ const weight=e=>e.id===pick?2:shortlisted.includes(e.id)?1:0;
+ const sorted=entries.slice().sort((a,b)=>weight(a)-weight(b));
+ for(const e of sorted){
+  const priority=weight(e),color=['#abb9c5','#24836e','#6738a9'][priority];
+  const points=e.ranks.map((r,i)=>xs[i]+','+y(r)).join(' ');
+  const forecast=g.forecasts.get(e.id);
+  const prediction=forecast?' · FEP '+nm(forecast.p)+' (±1σ: '+nm(forecast.p+forecast.sigma/kcalPerLogPotency)+' – '+nm(forecast.p-forecast.sigma/kcalPerLogPotency)+')':'';
+  const title=name(e.id)+' · '+e.ranks.map((r,i)=>labels[i]+' #'+r).join(' · ')+prediction;
+  out+='<g class="rankSeries" data-rank-id="'+esc(e.id)+'" data-ranks="'+e.ranks.join(',')+'"><title>'+esc(title)+'</title><polyline points="'+points+'" fill="none" stroke="transparent" stroke-width="9"/><polyline class="rankStroke" points="'+points+'" fill="none" stroke="'+color+'" stroke-width="'+[1.25,2.6,4][priority]+'"/>'+dots(e,color,[2.3,3.6,5.3][priority])+'</g>';
+ }
+ const selected=entries.find(e=>e.id===pick);
+ for(const col of [0,1])out+=text(xs[col]-9,y(selected.ranks[col])+5,'#'+selected.ranks[col],'end','class="rankNumber"');
+ let last=20;
+ for(const e of entries.filter(e=>weight(e)).sort((a,b)=>a.ranks[2]-b.ranks[2])){
+  const yy=y(e.ranks[2]),ly=Math.max(last+20,yy),chosen=e.id===pick,color=chosen?'#6738a9':'#24836e';last=ly;
+  out+='<path d="M739 '+yy+'L759 '+ly+'h8" stroke="'+color+'" fill="none"/>'+text(771,ly+4,'#'+e.ranks[2]+' '+name(e.id)+(chosen?' · pick':''),'start','fill="'+color+'" font-weight="720"');
+ }
+ return '<figure class="rankFigure"><figcaption>Round '+ranking.batch+' · '+entries.length+' candidates ranked before synthesis</figcaption><svg viewBox="0 0 925 308" role="img" aria-label="Candidate ranks across three scoring rules, highlighted compound selected for synthesis">'+out+'</svg></figure>';
 }
 
 function renderReninDecision(move){
@@ -25,16 +52,8 @@ function renderReninDecision(move){
  stats.innerHTML='<span><b>$'+(move.f.spent+move.f.queries)+'</b>Money spent</span><span><b>'+measured(best)+'</b>Best assay</span>';
  if(after&&delta.money)stats.querySelector('b').dataset.gain='+$'+delta.money;
  document.body.dataset.phase=phase;
- let heading='',content='',note='',button='';
- if(playAction==='compare'){
-  heading='Which would you make first?';
-  content=decision.options.map((o,i)=>{
-   const letter=i===0?'A':'B';
-   const ref=o.model==='FEP'?decision.parents[o.id]:null;
-   return '<div class="choiceOption">'+card(o.id,'Option '+letter,o.model+' estimate · <b>'+nm(o.estimate)+'</b><br>'+cost(o.price)+' from stock'+(ref?'<br>Reference · '+title(ref):''))+'<button data-pick="'+esc(o.id)+'">Choose '+letter+'</button></div>';
-  }).join('');
-  note='Two shortlisted compounds. Pick one to reveal the agent’s move.';
- }else if(!playAction){
+ let heading='',content='',note='',button='',rankPlot='';
+ if(!playAction){
   heading='Start with '+targets.length+' measured compounds';
   const n=move.inspected?id:best;
   content=card(n,n===best?'Best starting assay':'Starting assay','Measured '+measured(n));
@@ -66,10 +85,15 @@ function renderReninDecision(move){
   heading=(after?'Assayed ':'Make and assay ')+title(id);
   const info=from?'FEP from '+title(from)+' · '+nm(forecast.p):decision.model==='SAR'?'SAR estimate · '+nm(decision.estimate):'Selected by the hindsight oracle';
   content=card(id,'Selected for synthesis',info+(after?'<strong class="decisionResult">Measured '+measured(id)+'</strong>':''));
+  if(decision.ranking){
+   rankPlot=reninRankPlot(decision.ranking,id);
+   const fepRange=from&&forecast.sigma>0?'<small class="rankRange">Modeled FEP range (±1σ) · '+nm(forecast.p+forecast.sigma/kcalPerLogPotency)+' – '+nm(forecast.p-forecast.sigma/kcalPerLogPotency)+'</small>':'';
+   content=card(id,'Selected from the batch',info+fepRange+'<small class="rankRange">'+cost(delta.steps)+' from current stock</small>'+(after?'<strong class="decisionResult">Measured '+measured(id)+'</strong>':''));
+  }
   if(after&&decision.unlocked.length)note='Now within FEP reach: '+(decision.unlocked.length===1?title(decision.unlocked[0]):count(decision.unlocked.length))+'.';
-  if(decision.pick)note='Your pick · '+title(decision.pick)+' &nbsp; / &nbsp; Agent’s pick · '+title(id);
   button=action('make',after?cost(delta.steps)+' paid':'Make &amp; assay · '+cost(delta.steps)+' · $'+delta.money);
  }
  panel.dataset.index=move.index;
- panel.innerHTML='<h2>'+heading+'</h2><div class="decisionMols">'+content+'</div>'+button+(note?'<div class="decisionNote">'+note+'</div>':'');
+ panel.classList.toggle('withRanks',!!rankPlot);
+ panel.innerHTML='<h2>'+heading+'</h2>'+rankPlot+'<div class="decisionMols">'+content+'</div>'+button+(note?'<div class="decisionNote">'+note+'</div>':'');
 }

@@ -17,9 +17,9 @@ function fit(){
 }
 new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit);
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
-let phase='settled',phaseTimers=[],inspected=false,viewerPick=null;
+let phase='settled',phaseTimers=[],inspected=false;
 function duration(){
- if(run().frames[index].action==='compare')return 4.5;
+ if(run().frames[index].ranking)return 4.5;
  return Math.max(1.05,projection.D.paths.movie[index].seconds??2.6);
 }
 const moments=[['aim',0],['press',.17],['pop',.39],['settled',.65]];
@@ -35,7 +35,7 @@ function sync(){
  const focus=projection.node($('focus').value),beat=projection.D.paths.movie[index];
  const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
    {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
- const decision={options:f.options,pick:old.action==='compare'?viewerPick:null,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
+ const decision={ranking:f.ranking,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
  if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
   const priorSet=new Set(old.made),now=new Set(f.made);
   const reachable=new Set();
@@ -49,20 +49,12 @@ function sync(){
  }
  put('board',{type:'board-frame',index,tick,phase,delta,pair,focus,decision,inspected,f:projection.states[at],
    info:after?beat.caption:'',playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
- if(f.action==='compare'){
-  put('brain',{type:'brain-frame',index,tick,phase:'settled',delta:{queries:0,steps:0,money:0},focus:projection.cid(f.targets[0])});
-  return;
- }
- const priorTargets=run().frames[at].targets;
- put('brain',{type:'brain-frame',index:at,tick,phase,delta,focus:projection.cid(after?focus:priorTargets[priorTargets.length-1])});
+ put('brain',{type:'brain-frame',index:at,tick,phase,delta,focus:projection.cid(after?focus:old.targets[old.targets.length-1])});
 }
 window.addEventListener('message',e=>{
  const side=['board','brain'].find(k=>e.source===frameEl(k).contentWindow);if(!side)return;
  if(e.data?.type==='loaded'){if(e.data.generation!==generation)return;ready.add(side);sync();}
  if(e.data?.type==='painted'&&e.data.tick===tick){painted.add(side);if(painted.size===2)document.body.dataset.ready=String(tick);}
- if(side==='board'&&e.data?.type==='pick'&&e.data.tick===tick&&run().frames[index].action==='compare'&&run().frames[index].targets.includes(e.data.id)){
-  viewerPick=e.data.id;step(index+1);
- }
  if(e.data?.type==='navigate'){if(e.data.delta===0)$('play').click();else step(index+e.data.delta);}
 });
 function embed(template,marker,payload){
@@ -79,12 +71,10 @@ function show(i,keep=false){
  inspected=keep;
  const r=run(),b=board();index=Math.max(0,Math.min(i,r.frames.length-1));const f=r.frames[index];
  if(!keep){options($('focus'),f.targets.map(n=>[n,b.products[n].name]));$('focus').value=f.targets.reduce((a,c)=>(f.action==='query'?(f.forecasts?.[a]??b.products[a].p)>(f.forecasts?.[c]??b.products[c].p):b.products[a].p>b.products[c].p)?a:c);}
- if(f.action==='compare'){viewerPick=null;$('focus').parentElement.hidden=true;}
- else $('focus').parentElement.hidden=false;
  const beat=projection.D.paths.movie[index];
  if(!keep&&beat.beat==='prediction')$('focus').value=projection.node(beat.candidate);
  phaseTimers.forEach(clearTimeout);phaseTimers=[];
- const animated=index>0&&!keep&&f.action!=='compare';
+ const animated=index>0&&!keep;
  setPhase(animated?'aim':'settled');
  if(animated&&!window.capturePhases){
   for(const [name,fraction] of moments.slice(1))phaseTimers.push(setTimeout(()=>setPhase(name),duration()*1000*fraction));
@@ -100,13 +90,6 @@ function setup(){
  const summary=usesFep&&error!=='ideal'?data.draws[$('target').value][[i,cutoff,error]]:null;
  const level=summary?sampledLevel(board(),summary.seed):board();
  active=oracle?hindsightReplay(level,cutoff,$('route').value==='direct'):playStrategy(level,moviePolicies[i],cutoff,error);
- // This pause reuses the previous state. The strategy pays only for actual actions.
- const end=active.frames.at(-1);
- if(level.key==='RENIN'&&!oracle&&active.won&&end.action==='make'&&end.shortlist?.length===2&&usesFep){
-  const options=end.shortlist.slice().sort((a,b)=>level.products[a.id].name.localeCompare(level.products[b.id].name,'en',{numeric:true}));
-  const previous=active.frames.at(-2);
-  active.frames.splice(-1,0,{...previous,action:'compare',targets:options.map(o=>o.id),options,changes:{},amounts:{}});
- }
  const dollars=n=>n===null?'unreached':'$'+n;
  if(summary){
   $('sample').textContent='Median replay · '+dollars(summary.median)+' to hit · 10th–90th percentile '+dollars(summary.low)+'–'+dollars(summary.high)+' · '+summary.wins+'/'+summary.count+' reached the hit. ';
@@ -138,9 +121,9 @@ if(policyKey==='hindsight'||policyKey==='oracle')$('policy').value='oracle';
 else if(['0','1','2','3'].includes(policyKey))$('policy').value=policyKey;
 if(['0.60','0.70','0.80','0.90'].includes(cutKey))$('cut').value=cutKey;
 chooseTarget();
-if(entryKey==='choice'){
- const choiceIndex=run().frames.findIndex(f=>f.action==='compare');
- if(choiceIndex>=0)show(choiceIndex);
+if(entryKey==='ranks'||entryKey==='choice'){
+ const firstPick=run().frames.findIndex(f=>f.ranking);
+ if(firstPick>=0)show(firstPick);
 }
 $('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>show(index,true);
 function step(i){stop();show(i);}

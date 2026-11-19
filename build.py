@@ -52,12 +52,13 @@ def build():
     renin["openingInventory"] = renin.pop("archivedPaths")["forward"][0]["inventory"]
     movie = source("movie.html").replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
     (OUT / "strategy_movie.html").write_text(movie, encoding="utf-8")
-    choice = "strategy_movie.html#RENIN/hard/3/0.80/choice"
-    (OUT / "RENIN_choice.html").write_text(
-        f'<!doctype html><meta charset="utf-8"><title>RENIN · Choose a compound</title>'
-        f'<script>location.replace("{choice}")</script><a href="{choice}">Open the RENIN choice</a>',
-        encoding="utf-8",
-    )
+    ranks = "strategy_movie.html#RENIN/hard/3/0.80/ranks"
+    for page in ("RENIN_ranks.html", "RENIN_choice.html"):
+        (OUT / page).write_text(
+            f'<!doctype html><meta charset="utf-8"><title>RENIN · Candidate ranks</title>'
+            f'<script>location.replace("{ranks}")</script><a href="{ranks}">Open RENIN rankings</a>',
+            encoding="utf-8",
+        )
     for path in (ROOT / "media").iterdir():
         if path.suffix not in (".mp4", ".pdf"):
             continue
