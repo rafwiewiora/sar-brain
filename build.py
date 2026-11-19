@@ -54,6 +54,9 @@ def build():
         (OUT / (key + "_intro.html")).write_text(story, encoding="utf-8")
     renin = datasets["native"]["RENIN"]
     renin["openingInventory"] = renin.pop("archivedPaths")["forward"][0]["inventory"]
+    for key, level in datasets["boards"].items():
+        with gzip.open(ROOT / "data" / "rank-comparison" / (key + ".json.gz"), "rt") as stream:
+            level["rankStructures"] = json.load(stream)
     movie = source("movie.html").replace("__CARD_CSS__", source("story_cards.css")).replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
     (OUT / "strategy_movie.html").write_text(movie, encoding="utf-8")
     ranks = "strategy_movie.html#RENIN/hard/3/0.80/ranks"

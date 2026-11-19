@@ -13,8 +13,16 @@ __CARD_CSS__
 #stepSheet.victory article{max-width:600px;text-align:center;border:2px solid #18825c}
 #stepSheet.victory h1{color:#116d4b}#stepSheet.victory h1::before{content:'★';display:block;font-size:44px}
 #stepSheet.victory #sheetVisual svg{width:min(80%,340px);height:150px}
+#countdown{display:inline-block;min-width:3em;text-align:center;font-size:20px;line-height:1.15;font-weight:750;font-variant-numeric:tabular-nums;color:#294b76;background:#edf2fb;border-radius:5px;padding:4px 8px}
+#countdown.done{background:#def4e7;color:#11633d}
+#stepSheet.docked{position:absolute;inset:25px 0 0;background:white;padding:clamp(10px,2vw,28px);align-content:safe center}
+#stepSheet.docked article{max-width:100%;box-shadow:none;padding:clamp(14px,2vw,28px)}
+#stepSheet.docked h1{font-size:clamp(22px,2vw,32px)}
+#stepSheet.docked #sheetVisual>svg{height:clamp(110px,24vh,250px);width:100%}
+.pane:has(#stepSheet.docked) iframe{visibility:hidden}
+#resultChart .chart{width:100%;max-height:43vh;display:block;margin-top:10px}
 </style><main><header><strong>SAR Brain</strong><label>Campaign <select id="target"></select></label><label>Strategy <select id="policy"></select></label><label id="routeLabel" hidden>Oracle route <select id="route"><option value="fep">Shortest FEP path</option><option value="direct">Direct synthesis</option></select></label><label id="cutLabel">LoMap ≥ <select id="cut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label id="errorLabel">Difficulty <select id="error"><option value="ideal">Ideal (0 error)</option><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><label class="slideSwitch"><input type="checkbox" checked id="withSlides"> Step slides</label><a id="storyLink">Story slides</a><a id="boardLink" href="medicinal_chemistry_world_map.html">Play the board</a></header>
-<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Selected action</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>Recorded state</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><section id="stepSheet" aria-label="Replay slide" hidden><article><small id="sheetKicker"></small><h1 id="sheetTitle"></h1><div id="sheetVisual"></div><p id="sheetNote"></p><button id="reveal">Play this move →</button></article></section><nav><button id="prev" aria-label="Previous action">←</button><button id="play">Play</button><button id="next" aria-label="Next action">→</button><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
+<figure id="scene"><section class="pane"><div class="paneLabel">Agent decision <span>Selected action</span></div><iframe id="game" title="Medicinal chemistry board"></iframe></section><section class="pane"><div class="paneLabel">Campaign state <span>Recorded state</span></div><iframe id="brainPane" title="SAR Brain campaign viewer"></iframe></section></figure><section id="stepSheet" aria-label="Replay slide" hidden><article><small id="sheetKicker"></small><h1 id="sheetTitle"></h1><div id="sheetVisual"></div><p id="sheetNote"></p><button id="reveal">Play this move →</button></article></section><nav><button id="prev" aria-label="Previous beat">←</button><button id="play">Play</button><button id="next" aria-label="Next beat">→</button><span id="countdown" role="timer" aria-label="Time remaining"></span><output id="count" aria-live="polite"></output><input id="scrub" type="range" min="0" aria-label="Replay action"><label>Inspect <select id="focus"></select></label></nav><footer><strong id="sample"></strong> <span id="rule"></span></footer></main>
 <script id="data" type="application/json">__DATA__</script><script>__SCENE__
 const data=JSON.parse(document.querySelector('#data').textContent),$=id=>document.getElementById(id);
 let index=0,timer=null, projection,liveLevel,generation=0,tick=0,ready=new Set(),painted=new Set();
@@ -28,42 +36,63 @@ function fit(){
 new ResizeObserver(fit).observe($('scene'));window.addEventListener('resize',fit);
 function put(side,msg){frameEl(side).contentWindow.postMessage(msg,'*');}
 let phase='settled',inspected=false;
-let playing=false,oneMove=false,segment='intro',remaining=0,deadline=0,deck=null;
+let playing=false,segment='intro',remaining=0,deadline=0,deck=null;
 // Narration belongs to the published RENIN replay and its paired SAR comparison.
 const reninStory = [
- {action:'open',seconds:7,after:['Find a 1 nM renin inhibitor','Start with 15 assays. Each new synthesis step and each simulated FEP prediction costs $1.']},
- {action:'query',count:5,seconds:7,before:['Which molecules look worth making?','The agent can predict five neighbors of its measured compounds. Other candidates keep their SAR estimates.'],after:['Five predictions change the shortlist','CPD 177 rises to first. The agent commits to two compounds in this batch.']},
- {action:'make',name:'CPD 177',seconds:8,before:['Test the first prediction','CPD 177 ranks first with FEP. Preparing and assaying it takes nine synthesis steps.'],after:['The first prediction is too optimistic','FEP predicted 78 nM for CPD 177. The assay gives 513 nM.'],focus:'assay',tone:'caution'},
- {action:'make',name:'CPD 121',seconds:7,before:['The first synthesis also made an intermediate','Reusing it cuts the price of CPD 121 from nine steps to two.'],after:['Two more steps buy a stronger compound','CPD 121 measures 115 nM. Its batch partner already paid for the shared chemistry.'],focus:'price'},
- {action:'query',count:19,seconds:7,before:['New references extend FEP’s reach','The two assays make 19 more compounds eligible for prediction.'],after:['Choose the next pair','Using the new predictions and current synthesis prices, the agent selects CPD 223 and CPD 239.']},
- {action:'make',name:'CPD 223',seconds:7,before:['Test the next prediction','CPD 223 takes two steps from the current stock.'],after:['CPD 223 sets a new best','Its measured potency is 6 nM. One more compound is already committed in this batch.'],focus:'assay'},
- {action:'make',name:'CPD 239',seconds:8,before:['Make the second compound in the batch','CPD 239 also takes two synthesis steps. Its assay will make it available as an FEP reference.'],after:['A weaker compound opens the decisive link','At 9 nM, CPD 239 trails the 6 nM lead. It gives the agent its first eligible FEP link to CPD 270.'],focus:'link'},
- {action:'query',count:1,seconds:8,before:['One new prediction is available','CPD 270 ranks eighth under the active strategy. The agent can now query it from CPD 239.'],after:['One prediction changes the decision','FEP predicts 1.01 nM. CPD 270 moves from eighth to first. Both SAR columns still rank it fourteenth.'],focus:'rank'},
- {action:'make',name:'CPD 270',seconds:12,before:['Spend two steps to test CPD 270','The 1.01 nM value is a noisy prediction. The agent must make the compound and assay it.'],after:['The assay confirms 1 nM','This replay used 17 synthesis steps versus 21 for SAR + cost (19% fewer). With 25 FEP queries, it spent $42 versus $21.'],focus:'assay'}
+ {action:'open',after:['Find a 1 nM renin inhibitor','Start with 15 assays. Each new synthesis step and each simulated FEP prediction costs $1.']},
+ {action:'query',count:5,before:['Which molecules look worth making?','The agent can predict five neighbors of its measured compounds. Other candidates keep their SAR estimates.'],after:['Five predictions change the shortlist','CPD 177 rises to first. The agent commits to two compounds in this batch.']},
+ {action:'make',name:'CPD 177',before:['Test the first prediction','CPD 177 ranks first with FEP. Preparing and assaying it takes nine synthesis steps.'],after:['The first prediction is too optimistic','FEP predicted 78 nM for CPD 177. The assay gives 513 nM.'],focus:'assay',tone:'caution'},
+ {action:'make',name:'CPD 121',before:['The first synthesis also made an intermediate','Reusing it cuts the price of CPD 121 from nine steps to two.'],after:['Two more steps buy a stronger compound','CPD 121 measures 115 nM. Its batch partner already paid for the shared chemistry.'],focus:'price'},
+ {action:'query',count:19,before:['New references extend FEP’s reach','The two assays make 19 more compounds eligible for prediction.'],after:['Choose the next pair','Using the new predictions and current synthesis prices, the agent selects CPD 223 and CPD 239.']},
+ {action:'make',name:'CPD 223',before:['Test the next prediction','CPD 223 takes two steps from the current stock.'],after:['CPD 223 sets a new best','Its measured potency is 6 nM. One more compound is already committed in this batch.'],focus:'assay'},
+ {action:'make',name:'CPD 239',before:['Make the second compound in the batch','CPD 239 also takes two synthesis steps. Its assay will make it available as an FEP reference.'],after:['A weaker compound opens the decisive link','At 9 nM, CPD 239 trails the 6 nM lead. It gives the agent its first eligible FEP link to CPD 270.'],focus:'link'},
+ {action:'query',count:1,before:['One new prediction is available','CPD 270 ranks eighth under the active strategy. The agent can now query it from CPD 239.'],after:['One prediction changes the decision','FEP predicts 1.01 nM. CPD 270 moves from eighth to first. Both SAR columns still rank it fourteenth.'],focus:'rank'},
+ {action:'make',name:'CPD 270',before:['Spend two steps to test CPD 270','The 1.01 nM value is a noisy prediction. The agent must make the compound and assay it.'],after:['The assay confirms 1 nM','This replay used 17 synthesis steps versus 21 for SAR + cost (19% fewer). With 25 FEP queries, it spent $42 versus $21.'],focus:'assay'}
 ];
 let narrated=false;
-function duration(){
- if(liveLevel.key==='RENIN'&&run().frames[index].liveRanks)return narrated?reninStory[index].seconds:index?4.3:3;
- return Math.max(run().frames[index].liveRanks?3.6:1.05,projection.D.paths.movie[index].seconds??2.6);
+function addedStages(frameIndex){
+ if(!frameIndex)return [];
+ const f=run().frames[frameIndex],before=new Set(run().frames[frameIndex-1].stock);
+ return f.stock.filter(n=>!before.has(n));
 }
-const moments=[['aim',0],['press',.17],['pop',.39],['settled',.85]];
+function actionPhases(index){
+ if(run().won&&index===run().frames.length-1)return index?['aim','press','charge']:[];
+ if(!index)return ['settled'];
+ const f=run().frames[index],phases=['aim','press','charge'];
+ if(f.liveRanks){
+  phases.push('pop');
+  const col=f.liveRanks.activeColumn;
+  const leaders=snapshot=>snapshot.entries.filter(e=>e.ranks[col]<=3).map(e=>e.id);
+  const previous=leaders(run().frames[index-1]?.liveRanks??f.liveRanks),now=leaders(f.liveRanks);
+  if(previous.some(id=>!now.includes(id)))phases.push('depart');
+  if(now.some(id=>!previous.includes(id)))phases.push('arrive');
+ }
+ if(addedStages(index).length)phases.push('inventory');
+ phases.push('settled');
+ return phases;
+}
 let rankProgress=null;
 function setPhase(value,progress=null){
  rankProgress=progress;phase=value;tick++;painted.clear();delete document.body.dataset.ready;sync();
 }
 function sync(){
  if(!projection||ready.size<2)return;
+ const holding=segment==='intro'&&index>0;
+ paintFrame(holding?index-1:index,holding?'settled':phase,holding);
+}
+function paintFrame(index,phase,holding){
  const f=run().frames[index],intent=f.action==='open'?'':f.action;
- const after=phase==='pop'||phase==='settled',prior=Math.max(0,index-1),at=after?index:prior;
+ const after=phase!=='aim'&&phase!=='press',prior=Math.max(0,index-1),at=after?index:prior;
  const old=run().frames[prior],dq=f.queries-old.queries,ds=f.spent-old.spent;
  const delta={queries:dq,steps:ds,money:dq+ds};
- const focus=projection.node($('focus').value),beat=projection.D.paths.movie[index];
+ const beat=projection.D.paths.movie[index];
+ const focus=holding?projection.node(beat.candidate||f.targets.at(-1)):projection.node($('focus').value);
  const pair=phase==='settled'&&['prediction','assay'].includes(beat.beat)&&projection.cid(focus)===beat.candidate?
    {from:projection.node(beat.reference),to:projection.node(beat.candidate),measured:beat.beat==='assay'}:null;
  const cue=narrated?reninStory[index]:null;
  const story=cue&&$('withSlides').checked?{lines:after?cue.after:cue.before,focus:after?cue.focus:undefined,tone:cue.tone}:null;
  const decision={story,ranking:f.ranking,beforeRanks:old.liveRanks,afterRanks:f.liveRanks,
-   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:duration()*210,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
+   axisCount:run().frames[0].liveRanks?.entries.length,progress:rankProgress,animateMs:1250/PLAYBACK_RATE,addedStages:addedStages(index),stock:f.stock,parents:f.parents,model:f.decision?.model,estimate:f.decision?.estimate,unlocked:[]};
  if(liveLevel.key==='RENIN'&&intent==='make'&&!isOracle()&&[2,3].includes(+$('policy').value)){
   const priorSet=new Set(old.made),now=new Set(f.made);
   const reachable=new Set();
@@ -75,38 +104,70 @@ function sync(){
   }
   decision.unlocked=[...newly];
  }
- put('board',{type:'board-frame',index,tick,phase,delta,pair,focus,decision,inspected,f:projection.states[at],
+ put('board',{type:'board-frame',index,tick,phase,delta,pair,focus,decision,inspected,f:projection.states[phase==='charge'?prior:at],cash:f.spent+f.queries,
    info:after?beat.caption:'',playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,cutoff:$('cut').value,archived:false,setting:isOracle()?'ideal':$('error').value});
- put('brain',{type:'brain-frame',autoView:narrated&&$('withSlides').checked?(index===2||index===3?'retro':'brain'):null,watchSquare:narrated&&$('withSlides').checked&&index===2?'CPD_121':null,moveIndex:index,index:at,tick,phase,delta,focus:projection.cid(after?focus:old.targets[old.targets.length-1])});
+ put('brain',{type:'brain-frame',transport:transportState(),autoView:narrated&&$('withSlides').checked?(index===2||index===3?'retro':'brain'):null,watchSquare:narrated&&$('withSlides').checked&&index===2?'CPD_121':null,moveIndex:index,index:at,tick,phase:phase==='charge'?'pop':after?'settled':phase,delta,focus:projection.cid(after?focus:old.targets[old.targets.length-1])});
 }
 window.addEventListener('message',e=>{
  const side=['board','brain'].find(k=>e.source===frameEl(k).contentWindow);if(!side)return;
- if(e.data?.type==='loaded'){if(e.data.generation!==generation)return;ready.add(side);sync();if(ready.size===2&&timer===null)schedule(remaining);}
- if(e.data?.type==='painted'&&e.data.tick===tick){painted.add(side);if(painted.size===2)document.body.dataset.ready=String(tick);}
- if(e.data?.type==='navigate'){if(e.data.delta===0)$('play').click();else if(e.data.delta>0)forward();else step(index-1);}
+ if(e.data?.type==='loaded'){if(e.data.generation!==generation)return;ready.add(side);sync();}
+ if(e.data?.type==='painted'&&e.data.tick===tick){painted.add(side);if(painted.size===2){document.body.dataset.ready=String(tick);startClock();}}
+ if(e.data?.type==='navigate'){if(e.data.delta===0)$('play').click();else navigateBeat(e.data.delta);}
 });
 function embed(template,marker,payload){
  const safe=JSON.stringify(payload).replaceAll('<','\\u003c');
- return template.replace(marker,()=>safe).replaceAll("type:'loaded',side:","generation:"+generation+",type:'loaded',side:");
+ return template.replace('<html','<html style="--replay-rate:'+PLAYBACK_RATE+'"').replace(marker,()=>safe).replaceAll("type:'loaded',side:","generation:"+generation+",type:'loaded',side:");
 }
 
 let active;
 const isOracle=()=>$('policy').value==='oracle';
 const board=()=>data.boards[$('target').value],run=()=>active;
 function options(el,items){el.replaceChildren(...items.map(([v,t])=>new Option(t,v)));}
-function cancelClock(){clearTimeout(timer);timer=null;}
-function schedule(ms){
- cancelClock();remaining=ms;
- if((!playing&&!oneMove)||ready.size!==2)return;
+const PLAYBACK_RATE=0.75;
+const SCENE_HOLD_MS=5000, SLIDE_MS=10000;
+const phaseMotion={aim:850,press:1050,charge:2900,pop:2150,depart:2750,arrive:2900,inventory:2500,settled:900};
+let timeline=[],beatIndex=0,countInterval=null;
+function makeTimeline(){
+ timeline=[];
+ run().frames.forEach((frame,index)=>{
+  if($('withSlides').checked)timeline.push({index,segment:'intro',phase:index?'aim':'settled'});
+  for(const phase of actionPhases(index))timeline.push({index,segment:'action',phase});
+ });
+ if(run().won)for(const segment of ['outro','comparison'])timeline.push({index:run().frames.length-1,segment,phase:'result'});
+ for(const [i,beat] of timeline.entries()){
+  if(beat.segment!=='action'){beat.hold=beat.segment==='outro'?SCENE_HOLD_MS:SLIDE_MS;continue;}
+  const next=timeline[i+1];
+  beat.hold=beat.phase==='settled'&&(next?.segment==='intro'||next?.segment==='outro')?SCENE_HOLD_MS:0;
+ }
+}
+function timeLeft(){return timer===null?remaining:Math.max(0,deadline-performance.now());}
+function displayTime(){
+ const left=timeLeft(),hold=timeline[beatIndex]?.hold??SLIDE_MS;
+ const showCountdown=hold>0&&left<=hold;
+ $('countdown').style.visibility=segment==='finished'||showCountdown?'visible':'hidden';
+ $('countdown').classList.toggle('done',segment==='finished');
+ const label=segment==='finished'?'Done':Math.ceil(left/1000)+' s';
+ if($('countdown').textContent!==label)$('countdown').textContent=label;
+}
+function stopClock(){
+ remaining=timeLeft();
+ clearTimeout(timer);clearInterval(countInterval);timer=null;countInterval=null;
+}
+function startClock(){
+ if(!playing||timer!==null||document.body.dataset.ready!==String(tick))return;
  deadline=performance.now()+remaining;
- timer=setTimeout(advanceClock,remaining);
+ timer=setTimeout(()=>navigateBeat(1),remaining);
+ countInterval=setInterval(displayTime,100);
+ displayTime();
+}
+function transportState(){
+ return {playing,canBack:beatIndex>0||segment==='finished',canForward:segment!=='finished'};
 }
 function setPlaying(value){
- oneMove=false;
- if(value===playing){if(!value)cancelClock();return;}
- if(!value&&timer!==null)remaining=Math.max(0,deadline-performance.now());
- playing=value;$('play').textContent=playing?'Pause':'Play';
- if(playing)schedule(remaining);else cancelClock();
+ stopClock();playing=value;
+ $('play').textContent=segment==='finished'?'Replay':playing?'Pause':'Play';
+ for(const side of ready)put(side,{type:'clock',paused:!playing,transport:transportState()});
+ displayTime();startClock();
 }
 function genericCard(f){
  const b=board(),previous=run().frames[Math.max(0,index-1)];
@@ -134,59 +195,78 @@ function showCard(card,closing=false){
  $('stepSheet').classList.toggle('victory',closing&&run().won);
  layoutSheet();$('sheetKicker').textContent=$('target').value+' · '+(closing?'Campaign result':'Move '+(index+1)+' of '+run().frames.length);
  $('sheetTitle').textContent=card[0];$('sheetVisual').innerHTML=card[1];$('sheetNote').innerHTML=card[2];
- $('reveal').textContent=closing?'Return to the campaign':'Play this move →';$('stepSheet').hidden=false;
+ $('reveal').textContent=closing?'Compare strategies →':'Play this move →';$('stepSheet').hidden=false;
 }
-function startAction(){
- $('stepSheet').hidden=true;segment='action';oneMove=!playing&&index>0;
- setPhase(index?'aim':'settled');schedule(duration()*1000*(index?moments[1][1]:1));
+function dockResult(docked){
+ const sheet=$('stepSheet');
+ sheet.classList.toggle('docked',docked);
+ if(docked)$('game').parentElement.append(sheet);
+ else $('scene').after(sheet);
 }
 function finishReplay(){
- cancelClock();segment='finished';$('stepSheet').hidden=true;setPlaying(false);remaining=0;$('next').disabled=true;
+ const keepComparison=segment==='comparison';
+ segment='finished';setPlaying(false);
+ if(keepComparison){dockResult(true);$('reveal').hidden=true;}
+ else $('stepSheet').hidden=true;
+ $('next').disabled=true;$('prev').disabled=false;
 }
-function advanceClock(){
- cancelClock();
- if(segment==='intro'){startAction();return;}
- if(segment==='outro'){finishReplay();return;}
- const pos=moments.findIndex(([name])=>name===phase);
- if(pos<3){
-  setPhase(moments[pos+1][0]);
-  if(phase==='settled'){
-   if(winningMove()){showVictory();return;}
-   oneMove=false;
-  }
-  schedule(duration()*1000*((moments[pos+2]?.[1]??1)-moments[pos+1][1]));return;
- }
- if(index<run().frames.length-1){show(index+1);return;}
- if(winningMove()){showVictory();return;}
- finishReplay();
-}
-function winningMove(){return run().won&&index===run().frames.length-1&&run().frames[index].action==='make';}
 function showVictory(){
- setPlaying(false);segment='outro';
  const f=run().frames[index],b=board(),id=f.made.reduce((best,n)=>b.products[n].p>b.products[best].p?n:best);
  const potency=Number((10**(9-b.products[id].p)).toPrecision(3))+' nM';
  const detail=b.products[id].name+' · '+potency+' measured';
  const costs=f.spent+' synthesis steps · '+f.queries+' FEP queries · $'+(f.spent+f.queries)+' spent';
  showCard(['Campaign won',b.drawings[id]+'<h2>'+detail+'</h2>',costs+(narrated?' · 19% fewer synthesis steps than SAR + cost (21 steps).':'')],true);
- $('reveal').focus();
+ dockResult(true);
+}
+function showComparison(){
+ const b=board(),cut=+$('cut').value,error=isOracle()?'ideal':$('error').value;
+ const winner=run().frames.at(-1).made.reduce((a,c)=>b.products[c].p>b.products[a].p?c:a);
+ const chart=metric=>strategyComparison(b,data.draws[b.key],cut,error,metric,b.products[winner].name);
+ const controls='<label>Compare <select id="resultMetric"><option value="stepInterval">Synthesis steps</option><option value="moneyInterval">Total spend ($)</option></select></label>';
+ const note=error==='ideal'?'Ideal FEP · deterministic results.':'Dots show medians. Whiskers span the middle 50% of 101 FEP error draws.';
+ showCard(['Four strategies, one opening inventory',controls+'<div id="resultChart">'+chart('stepInterval')+'</div>',note]);
+ $('sheetKicker').textContent=b.key+' · Strategy comparison · LoMap ≥ '+cut.toFixed(2)+' · '+error+' FEP';
+ $('resultMetric').onchange=e=>{$('resultChart').innerHTML=chart(e.target.value);};
+ $('reveal').textContent='Finish →';
 }
 window.addEventListener('resize',layoutSheet);
 
-function show(i,keep=false){
- inspected=keep;
- const r=run(),b=board();index=Math.max(0,Math.min(i,r.frames.length-1));const f=r.frames[index];
- if(!keep){options($('focus'),f.targets.map(n=>[n,b.products[n].name]));$('focus').value=f.targets.reduce((a,c)=>(f.action==='query'?(f.forecasts?.[a]??b.products[a].p)>(f.forecasts?.[c]??b.products[c].p):b.products[a].p>b.products[c].p)?a:c);}
- const beat=projection.D.paths.movie[index];
- if(!keep&&beat.beat==='prediction')$('focus').value=projection.node(beat.candidate);
- if(keep){sync();return;}
- cancelClock();oneMove=false;$('stepSheet').hidden=true;
- if($('withSlides').checked){
-  segment='intro';setPhase(index?'aim':'settled');showCard(cardForStep());schedule(index===2&&deck?9000:6000);
- }else startAction();
- $('count').textContent=(index+1)+' / '+r.frames.length;$('scrub').max=r.frames.length-1;$('scrub').value=index;
- $('prev').disabled=index===0;$('next').disabled=false;
- $('rule').textContent=r.rule+(index===r.frames.length-1?'  '+(r.end||(Math.max(...f.made.map(n=>b.products[n].p))===Math.max(...Object.values(b.products).map(x=>x.p))?'Winner assayed.':'No eligible move remains.')):'');
+function displayBeat(position){
+ stopClock();
+ beatIndex=position;
+ const beat=timeline[position],changedMove=index!==beat.index;
+ index=beat.index;segment=beat.segment;
+ const f=run().frames[index],b=board(),r=run();
+ if(changedMove||!$('focus').options.length){
+  options($('focus'),f.targets.map(n=>[n,b.products[n].name]));
+  $('focus').value=f.targets.reduce((a,c)=>(f.action==='query'?(f.forecasts?.[a]??b.products[a].p)>(f.forecasts?.[c]??b.products[c].p):b.products[a].p>b.products[c].p)?a:c);
+  const storyBeat=projection.D.paths.movie[index];
+  if(storyBeat.beat==='prediction')$('focus').value=projection.node(storyBeat.candidate);
+ }
+ if(changedMove)inspected=false;
+ remaining=beat.hold||phaseMotion[beat.phase]/PLAYBACK_RATE;
+ dockResult(false);$('reveal').hidden=false;$('stepSheet').hidden=true;
+ if(segment==='intro')showCard(cardForStep());
+ if(segment==='outro')showVictory();
+ if(segment==='comparison')showComparison();
+ setPhase(beat.phase);
+ $('count').textContent=(index+1)+' / '+r.frames.length;
+ $('scrub').max=r.frames.length-1;$('scrub').value=index;
+ $('prev').disabled=position===0;$('next').disabled=false;
+ $('rule').textContent=r.rule+(index===r.frames.length-1?'  '+(r.end||''):'');
+ $('play').textContent=playing?'Pause':'Play';
+ displayTime();
 }
+function navigateBeat(delta){
+ if(segment==='finished'){
+  if(delta<0)displayBeat(timeline.length-1);
+  return;
+ }
+ const next=beatIndex+delta;
+ if(next>=timeline.length){finishReplay();return;}
+ if(next>=0)displayBeat(next);
+}
+function seekMove(i){displayBeat(timeline.findIndex(b=>b.index===i));}
 function setup(){
  setPlaying(false);const i=+$('policy').value;
  const cutoff=+$('cut').value,error=$('error').value;
@@ -214,7 +294,7 @@ function setup(){
  projection=project(key,liveLevel,active,data.native[key],oracle||error==='ideal');
  generation++;ready.clear();$('game').srcdoc=embed(data.gameTemplate,'__LEVELS__',{[key]:liveLevel});
  $('brainPane').srcdoc=embed(data.brainTemplate,'__DEMO_DATA__',projection.D);fit();
- $('cutLabel').hidden=!(usesFep||(oracle&&$('route').value==='fep'));$('errorLabel').hidden=!usesFep;$('routeLabel').hidden=!oracle;show(0);
+ $('cutLabel').hidden=!(usesFep||(oracle&&$('route').value==='fep'));$('errorLabel').hidden=!usesFep;$('routeLabel').hidden=!oracle;$('focus').replaceChildren();makeTimeline();displayBeat(0);
 }
 function chooseTarget(){setup();}
 options($('policy'),[...moviePolicies.map((p,i)=>[i,p[1]]),['oracle','Hindsight oracle']]);$('policy').value='3';
@@ -233,22 +313,28 @@ if(['0.60','0.70','0.80','0.90'].includes(cutKey))$('cut').value=cutKey;
 chooseTarget();
 if(entryKey==='ranks'||entryKey==='choice'){
  const firstPick=run().frames.findIndex(f=>f.ranking);
- if(firstPick>=0)show(firstPick);
+ if(firstPick>=0)seekMove(firstPick);
 }
-$('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>show(index,true);
-function step(i){setPlaying(false);show(i);}
-function forward(){
- if(segment==='intro'){setPlaying(false);startAction();return;}
- if(segment==='outro'){finishReplay();return;}
- if(index<run().frames.length-1)step(index+1);else if(segment==='action'){setPlaying(false);setPhase('settled');advanceClock();}
-}
-$('withSlides').onchange=()=>{if(!$('withSlides').checked&&segment==='intro')startAction();else if(segment==='outro')finishReplay();else if($('withSlides').checked)show(index);};
-$('reveal').onclick=()=>{if(segment==='outro')finishReplay();else{setPlaying(false);startAction();}};
-$('prev').onclick=()=>step(index-1);$('next').onclick=forward;$('scrub').oninput=e=>step(+e.target.value);
-$('play').onclick=()=>{if(segment==='outro'){finishReplay();return;}if(segment==='finished'){show(0);setPlaying(true);}else setPlaying(!playing);};
-$('play').textContent=playing?'Pause':'Play';
-document.addEventListener('keydown',e=>{if(['SELECT','INPUT'].includes(e.target.tagName))return;
- if(e.key==='ArrowRight'){e.preventDefault();forward();}else if(e.key==='ArrowLeft'){e.preventDefault();step(index-1);}
- else if(e.key==='Escape'&&segment==='intro'){startAction();}
+$('target').onchange=()=>{applyDefaults();chooseTarget();};$('route').onchange=$('cut').onchange=$('error').onchange=$('policy').onchange=setup;$('focus').onchange=()=>{inspected=true;sync();};
+$('withSlides').onchange=()=>{
+ const current=timeline[beatIndex],finished=segment==='finished';makeTimeline();
+ const same=timeline.findIndex(b=>b.index===current.index&&b.segment===current.segment&&b.phase===current.phase);
+ if(same>=0){displayBeat(same);if(finished)finishReplay();}else seekMove(index);
+};
+$('reveal').onclick=()=>{
+ if(segment==='comparison'){finishReplay();return;}
+ if(segment==='outro'){navigateBeat(1);return;}
+ navigateBeat(1);setPlaying(true);
+};
+$('prev').onclick=()=>navigateBeat(-1);$('next').onclick=()=>navigateBeat(1);
+$('scrub').oninput=e=>{setPlaying(false);seekMove(+e.target.value);};
+$('play').onclick=()=>{if(segment==='finished')displayBeat(0);setPlaying(!playing);};
+document.addEventListener('keydown',e=>{
+ if(e.target.closest('select,input,textarea'))return;
+ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+  e.preventDefault();navigateBeat(e.key==='ArrowRight'?1:-1);
+ }else if(e.code==='Space'){
+  e.preventDefault();if(!e.repeat)$('play').click();
+ }
 });
 </script></html>

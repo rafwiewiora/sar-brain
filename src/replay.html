@@ -30,12 +30,21 @@ main{max-width:none;width:100%;padding:10px clamp(12px,1.5vw,26px) 10px}header{p
 .rx-partner .mol{height:clamp(55px,5.6vw,85px)}.rx-partner .species b{font-size:10px;font-weight:500}
 .branchlabel{text-align:left;margin:9px 0 3px}
 @media(max-width:600px){.chainRow .species b{font-size:10px}.retro-cut>b{font-size:11px}.platformContents{grid-template-columns:minmax(75px,.6fr) minmax(0,1.7fr)}}
-#caption.storyBeat{background:#e5f6f2;border-left:4px solid #087c72;padding:9px 12px;border-radius:5px;color:#164a43}#caption.storyBeat span{display:inline-block;margin-right:12px;padding:4px 9px;border-radius:12px;background:#08736c;color:white;font-size:.77em;vertical-align:middle}.status [data-gain]::after{content:attr(data-gain);display:inline-block;font-size:15px;font-weight:750;border-radius:5px;padding:2px 5px;margin-left:4px;background:#e8ddfa;color:#542b95}.status #queries[data-gain]::after{color:#08675c;background:#d8f2eb}body[data-phase="pop"] .status [data-gain]{display:inline-block;transform:scale(1.12)}body[data-phase="pop"] .status [data-gain]::after{outline:2px solid currentColor}.bar .status{align-items:stretch;gap:20px}
+#caption.storyBeat{background:#e5f6f2;border-left:4px solid #087c72;padding:9px 12px;border-radius:5px;color:#164a43}#caption.storyBeat span{display:inline-block;margin-right:12px;padding:4px 9px;border-radius:12px;background:#08736c;color:white;font-size:.77em;vertical-align:middle}.status [data-gain]::after{content:attr(data-gain);display:inline-block;font-size:19px;font-weight:800;border-radius:6px;padding:3px 7px;margin-left:6px;vertical-align:middle;background:#e8ddfa;color:#542b95}.status #queries[data-gain]::after{color:#08675c;background:#d8f2eb}body[data-phase="pop"] .status [data-gain]{display:inline-block;transform:scale(1.12)}body[data-phase="pop"] .status [data-gain]::after{outline:2px solid currentColor}.bar .status{align-items:stretch;gap:20px}
 .status .metric{display:grid;min-width:118px;align-content:center;gap:3px;font:650 15px/1.15 system-ui;color:var(--mid)}
 .status .metric strong{display:block;font:750 40px/1 system-ui;font-variant-numeric:tabular-nums;letter-spacing:-.04em;transform-origin:left}
 .status #queries{color:#087b73}
 .squarelist .cell.storySquare{outline:3px solid #7645af;outline-offset:-3px}
-@media(prefers-reduced-motion:no-preference){body[data-phase=pop] .storySquare.discount b{animation:squareDrop .7s ease-out}@keyframes squareDrop{30%{transform:scale(1.4);color:#6236a9}}}
+#gridKey{font-size:15px;margin-top:9px}#gridKey strong{font-size:19px;color:var(--ink)}
+body[data-phase=pop] .squarelist .priceDrop{position:relative;z-index:1;grid-template-columns:auto auto;column-gap:3px;justify-content:center;background:#e9dafa;border:2px solid #7547a5;border-radius:6px;padding:2px 0}
+body[data-phase=pop] .priceDrop::before{content:attr(data-was) "→";font-size:12px;color:#654782}
+body[data-phase=pop] .priceDrop small{grid-column:1/-1}
+@media(prefers-reduced-motion:no-preference){body[data-phase=pop] .priceDrop{animation:squareDrop calc(.8s / var(--replay-rate, 1)) ease-out}@keyframes squareDrop{38%{transform:scale(1.12);box-shadow:0 2px 8px #69419766}}}
+
+body[data-phase="pop"] .status [data-gain]::after{font-size:23px;color:white;background:#6035a1;outline:0}
+body[data-phase="pop"] .status #queries[data-gain]::after{color:white;background:#08746c}
+body[data-phase] .cell.made b{font-size:22px;font-weight:800}
+body[data-phase] .cell.justMade{box-shadow:inset 0 0 0 2px #41916a}body[data-phase] .cell.justMade b{font-size:26px;color:#126840}
 </style></head><body><main>
 <header><div><h1>RENIN · Routes to the 1 nM compound</h1><p>15 measured references on 16 March 2006. CPD 270 was recorded on 23 October 2007.</p></div><nav id="paths" aria-label="Replay strategy"><button data-path="hindsight">Hindsight</button><button data-path="forward">Forward strategy</button></nav></header>
 <div class="bar"><nav id="views" aria-label="Visualization"><button data-view="brain">SAR Brain</button><button data-view="retro">Squares + retrosynthesis</button></nav>

@@ -28,7 +28,8 @@ function bestPanel(id){
  return options.find(p=>p.id===D.platform&&touched.has(p.goal))||[...options].reverse().find(p=>touched.has(p.goal))||options[0];
 }
 function setFocus(id,p){focus=id;panelId=p||bestPanel(id)?.id||D.platform}
-function stop(){clearInterval(timer);timer=null;$('play').textContent='▶';$('play').setAttribute('aria-label','Play replay')}
+let movieTransport=null;
+function stop(){if(D.movie)return;clearInterval(timer);timer=null;$('play').textContent='▶';$('play').setAttribute('aria-label','Play replay')}
 function closePopup(){$('popup').hidden=true;$('plot').querySelector('[data-group][aria-pressed="true"]')?.setAttribute('aria-pressed','false')}
 function go(index){
  frameIndex=Math.max(0,Math.min(index,frames().length-1));
@@ -66,7 +67,8 @@ function render(){
  $('queries').textContent=f.queries;
  $('shortResult').textContent=!D.movie&&frameIndex===frames().length-1?'Largest advance in recorded date · '+f.maxLeap+' days':'';
  $('position').textContent=(frameIndex+1)+' / '+frames().length;
- $('prev').disabled=frameIndex===0;$('next').disabled=frameIndex===frames().length-1;
+ if(movieTransport)paintMovieControls();
+ else{$('prev').disabled=frameIndex===0;$('next').disabled=frameIndex===frames().length-1;}
  document.querySelectorAll('[data-path]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.path===path)));
  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
  $('brain').hidden=view!=='brain';$('retro').hidden=view!=='retro';
@@ -263,13 +265,14 @@ function renderRetro(){
   const costHint=D.movie?'':pid!==D.platform?'':discounted?discounted+' compounds · 9 → 2 steps each':f.made.includes(D.winner)?'CPD 270 made':f.quotes[D.winner]+' steps to CPD 270';
   const buttons=group.ids.filter(id=>id in f.quotes).map(id=>{
    const made=f.made.includes(id),cost=f.quotes[id],less=cost<start[id];
-   const label=display(id)+' · '+(made?'already made':cost+' steps from current inventory');
-   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(id===watchSquare?' storySquare':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"><b>'+(f.winningIds?.includes(id)?'★':made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
+   const priorCost=previous.quotes[id], priceDrop=!made&&Number.isFinite(priorCost)&&cost<priorCost;
+   const label=display(id)+' · '+(made?'already made':(priceDrop?priorCost+' → ':'')+cost+' steps from current inventory');
+   return '<button aria-label="'+E(label)+'" title="'+E(label)+'" class="cell '+(made?'made':less?'discount':'')+(D.movie&&made&&!previous.made.includes(id)?' justMade':'')+(D.movie&&priceDrop?' priceDrop':'')+(id===watchSquare?' storySquare':'')+(id===focus&&pid===p.id?' active':'')+'" data-pid="'+E(pid)+'" data-cell="'+id+'"'+(D.movie&&priceDrop?' data-was="'+priorCost+'"':'')+'><b>'+(f.winningIds?.includes(id)?'★':made?'✓':cost)+'</b><small>'+display(id)+'</small></button>';
   }).join('');
   const drawing=D.molecules[group.goal]?'<div class="mol">'+mol(group.goal)+'</div>':'';
   return '<article class="platformCard '+(kept?'kept':'')+'"><h3>'+E(title)+'</h3><p class="muted">'+(kept?'Retained':'')+((kept&&costHint)?' · ':'')+E(costHint)+'</p><div class="platformContents">'+drawing+'<div class="squarelist">'+buttons+'</div></div></article>';
  }).join('');
- $('gridKey').textContent='Each square is one compound. Number = remaining steps. Purple = cheaper since the start. ✓ = made.';
+ $('gridKey').innerHTML='<strong>Number = remaining synthesis steps</strong> · Purple = cheaper since the start · ✓ = made';
  renderRoute(focus);
 }
 $('paths').addEventListener('click',e=>{const b=e.target.closest('[data-path]');if(b)setPath(b.dataset.path)});
@@ -287,8 +290,16 @@ $('popup').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.hasA
  else if(b.dataset.openpanel){const p=panelFor(b.dataset.openpanel);setFocus(pickInPanel(p),p.id);switchView('retro')}};
 document.addEventListener('click',e=>{if(!e.target.closest('#plot,#popup'))closePopup()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePopup();stop()}if(e.target.closest('select,input,textarea,summary'))return;
+ if(D.movie&&e.code==='Space'&&!e.defaultPrevented&&!e.target.closest('button')){
+  e.preventDefault();if(!e.repeat)parent.postMessage({type:'navigate',delta:0},'*');return;
+ }
  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();if(D.movie){parent.postMessage({type:'navigate',delta:e.key==='ArrowRight'?1:-1},'*');return}stop();go(frameIndex+(e.key==='ArrowRight'?1:-1))}});
 window.addEventListener('resize',()=>{if(view==='brain')renderBrain();else renderRoute(focus)});
+function paintMovieControls(){
+ const {playing,canBack,canForward}=movieTransport;
+ $('prev').disabled=!canBack;$('next').disabled=!canForward;
+ $('play').textContent=playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',playing?'Pause replay':'Play replay');
+}
 if(D.movie){
  document.querySelector('h1').textContent=D.movie.title;
  document.querySelector('main>header p').textContent=D.movie.subtitle;
@@ -298,7 +309,16 @@ if(D.movie){
  for(const [id,delta] of [['prev',-1],['next',1],['play',0]])$(id).onclick=()=>parent.postMessage({type:'navigate',delta},'*');
  let lastGuidedMove=null;
  window.addEventListener('message',e=>{
-  if(e.source!==parent||e.data?.type!=='brain-frame')return;
+  if(e.source!==parent)return;
+  if(e.data?.transport){movieTransport=e.data.transport;paintMovieControls();}
+  if(e.data?.type==='clock'){
+   for(const anim of document.getAnimations()){
+    if(e.data.paused&&anim.playState==='running')anim.pause();
+    else if(!e.data.paused&&anim.playState==='paused')anim.play();
+   }
+   return;
+  }
+  if(e.data?.type!=='brain-frame')return;
   if(e.data.autoView&&lastGuidedMove!==e.data.moveIndex){view=e.data.autoView;closePopup();}
   lastGuidedMove=e.data.moveIndex;watchSquare=e.data.watchSquare;
   const i=e.data.index, f=frames()[i];f.focus=e.data.focus; f.targets=[e.data.focus];

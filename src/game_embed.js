@@ -16,13 +16,34 @@ const rankPanel=document.createElement('section');
 rankPanel.id='reninDecision';
 rankPanel.hidden=true;
 nativeBoard.after(rankPanel);
+function stockRow(stock,added){
+ const ids=added.concat(stock.filter(n=>!added.includes(n)));
+ const items=ids.map(id=>'<div class="stockItem" data-stock-id="'+esc(id)+'">'+level.drawings[id]+'<span>'+esc(name(id))+(added.includes(id)?' <em>New</em>':'')+'</span></div>');
+ return '<section class="stockRow"><h3>Intermediates in stock · '+ids.length+'</h3>'+(items.length?'<div class="stockItems" tabindex="0">'+items.join('')+'</div>':'')+'</section>';
+}
 render=function(){
- const showingRanks=activeMove?.phase==='pop'&&!!activeMove.decision.afterRanks;
- nativeBoard.hidden=showingRanks;
- rankPanel.hidden=!showingRanks;
- document.body.classList.toggle('reninReplay',showingRanks);
+ const showingRanks=['pop','depart','arrive','settled'].includes(activeMove?.phase)&&!!activeMove.decision.afterRanks;
+ const oracleSummary=activeMove?.phase==='settled'&&!showingRanks&&activeMove.index>0;
+ const showingInventory=activeMove?.phase==='inventory';
+ nativeBoard.hidden=showingRanks||showingInventory||oracleSummary;
+ rankPanel.hidden=!nativeBoard.hidden;
+ document.body.classList.toggle('reninReplay',nativeBoard.hidden);
  if(showingRanks){renderRankBoard(activeMove);return;}
  cancelAnimationFrame(rankAnimation);
+ if(oracleSummary){
+  rankPanel.className='inventoryUpdate';
+  rankPanel.innerHTML='<h2>'+esc(name(activeMove.agentFocus))+'</h2>'+level.drawings[activeMove.agentFocus]+stockRow(activeMove.decision.stock,activeMove.decision.addedStages);
+  return;
+ }
+ if(showingInventory){
+  const {addedStages}=activeMove.decision;
+  rankPanel.className='inventoryUpdate';
+  rankPanel.innerHTML='<h2>Added to inventory</h2><div class="stockGallery">'+addedStages.map(id=>{
+   const count=level.order.filter(n=>!g.stock.has(n)&&level.routes[n].includes(id)).length;
+   return '<article data-stock-id="'+esc(id)+'">'+level.drawings[id]+'<b>'+esc(name(id))+'</b><small>'+count+' remaining '+(count===1?'compound uses':'compounds use')+' this intermediate</small></article>';
+  }).join('')+'</div>';
+  return;
+ }
  drawBoard();
  if(!activeMove)return;
  const {archived,f,playAction,agentFocus}=activeMove;
@@ -30,7 +51,7 @@ render=function(){
   $('stats').innerHTML='<span><b>'+f.spent+'</b>Synthesis steps</span><span><b>'+f.queries+'</b>FEP queries</span><span><b>'+nm(level.products[model.best].p)+'</b>Best assay</span>';
   $('goal').textContent='Replay the recorded selections from the original starting inventory.';
  }
- const {phase,delta,pair}=activeMove,after=phase==='pop'||phase==='settled';
+ const {phase,delta,pair}=activeMove,after=!['aim','press','charge'].includes(phase);
  document.body.dataset.phase=phase;
  const bulk=!after&&playAction==='query-all';
  $('bulkFep').classList.toggle('agentMove',bulk);
@@ -38,7 +59,11 @@ render=function(){
  if(!after&&!bulk&&pinned===agentFocus&&!stage){
   $('actions').querySelector('[data-action="'+playAction+'"]')?.classList.add('agentMove');
  }
- if(after&&delta.money)$('stats').querySelector('b').dataset.gain='+$'+delta.money;
+ if(phase==='charge'){
+  const counter=$('stats').querySelector('b');
+  counter.textContent='$'+activeMove.cash;
+  if(delta.money)counter.dataset.gain='+$'+delta.money;
+ }
  document.querySelector('.pairCard')?.remove();
  if(pair){
   const matched=level.comparisonDrawings?.[pair.from]&&level.comparisonDrawings?.[pair.to];
@@ -51,7 +76,17 @@ render=function(){
 };
 
 window.addEventListener('message',e=>{
- if(e.source!==parent||e.data?.type!=='board-frame')return;
+ if(e.source!==parent)return;
+ if(e.data?.type==='clock'){
+  rankMotionPaused=e.data.paused;
+  for(const animation of document.getAnimations()){
+   if(e.data.paused&&animation.playState==='running')animation.pause();
+   else if(!e.data.paused&&animation.playState==='paused')animation.play();
+  }
+  return;
+ }
+ if(e.data?.type!=='board-frame')return;
+ rankMotionPaused=false;
  const {f,focus,info,playAction,targets,archived,setting}=e.data;
  difficulty=setting;cut=e.data.cutoff;$('boardCut').value=cut;
  if(setting==='ideal'&&!$('difficulty').querySelector('[value="ideal"]'))$('difficulty').add(new Option('Ideal','ideal'));
@@ -65,7 +100,7 @@ window.addEventListener('message',e=>{
  }
  if(f.quotes){const base=g.price;g.price=n=>f.quotes[n]??base(n);}
  g.history.push(...f.history);
- activeMove={archived,f,playAction,targets,index:e.data.index,inspected:e.data.inspected,decision:e.data.decision,phase:e.data.phase,delta:e.data.delta,pair:e.data.pair,agentFocus:focus};pinned=focus;stage=null;message=info;render();
+ activeMove={archived,f,cash:e.data.cash,playAction,targets,index:e.data.index,inspected:e.data.inspected,decision:e.data.decision,phase:e.data.phase,delta:e.data.delta,pair:e.data.pair,agentFocus:focus};pinned=focus;stage=null;message=info;render();
  document.body.dataset.tick=e.data.tick;
  parent.postMessage({type:'painted',side:'board',tick:e.data.tick},'*');
 });
@@ -80,6 +115,10 @@ $('guide').onclick=()=>{
  }
 };
 document.addEventListener('keydown',e=>{
- if($('dialog').open||e.target.closest('select,input,textarea')||!['ArrowLeft','ArrowRight'].includes(e.key))return;
+ if($('dialog').open||e.defaultPrevented||e.target.closest('select,input,textarea'))return;
+ if(e.code==='Space'&&!e.target.closest('button')){
+  e.preventDefault();if(!e.repeat)parent.postMessage({type:'navigate',delta:0},'*');return;
+ }
+ if(!['ArrowLeft','ArrowRight'].includes(e.key))return;
  e.preventDefault();parent.postMessage({type:'navigate',delta:e.key==='ArrowRight'?1:-1},'*');
 });
