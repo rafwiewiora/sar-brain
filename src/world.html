@@ -30,12 +30,18 @@ body[data-phase="pop"] #stats b[data-gain]{display:inline-block;transform:scale(
 #reninDecision.liveRanks{padding:6px 6px 0;max-height:none;overflow:visible}
 .liveRanks .rankTitle,.rankInfo header{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .liveRanks .rankTitle{height:58px;max-width:940px;margin:auto}.liveRanks .rankTitle h2{margin:0!important;font-size:clamp(18px,2.8vw,30px)!important}.rankTitle .decisionButton{margin:0;font-size:15px;padding:8px 12px}
-.rankInfo{border-top:1px solid #cdd9e3;max-width:940px;margin:auto;padding:12px 4px;text-align:left}
-.rankInfo header{position:static;height:auto;background:white;color:#20364d;padding:0;border:none}.rankInfo header label{font-size:13px;color:#53697c}.rankInfo select{max-width:155px}
-.infoBody{display:grid;grid-template-columns:minmax(110px,28%) 1fr 1fr;align-items:center;gap:12px}.infoMol svg{display:block;width:100%;height:135px}
-.rankInfo h3{margin:2px 0;font-size:22px}.rankInfo p,.rankInfo small,.rankRange{margin:4px 0;font-size:14px;color:#435c70}.rankRange{display:block}.rankInfo .decisionResult{font-size:17px}
-.rankInfo .watchLink{padding:0;background:none;border:0;color:#603897;text-decoration:underline;font:inherit;font-weight:700}.rankInfo summary{cursor:pointer;color:#435c70;font-size:14px}.rankInfo details div{padding:6px;font-size:13px;line-height:1.6}.rankSeries,[data-rank-id]{cursor:pointer}
-@media(max-width:550px){.infoBody{gap:6px;grid-template-columns:25% 40% 1fr}.infoMol svg{height:98px}.rankTitle .decisionButton{font-size:12px}.rankInfo p,.rankRange{font-size:12px}}
+.rankInfo{border-top:1px solid #cdd9e3;max-width:1040px;margin:auto;padding:10px 6px;text-align:left}
+.rankInfo header{position:static;height:auto;background:white;color:#20364d;padding:0;border:none;font-size:22px}
+.rankInfo header label,.rankInfo select{font-size:16px}.rankInfo header label{color:#53697c}.rankInfo select{max-width:175px}
+.infoBody{display:grid;grid-template-columns:34% minmax(0,1fr) minmax(0,.88fr);align-items:center;gap:20px}
+.infoMol svg{display:block;width:100%;height:clamp(168px,23vh,234px)}
+.rankInfo h3{margin:3px 0;font-size:32px;line-height:1.1}
+.rankInfo p,.rankInfo small,.rankRange{margin:5px 0;font-size:19px;line-height:1.3;color:#435c70}
+.rankInfo small,.rankRange{font-size:16px}.rankRange{display:block}
+.rankInfo .infoMovement>b,.rankInfo p>b{font-size:21px}.rankInfo .decisionResult{font-size:23px}
+.rankInfo .watchLink{padding:0;background:none;border:0;color:#603897;text-decoration:underline;font:inherit;font-weight:700}
+.rankInfo summary{cursor:pointer;color:#435c70;font-size:16px}.rankInfo details div{padding:6px;font-size:15px;line-height:1.6}.rankSeries,[data-rank-id]{cursor:pointer}
+@media(max-width:550px){.infoBody{gap:8px;grid-template-columns:38% 1fr}.infoMol{grid-row:span 2}.infoMol svg{height:150px}.rankTitle .decisionButton{font-size:12px}.rankInfo h3{font-size:25px}.rankInfo p,.rankRange{font-size:16px}}
 </style></head><body><header><strong>SAR Brain</strong><div><label><span class="sr">Campaign</span><select id="level"><option>S1P1</option><option>ABL1</option><option>RENIN</option></select></label><label class="difficulty">LoMap ≥ <select id="boardCut"><option>0.60</option><option>0.70</option><option>0.80</option><option>0.90</option></select></label><label class="difficulty">Difficulty <select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></label><a id="strategyReplay" href="strategy_movie.html">Watch strategies</a><button id="guide">Game rules</button></div></header>
 <main><div class="heading"><div><h1>The medicinal chemistry board</h1><p id="goal"></p></div><div class="stats" aria-live="polite" id="stats"></div></div>
 <div class="board"><div class="bulkBar"><button id="bulkFep" type="button" data-action="query-all"></button></div><div class="atlas"><svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 630" role="group" aria-label="Interactive compound and synthesis map"></svg></div><aside class="focus"><div class="eyebrow" id="role"></div><h2 id="title"></h2><div class="structure" id="structure"></div><div class="detail" id="detail"></div><div class="actions" id="actions"></div></aside></div>
