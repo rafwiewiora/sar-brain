@@ -18,7 +18,7 @@ def inline_json(value):
 
 
 def build():
-    datasets = {field: {} for field in ("archive", "boards", "archiveLevels", "native")}
+    datasets = {field: {} for field in ("boards", "native")}
     for path in sorted((ROOT / "data").glob("*.json.gz")):
         key = path.name.split(".")[0]
         with gzip.open(path, "rt", encoding="utf-8") as stream:
@@ -39,9 +39,18 @@ def build():
     datasets["gameTemplate"] = game.replace("__WORLD__", board_logic + "\n" + source("game_embed.js"))
     datasets["brainTemplate"] = source("replay.html").replace("__DEMO_SCRIPT__", source("replay.js"))
     logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "native_movie.js"))
+    story_logic = "\n".join(source(name) for name in ("engine.js", "strategy_play.js", "story.js"))
+    for key, level in datasets["boards"].items():
+        story_data = {"board": level, "draws": datasets["draws"][key]}
+        story = source("story.html").replace("__TARGET__", key).replace("__DATA__", inline_json(story_data)).replace("__LOGIC__", story_logic)
+        (OUT / (key + "_intro.html")).write_text(story, encoding="utf-8")
+    renin = datasets["native"]["RENIN"]
+    renin["openingInventory"] = renin.pop("archivedPaths")["forward"][0]["inventory"]
     movie = source("movie.html").replace("__DATA__", inline_json(datasets)).replace("__SCENE__", logic)
     (OUT / "strategy_movie.html").write_text(movie, encoding="utf-8")
-    for path in (ROOT / "media").glob("*.mp4"):
+    for path in (ROOT / "media").iterdir():
+        if path.suffix not in (".mp4", ".pdf"):
+            continue
         shutil.copyfile(path, OUT / path.name)
 
 

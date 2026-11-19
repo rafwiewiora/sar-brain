@@ -27,3 +27,19 @@ for(const key of ['RENIN','ABL1','S1P1']){
  }
 }
 console.log(checked+' representative trajectories reproduce the saved result and every action charge.');
+const oracle=vm.runInContext('hindsightReplay',ctx);
+const distances={RENIN:[1,2,2,5],ABL1:[Infinity,Infinity,Infinity,Infinity],S1P1:[1,Infinity,Infinity,Infinity]};
+for(const [key,expected] of Object.entries(distances)){
+ const b=JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root,'data',key+'.json.gz')))).boards;
+ for(const [i,cut] of [.6,.7,.8,.9].entries()){
+  const r=oracle(b,cut),direct=oracle(b,cut,true);
+  assert.equal(r.hops,expected[i]);assert.equal(r.won,Number.isFinite(expected[i]));
+  assert.equal(direct.total,r.directCost);assert(direct.won);
+  if(r.won){
+   assert.equal(r.frames.at(-1).queries,r.hops);
+   for(const [j,from] of r.path.slice(0,-1).entries())assert(b.edges.some(([a,c,s])=>s>=cut-1e-12&&((a===from&&c===r.path[j+1])||(c===from&&a===r.path[j+1]))));
+   assert(r.total>=direct.total);
+  }else assert.equal(r.frames.length,1);
+ }
+}
+console.log('Oracle reachability, path edges and costs checked at all twelve target/cutoff settings.');

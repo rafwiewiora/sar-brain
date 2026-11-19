@@ -1,194 +1,434 @@
 {
-  "0,0.6,easy": {
+  "2,0.6,easy": {
     "count": 101,
     "wins": 101,
     "seed": 55,
     "median": 35,
     "low": 35,
-    "high": 35
+    "high": 35,
+    "moneyInterval": [
+      35,
+      35,
+      35
+    ],
+    "stepInterval": [
+      9,
+      9,
+      9
+    ]
   },
-  "0,0.6,medium": {
+  "2,0.6,medium": {
     "count": 101,
     "wins": 101,
     "seed": 89,
     "median": 35,
     "low": 35,
-    "high": 45
+    "high": 45,
+    "moneyInterval": [
+      35,
+      35,
+      39
+    ],
+    "stepInterval": [
+      9,
+      9,
+      13
+    ]
   },
-  "0,0.6,hard": {
+  "2,0.6,hard": {
     "count": 101,
     "wins": 101,
     "seed": 79,
     "median": 39,
     "low": 35,
-    "high": 59
+    "high": 59,
+    "moneyInterval": [
+      35,
+      39,
+      47
+    ],
+    "stepInterval": [
+      9,
+      13,
+      21
+    ]
   },
-  "0,0.7,easy": {
+  "2,0.7,easy": {
     "count": 101,
     "wins": 101,
     "seed": 48,
     "median": 39,
     "low": 39,
-    "high": 39
+    "high": 39,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "0,0.7,medium": {
+  "2,0.7,medium": {
     "count": 101,
     "wins": 101,
     "seed": 53,
     "median": 39,
     "low": 39,
-    "high": 39
+    "high": 39,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "0,0.7,hard": {
+  "2,0.7,hard": {
     "count": 101,
     "wins": 101,
     "seed": 83,
     "median": 39,
     "low": 39,
-    "high": 49
+    "high": 49,
+    "moneyInterval": [
+      39,
+      39,
+      43
+    ],
+    "stepInterval": [
+      13,
+      13,
+      17
+    ]
   },
-  "0,0.8,easy": {
+  "2,0.8,easy": {
     "count": 101,
     "wins": 101,
     "seed": 60,
     "median": 39,
     "low": 39,
-    "high": 42
+    "high": 42,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "0,0.8,medium": {
+  "2,0.8,medium": {
     "count": 101,
     "wins": 101,
     "seed": 95,
     "median": 39,
     "low": 38,
-    "high": 43
+    "high": 43,
+    "moneyInterval": [
+      39,
+      39,
+      42
+    ],
+    "stepInterval": [
+      13,
+      13,
+      17
+    ]
   },
-  "0,0.8,hard": {
+  "2,0.8,hard": {
     "count": 101,
     "wins": 101,
     "seed": 80,
     "median": 42,
     "low": 38,
-    "high": 53
+    "high": 53,
+    "moneyInterval": [
+      39,
+      42,
+      45
+    ],
+    "stepInterval": [
+      13,
+      17,
+      19
+    ]
   },
-  "0,0.9,easy": {
+  "2,0.9,easy": {
     "count": 101,
     "wins": 101,
     "seed": 94,
     "median": 35,
     "low": 35,
-    "high": 53
+    "high": 53,
+    "moneyInterval": [
+      35,
+      35,
+      52
+    ],
+    "stepInterval": [
+      21,
+      21,
+      29
+    ]
   },
-  "0,0.9,medium": {
+  "2,0.9,medium": {
     "count": 101,
     "wins": 101,
     "seed": 83,
     "median": 37,
     "low": 35,
-    "high": 53
+    "high": 53,
+    "moneyInterval": [
+      35,
+      37,
+      45
+    ],
+    "stepInterval": [
+      21,
+      21,
+      27
+    ]
   },
-  "0,0.9,hard": {
+  "2,0.9,hard": {
     "count": 101,
     "wins": 101,
     "seed": 88,
     "median": 39,
     "low": 35,
-    "high": 52
+    "high": 52,
+    "moneyInterval": [
+      37,
+      39,
+      45
+    ],
+    "stepInterval": [
+      21,
+      25,
+      27
+    ]
   },
-  "4,0.6,easy": {
+  "3,0.6,easy": {
     "count": 101,
     "wins": 101,
     "seed": 55,
     "median": 35,
     "low": 35,
-    "high": 35
+    "high": 35,
+    "moneyInterval": [
+      35,
+      35,
+      35
+    ],
+    "stepInterval": [
+      9,
+      9,
+      9
+    ]
   },
-  "4,0.6,medium": {
+  "3,0.6,medium": {
     "count": 101,
     "wins": 101,
     "seed": 89,
     "median": 35,
     "low": 35,
-    "high": 45
+    "high": 45,
+    "moneyInterval": [
+      35,
+      35,
+      39
+    ],
+    "stepInterval": [
+      9,
+      9,
+      13
+    ]
   },
-  "4,0.6,hard": {
+  "3,0.6,hard": {
     "count": 101,
     "wins": 101,
     "seed": 79,
     "median": 39,
     "low": 35,
-    "high": 59
+    "high": 59,
+    "moneyInterval": [
+      35,
+      39,
+      47
+    ],
+    "stepInterval": [
+      9,
+      13,
+      21
+    ]
   },
-  "4,0.7,easy": {
+  "3,0.7,easy": {
     "count": 101,
     "wins": 101,
     "seed": 48,
     "median": 39,
     "low": 39,
-    "high": 39
+    "high": 39,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "4,0.7,medium": {
+  "3,0.7,medium": {
     "count": 101,
     "wins": 101,
     "seed": 53,
     "median": 39,
     "low": 39,
-    "high": 39
+    "high": 39,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "4,0.7,hard": {
+  "3,0.7,hard": {
     "count": 101,
     "wins": 101,
     "seed": 83,
     "median": 39,
     "low": 39,
-    "high": 49
+    "high": 49,
+    "moneyInterval": [
+      39,
+      39,
+      43
+    ],
+    "stepInterval": [
+      13,
+      13,
+      17
+    ]
   },
-  "4,0.8,easy": {
+  "3,0.8,easy": {
     "count": 101,
     "wins": 101,
     "seed": 60,
     "median": 39,
     "low": 39,
-    "high": 42
+    "high": 42,
+    "moneyInterval": [
+      39,
+      39,
+      39
+    ],
+    "stepInterval": [
+      13,
+      13,
+      13
+    ]
   },
-  "4,0.8,medium": {
+  "3,0.8,medium": {
     "count": 101,
     "wins": 101,
     "seed": 95,
     "median": 39,
     "low": 38,
-    "high": 43
+    "high": 43,
+    "moneyInterval": [
+      39,
+      39,
+      42
+    ],
+    "stepInterval": [
+      13,
+      13,
+      17
+    ]
   },
-  "4,0.8,hard": {
+  "3,0.8,hard": {
     "count": 101,
     "wins": 101,
     "seed": 80,
     "median": 42,
     "low": 38,
-    "high": 53
+    "high": 53,
+    "moneyInterval": [
+      39,
+      42,
+      45
+    ],
+    "stepInterval": [
+      13,
+      17,
+      19
+    ]
   },
-  "4,0.9,easy": {
+  "3,0.9,easy": {
     "count": 101,
     "wins": 101,
-    "seed": 62,
-    "median": 47,
-    "low": 46,
-    "high": 51
+    "seed": 94,
+    "median": 35,
+    "low": 35,
+    "high": 53,
+    "moneyInterval": [
+      35,
+      35,
+      52
+    ],
+    "stepInterval": [
+      21,
+      21,
+      29
+    ]
   },
-  "4,0.9,medium": {
+  "3,0.9,medium": {
     "count": 101,
     "wins": 101,
-    "seed": 18,
-    "median": 47,
-    "low": 42,
-    "high": 51
+    "seed": 83,
+    "median": 37,
+    "low": 35,
+    "high": 53,
+    "moneyInterval": [
+      35,
+      37,
+      45
+    ],
+    "stepInterval": [
+      21,
+      21,
+      27
+    ]
   },
-  "4,0.9,hard": {
+  "3,0.9,hard": {
     "count": 101,
     "wins": 101,
-    "seed": 54,
-    "median": 46,
-    "low": 42,
-    "high": 51
+    "seed": 88,
+    "median": 39,
+    "low": 35,
+    "high": 52,
+    "moneyInterval": [
+      37,
+      39,
+      45
+    ],
+    "stepInterval": [
+      21,
+      25,
+      27
+    ]
   }
 }

@@ -9,7 +9,7 @@ const run=vm.runInContext('(level, index, cut, error) => summarizeDraws(level, m
 for(const file of fs.readdirSync(path.join(root,'data')).filter(f=>f.endsWith('.json.gz'))){
  const level=JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root,'data',file)))).boards;
  const summaries={};
- for(const i of [0,4])for(const cut of [.6,.7,.8,.9])for(const error of ['easy','medium','hard']){
+ for(const i of [2,3])for(const cut of [.6,.7,.8,.9])for(const error of ['easy','medium','hard']){
   summaries[[i,cut,error]]=run(level,i,cut,error);
  }
  fs.writeFileSync(path.join(root,'data',level.key+'.draws.json'),JSON.stringify(summaries,null,2)+'\n');
