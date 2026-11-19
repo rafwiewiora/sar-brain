@@ -20,6 +20,8 @@ Each target has an eleven-slide story (`dist/ABL1_intro.html`, `dist/RENIN_intro
 
 The current game charges $1 per missing synthesis operation and $1 per FEP query. The spend counter starts at $0 and has no cap. An assay is included when a compound is made. The initial inventory is supplied. The cash unit represents a game cost. RENIN’s recorded dates locate the historical measurements on the plot. Elapsed laboratory time is an open modeling question.
 
+The three candidate cards show a selection. **Run FEP on all eligible** shows the full count and total price before purchase. You can also predict one compound from its card. The replay highlights the button the agent presses and marks every compound in its FEP batch.
+
 ## Replay strategies
 
 | Current game | How it picks the next compounds |

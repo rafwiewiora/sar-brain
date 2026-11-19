@@ -19,12 +19,8 @@ function playStrategy(level,policy,cutoff,difficulty,record=true){
  capture(0,'open',g.made());
  const wantsFep=mode==='hybrid'||mode==='hybridFree';
  for(let batch=1;!g.goal();batch++){
-   const queried=[];
    if(wantsFep){
-     for(const n of pool()){
-       const link=g.sources(n)[0];
-       if(link&&!g.forecasts.has(n)&&g.act('query',n,link[0]))queried.push(n);
-     }
+     const queried=g.queryAll();
      if(queried.length)capture(batch,'query',queried);
    }
    const candidates=pool();

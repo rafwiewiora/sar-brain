@@ -16,7 +16,7 @@ function play(type,id,parent){
 }
 function finished(){return g.goal();}
 
-const save=()=>{try{localStorage.setItem(key(),JSON.stringify({legacyOpening:!!level.legacyStock&&!level.openingPlatform,moves:g.history.map(({type,id,parent})=>({type,id,parent}))}));}catch{}};
+const save=()=>{try{localStorage.setItem(key(),JSON.stringify({legacyOpening:!!level.legacyStock&&!level.openingPlatform,moves:g.history.map(({type,id,parent,batch})=>({type,id,parent,batch}))}));}catch{}};
 const available=()=>level.order.filter(n=>!g.stock.has(n));
 const similarity=(a,b)=>level.sim[idx.get(a)][idx.get(b)];
 const name=n=>g.name(n);
@@ -33,7 +33,10 @@ function load(k,reset=false){
  }catch{}}
  if(saved?.legacyOpening)level={...level,stock:level.legacyStock,openingPlatform:null};
  idx=new Map(level.order.map((n,i)=>[n,i]));g=campaign(level,sigmaForScore);
- for(const a of saved?.moves||[])if(!play(a.type,a.id,a.parent))break;
+ for(const a of saved?.moves||[]){
+   if(!play(a.type,a.id,a.parent))break;
+   if(a.type==='query'&&Number.isInteger(a.batch))g.history.at(-1).batch=a.batch;
+ }
  if(reset||migrated)save();
  stage=null;const pool=available();pinned=pool.find(n=>g.sources(n).length && level.routes[n].some(x=>level.stages[x]&&!g.stock.has(x)))||pool.find(n=>g.sources(n).length)||pool[0]||g.made()[0];
  message='Choose an analog to make, or select a shared intermediate below it to see what gets cheaper.';if(migrated)message='Previous moves restored. Saved FEP queries now use Medium error.';$('level').value=k;$('difficulty').value=difficulty;render();
@@ -112,8 +115,8 @@ function map(){
  let s='<defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="'+purple+'"/></marker></defs>';
  s+='<rect width="1000" height="470" fill="white"/>'+path('M314 16V450 M661 16V450','#dce3ee',1);
  for(const y of [199,331]) s+=path('M16 '+y+' H984','#eff2f7',1);
- s+=textAt(25,34,'Measured',22,teal,650)+textAt(329,34,'Next moves',22,purple,650)+textAt(681,34,'Unassayed territory',22,ink,650);
- s+=textAt(25,54,made.length+' assay results',13,grey)+textAt(329,54,picks.length+' in focus',13,grey)+textAt(681,54,(pool.length-picks.length)+' hidden activities',13,grey);
+ s+=textAt(25,34,'Measured',22,teal,650)+textAt(329,34,'Candidates in focus',22,purple,650)+textAt(681,34,'Unassayed territory',22,ink,650);
+ s+=textAt(25,54,made.length+' assay results',13,grey)+textAt(329,54,picks.length+' of '+pool.length+' unassayed',13,grey)+textAt(681,54,(pool.length-picks.length)+' hidden activities',13,grey);
  for(const b of picks){
    const [X,Y]=positions.get(b),a=parent(b),[x,y]=positions.get(a);
    const big=observed.includes(a);
@@ -168,10 +171,17 @@ function inspector(){
  if(finished())buttons+=btn('restart','Play again');
  $('detail').innerHTML=detail;$('actions').innerHTML=buttons;
 }
+function markFepTargets(ids){
+ const targets=new Set(ids);
+ for(const item of $('map').querySelectorAll('[data-kind="compound"]'))item.classList.toggle('fepTarget',targets.has(item.dataset.node));
+}
 function render(){
  model=layout();$('goal').textContent=g.goal()?'Hit confirmed at '+nm(g.best)+'.':'Find and assay the '+nm(g.best)+' hit.';
  const stat=(n,s)=>'<span><b>'+esc(n)+'</b>'+s+'</span>';
- $('stats').innerHTML=stat('$'+spentCash(),'Money spent')+stat(g.history.length,'Moves played')+stat(nm(level.products[model.best].p),'Best assay');
+ $('stats').innerHTML=stat('$'+spentCash(),'Money spent')+stat(new Set(g.history.map((a,i)=>a.batch??i)).size,'Moves played')+stat(nm(level.products[model.best].p),'Best assay');
+ const eligible=g.eligibleFep().length;
+ $('bulkFep').disabled=finished()||!eligible;
+ $('bulkFep').textContent='Run FEP on all eligible · '+eligible+(eligible===1?' compound':' compounds')+' · $'+eligible;
  map();inspector();$('notice').textContent=message;
  $('find').innerHTML=level.order.map(n=>'<option value="'+n+'" '+(n===pinned?'selected':'')+'>'+esc(name(n))+(g.stock.has(n)?' ✓':'')+'</option>').join('');
 }
@@ -200,6 +210,12 @@ function restart(){openDialog('<h2>Restart '+level.key+'?</h2><p>This clears you
 $('map').addEventListener('click',e=>{const item=e.target.closest('[data-node]');if(item)select(item.dataset.node,item.dataset.kind);});
 $('map').addEventListener('keydown',e=>{const item=e.target.closest('[data-node]');if(item&&['Enter',' '].includes(e.key)){e.preventDefault();select(item.dataset.node,item.dataset.kind);$('map').querySelector('[data-node="'+item.dataset.node+'"][data-kind="'+item.dataset.kind+'"]')?.focus();}});
 $('actions').onclick=e=>{const b=e.target.closest('[data-action]');if(b)action(b.dataset.action);};
+$('bulkFep').onclick=()=>{
+ const targets=g.queryAll();if(!targets.length)return;
+ save();message='Predicted '+targets.length+' compounds · $'+targets.length+' spent.';render();
+};
+$('bulkFep').onpointerenter=$('bulkFep').onfocus=()=>markFepTargets(g.eligibleFep());
+$('bulkFep').onpointerleave=$('bulkFep').onblur=()=>markFepTargets([]);
 $('level').onchange=e=>load(e.target.value);$('find').onchange=e=>select(e.target.value,'compound');
 $('difficulty').onchange=e=>{
  const next=e.target.value;if(!Object.hasOwn(errorAtCutoff,next))return;

@@ -22,7 +22,7 @@ function sync(){
  const f=run().frames[index],n=projection.node($('focus').value),intent=f.action==='open'?'':f.action;
  const before=projection.states[Math.max(0,index-1)];
  put('board',{type:'board-frame',tick,focus:n,f:before,info:projection.D.paths.movie[index].caption,
-   playAction:intent,archived:false,setting:isOracle()?'ideal':$('error').value});
+   playAction:intent==='query'&&!isOracle()?'query-all':intent,targets:f.targets,archived:false,setting:isOracle()?'ideal':$('error').value});
  put('brain',{type:'brain-frame',index,tick,focus:projection.cid(n)});
 }
 window.addEventListener('message',e=>{

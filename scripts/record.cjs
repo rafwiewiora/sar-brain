@@ -10,6 +10,15 @@ async function main(){
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const ready=()=>page.waitForFunction(()=>typeof tick!=='undefined'&&document.body.dataset.ready===String(tick),null,{timeout:20000});
  try{
+  await page.goto(pathToFileURL(path.join(dist,'medicinal_chemistry_world_map.html')).href+'#ABL1');
+  const bulk=page.locator('#bulkFep');
+  if(!(await bulk.innerText()).includes('24 compounds · $24'))throw Error('Opening bulk quote');
+  await page.locator('[data-action="query"]').click();
+  if(!(await bulk.innerText()).includes('23 compounds · $23'))throw Error('Duplicate individual quote');
+  await bulk.click();
+  await page.reload();
+  if(!await bulk.isDisabled()||!await page.evaluate(()=>g.forecasts.size===24&&spentCash()===24))throw Error('Bulk purchase persistence');
+  if(!await page.locator('#stats').innerText().then(t=>t.includes('2Moves played')||t.match(/2\s+Moves played/)))throw Error('Bulk move count');
   for(const target of ['RENIN','ABL1','S1P1']){
    await page.goto(pathToFileURL(path.join(dist,target+'_intro.html')).href);await page.waitForSelector('#title:not(:empty)');
    const slides=[];
@@ -49,6 +58,14 @@ async function main(){
     await page.evaluate(i=>step(i),i);await ready();
     const total=await page.evaluate(()=>run().frames[index].spent+run().frames[index].queries);
     if(await page.frameLocator('#brainPane').locator('#money').innerText()!=='$'+total+' spent')throw Error('Ledger mismatch');
+    const action=await page.evaluate(()=>run().frames[index].action);
+    const board=page.frameLocator('#game');
+    if(action==='query'){
+     const count=await page.evaluate(()=>run().frames[index].targets.length);
+     if(!(await board.locator('button.agentMove').innerText()).includes('all eligible · '+count))throw Error('Bulk selection highlight');
+     const marked=await board.locator('#map .fepTarget').evaluateAll(items=>new Set(items.map(el=>el.dataset.node)).size);
+     if(marked!==count)throw Error('Queried map coverage');
+    }else if(action==='make'&&await board.locator('button.agentMove').getAttribute('data-action')!=='make')throw Error('Make button highlight');
     const name=target+i+'.png';
     await page.screenshot({path:path.join(tmp,name),animations:'disabled'});
     manifest.push("file '"+name+"'",'duration '+(i===0||i===len-1?'3':'2'));

@@ -23,7 +23,8 @@ function project(key,level,run,base,ideal){
   const parents=Object.fromEntries(Object.entries(raw.parents).map(([n,v])=>[node(n),node(v)]));
   const estimates=Object.fromEntries(raw.pred.map(n=>[node(n),raw.forecasts?.[n]??level.products[node(n)].p]));
   const prior=run.frames[Math.max(0,i-1)];
-  if(i&&raw.action==='query')for(const n of targets)history.push({type:'query',id:n,parent:parents[n]});
+  const historyBatch=history.length;
+  if(i&&raw.action==='query')for(const n of targets)history.push({type:'query',id:n,parent:parents[n],batch:historyBatch});
   if(i&&raw.action==='make'){
    for(const n of targets){
     const route=(level.routes[n]||[]).filter(r=>!stock.has(r));

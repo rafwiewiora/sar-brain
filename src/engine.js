@@ -16,6 +16,18 @@ function campaign(level, sigmaForScore = () => 0, {completeBatch=false}={}) {
   const price=id=>remaining(id).reduce((sum,n)=>sum+rx[n].cost,0);
   const spent=()=>Array.from(stock).reduce((sum,n)=>sum+(rx[n]?.cost||0),0);
   const sources=id=>neighbors[id].filter(([r])=>stock.has(r)).sort((a,b)=>b[1]-a[1]||index.get(a[0])-index.get(b[0]));
+  function eligibleFep(){
+    return order.filter(n=>!stock.has(n)&&!forecasts.has(n)&&sources(n).length);
+  }
+  function queryAll(){
+    const targets=eligibleFep(),batch=history.length;
+    if(goal())return [];
+    for(const n of targets){
+      if(!act('query',n,sources(n)[0][0]))throw Error('Ineligible FEP target');
+      history.at(-1).batch=batch;
+    }
+    return targets;
+  }
   function sar(id){
     const row=level.sim[index.get(id)], near=made().map(n=>[row[index.get(n)],n]).sort((a,b)=>b[0]-a[0]||index.get(a[1])-index.get(b[1])).slice(0,5);
     let w=0,s=0; for(const [t,n] of near){const weight=t**4+1e-8;s+=weight*products[n].p;w+=weight;}
@@ -42,7 +54,7 @@ function campaign(level, sigmaForScore = () => 0, {completeBatch=false}={}) {
     lastSaving=Object.fromEntries(Object.keys(previous).filter(n=>!stock.has(n)&&previous[n]>price(n)).map(n=>[n,previous[n]-price(n)]));
     history.push({type,id,cost,assayed:made().filter(n=>!prior.has(n)),cheaper:Object.keys(lastSaving).length});return true;
   }
-  return {made,goal,remaining,price,spent,sources,sar,rank,act,stock,forecasts,history,best,
+  return {eligibleFep,queryAll,made,goal,remaining,price,spent,sources,sar,rank,act,stock,forecasts,history,best,
           savings:()=>lastSaving,name:id=>(products[id]?.name||stages[id]||'Intermediate '+id.slice(2))};
 }
 function rival(level,mode){

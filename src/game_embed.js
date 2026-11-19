@@ -6,6 +6,8 @@ $('level').disabled=$('difficulty').disabled=true;
 $('strategyReplay').hidden=true;
 $('actions').onclick=e=>{const a=e.target.closest('[data-action]')?.dataset.action;if(['inspect-stage','back','next'].includes(a))action(a);};
 $('dialogBody').onclick=null;
+$('bulkFep').onclick=null;
+$('bulkFep').onpointerenter=$('bulkFep').onpointerleave=$('bulkFep').onfocus=$('bulkFep').onblur=null;
 let activeMove;
 const drawBoard=render;
 render=function(){
@@ -16,13 +18,17 @@ render=function(){
   $('stats').innerHTML='<span><b>'+f.spent+'</b>Synthesis steps</span><span><b>'+f.queries+'</b>FEP queries</span><span><b>'+nm(level.products[model.best].p)+'</b>Best assay</span>';
   $('goal').textContent='Replay the recorded selections from the original starting inventory.';
  }
- const b=$('actions').querySelector('[data-action="'+playAction+'"]');
- if(b&&pinned===agentFocus&&!stage){b.style.outline='3px solid #7154c8';b.style.outlineOffset='2px';}
+  const bulk=playAction==='query-all';
+ $('bulkFep').classList.toggle('agentMove',bulk);
+ if(bulk||playAction==='query')markFepTargets(activeMove.targets);
+ if(!bulk&&pinned===agentFocus&&!stage){
+  $('actions').querySelector('[data-action="'+playAction+'"]')?.classList.add('agentMove');
+ }
 };
 
 window.addEventListener('message',e=>{
  if(e.source!==parent||e.data?.type!=='board-frame')return;
- const {f,focus,info,playAction,archived,setting}=e.data;
+ const {f,focus,info,playAction,targets,archived,setting}=e.data;
  difficulty=setting;
  if(setting==='ideal'&&!$('difficulty').querySelector('[value="ideal"]'))$('difficulty').add(new Option('Ideal','ideal'));
  $('difficulty').value=setting;
@@ -35,7 +41,7 @@ window.addEventListener('message',e=>{
  }
  if(f.quotes){const base=g.price;g.price=n=>f.quotes[n]??base(n);}
  g.history.push(...f.history);
- activeMove={archived,f,playAction,agentFocus:focus};pinned=focus;stage=null;message=info;render();
+ activeMove={archived,f,playAction,targets,agentFocus:focus};pinned=focus;stage=null;message=info;render();
  document.body.dataset.tick=e.data.tick;
  parent.postMessage({type:'painted',side:'board',tick:e.data.tick},'*');
 });
